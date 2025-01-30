@@ -87,7 +87,7 @@ function advanced_find_joker(name, rarity, edition, ability, non_debuff)
 				if abilitycheck then check = check + 1 end
 			end
 			--Consumables don't have a rarity, so this should ignore it in that case (untested lmfao)
-			if check == filter - (rarity and 1 or 0) then table.insert(jokers, v) end
+			if check == filter then table.insert(jokers, v) end
 		end
 	end
 	return jokers
@@ -202,14 +202,13 @@ end
 
 -- checks for Jolly Jokers or cards that are supposed to be treated as jolly jokers
 function Card:is_jolly()
-	local check = false
 	if self.ability.name == "Jolly Joker" then
-		check = true
+		return true
 	end
 	if self.edition and self.edition.key == "e_cry_m" then
-		check = true
+		return true
 	end
-	return check
+	return false
 end
 
 function cry_with_deck_effects(card, func)
@@ -338,12 +337,14 @@ if true then --Cryptid.enabled["Menu"] then
 	end
 end
 function Cryptid.get_food(seed)
-	local food_keys = {}
+	local food_keys = {"j_ice_cream","j_popcorn","j_selzer","j_ramen"}
+	--[[
 	for k, v in pairs(Cryptid.food) do
 		if G.GAME.banned_keys[v] and G.P_CENTERS[v] then
 			table.insert(food_keys, v)
 		end
 	end
+	--]]
 	if #food_keys <= 0 then
 		return "j_reserved_parking"
 	else
