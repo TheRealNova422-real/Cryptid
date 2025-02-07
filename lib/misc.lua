@@ -433,11 +433,17 @@ Cryptid.big_num_whitelist = {
 	j_cry_mprime = true,
 }
 
+Cryptid.big_num_blacklist = {
+	j.pareidolia = true,
+}
+
 function is_card_big(joker)
 	local center = joker.config and joker.config.center
 	if not center then return false end
-	return Cryptid.big_num_whitelist[center.key or "Nope!"] --[[or
-	       (center.mod and center.mod.id == "Cryptid" and not center.no_break_infinity) or center.break_infinity--]]
+	if Cryptid.big_num_blacklist[center.key] then
+		return false end
+	return true end
+	--[ return Cryptid.big_num_whitelist[center.key or "Nope!"] or (center.mod and center.mod.id == "Cryptid" and not center.no_break_infinity) or center.break_infinity --]]
 end
 
 --Utility function to check things without erroring
