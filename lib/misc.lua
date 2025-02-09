@@ -434,7 +434,7 @@ Cryptid.big_num_whitelist = {
 }
 
 Cryptid.big_num_blacklist = {
-	j.pareidolia = true,
+	j_pareidolia = true,
 }
 
 function is_card_big(joker)
@@ -442,8 +442,8 @@ function is_card_big(joker)
 	if not center then return false end
 	if Cryptid.big_num_blacklist[center.key] then
 		return false end
-	return true end
-	--[ return Cryptid.big_num_whitelist[center.key or "Nope!"] or (center.mod and center.mod.id == "Cryptid" and not center.no_break_infinity) or center.break_infinity --]]
+	return true 
+	-- return Cryptid.big_num_whitelist[center.key or "Nope!"] or (center.mod and center.mod.id == "Cryptid" and not center.no_break_infinity) or center.break_infinity
 end
 
 --Utility function to check things without erroring
