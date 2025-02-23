@@ -1187,8 +1187,11 @@ local gold_edition = {
 		card.edition.cry_gold_seed = pseudorandom("e_cry_gold") * 2 - 1
 	end,
 	calculate = function(self, card, context)
-		if context.post_trigger or (context.using_consumeable and context.consumeable == card) then
-			SMODS.calculate_effect({ dollars = self.config.dollars }, card, true)
+        	if context.post_trigger or (context.using_consumeable and context.consumeable == card) or (context.main_scoring and context.cardarea == G.play and self.config.active) then
+            		SMODS.calculate_effect({ p_dollars = self.config.dollars }, card, true)
+			self.config.active = nil
+        	else if not self.config.active then
+			self.config.active = true
 		end
 	end,
 }
