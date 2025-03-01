@@ -116,7 +116,7 @@ return {
             b_cry_spooky = {
                 name = "Spooky Deck",
                 text = {
-                    "Start with an {C:eternal}Eternal{} {C:attention,T:j_cry_chocolate_dice}Chocolate Die",
+                    "Start with an {C:eternal}Eternal{} {C:attention,T:_chocolate_dice}Chocolate Die",
                     "After each {C:attention}Ante{}, create a",
                     "{C:cry_candy}Candy{} or {X:cry_cursed,C:white}Cursed{} Joker",
                 }
@@ -903,6 +903,26 @@ return {
                     "{C:chips}+#1#{} Chips",
                     "{C:chips}-#2#{} Chips when",
                     "you {C:attention}click",
+                },
+            },
+	    j_cry_clockwork = {
+				name = "Clockwork Joker",
+				text = {
+					"Every {C:attention}second{} {C:inactive}(#1#){} hand played retriggers all steel cards,",
+					"every {C:attention}third{} {C:inactive}(#2#){} hand played, this joker gains {C:mult}#6#x Mult{},",
+					"every {C:attention}fifth{} {C:inactive}(#3#){} hand played, create a Negative Chariot,",
+					"every {C:attention}seventh{} {C:inactive}(#4#){} hand played, Steel cards give an additional {C:mult}#8#x{} more {C:mult}Mult{}",
+					"{C:inactive}Currently gives #5#x Mult on trigger and #7#x Mult on Steel{}",
+				},
+			},
+	    j_cry_clockwork = { -- make this better please
+                name = "Clockwork Joker",
+                text = {
+                    "Every {C:attention}second{} {C:inactive}(#1#){} hand played retriggers all steel cards,",
+                    "every {C:attention}third{} {C:inactive}(#2#){} hand played, this joker gains {C:mult}#6#x Mult{},",
+                    "every {C:attention}fifth{} {C:inactive}(#3#){} hand played, create a Negative Chariot,",
+		    "every {C:attention}seventh{} {C:inactive}(#4#){} hand played, Steel cards give an additional {C:mult}#8#x{} more {C:mult}Mult{}",
+		    "{C:inactive}Currently gives #5#x Mult on trigger and #7#x Mult on Steel{}",
                 },
             },
             j_cry_CodeJoker = {
