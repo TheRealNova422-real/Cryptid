@@ -70,10 +70,10 @@ local atomic1 = {
 local proton = {
 	cry_credits = {
 		idea = {
-			"playerrWon & HexaCryonic",
+			"playerrWon/HexaCryonic",
 		},
 		art = {
-			"",
+			"ori",
 		},
 		code = {
 			"crazybot",
@@ -88,13 +88,13 @@ local proton = {
 	set = "Particle",
 	name = "cry-Proton",
 	key = "proton",
-	pos = { x = 0, y = 2 },
+	pos = { x = 0, y = 0 },
 	config = { extra = 1.25 },
 	loc_vars = function(self, info_queue, center)
 		return { vars = { self.config.extra } }
 	end,
 	cost = 4,
-	atlas = "placeholders",
+	atlas = "atlasparticle",
 	order = 901,
 	can_use = function(self, card)
 		return true
@@ -112,10 +112,56 @@ local proton = {
 	end,
 }
 
+local neutron = {
+	cry_credits = {
+		idea = {
+			"playerrWon/HexaCryonic",
+		},
+		art = {
+			"ori",
+		},
+		code = {
+			"crazybot",
+		},
+	},
+	dependencies = {
+		items = {
+			"set_cry_particle",
+		},
+	},
+	object_type = "Consumable",
+	set = "Particle",
+	name = "cry-Neutron",
+	key = "neutron",
+	pos = { x = 1, y = 0 },
+	config = { extra = 1.25 },
+	loc_vars = function(self, info_queue, center)
+		return { vars = { self.config.extra } }
+	end,
+	cost = 4,
+	atlas = "atlasparticle",
+	order = 901,
+	can_use = function(self, card)
+		return true
+	end,
+	can_bulk_use = true,
+	use = function(self, card, area, copier)
+		for k, v in pairs(G.GAME.hands) do
+			v.l_chips = lenient_bignum(to_big(v.l_chips)*to_big(self.config.extra))
+		end
+	end,
+	bulk_use = function(self, card, area, copier, number)
+		for k, v in pairs(G.GAME.hands) do
+			v.l_chips = lenient_bignum(to_big(v.l_chips)*to_big(self.config.extra)^to_big(number))
+		end
+	end,
+}
+
 local particle_cards = {
 	particle,
 	atomic1,
 	proton,
+	neutron,
 }
 
 return {
