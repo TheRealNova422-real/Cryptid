@@ -5,6 +5,7 @@ function loc_colour(_c, _default)
 		lc()
 	end
 	G.ARGS.LOC_COLOURS.cry_code = G.C.SET.Code
+	G.ARGS.LOC_COLOURS.cry_particle = G.C.SET.Particle
 	G.ARGS.LOC_COLOURS.heart = G.C.SUITS.Hearts
 	G.ARGS.LOC_COLOURS.diamond = G.C.SUITS.Diamonds
 	G.ARGS.LOC_COLOURS.spade = G.C.SUITS.Spades

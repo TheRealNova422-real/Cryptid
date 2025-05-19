@@ -1,0 +1,13 @@
+[manifest]
+version = "1.0.0"
+dump_lua = true
+priority = -1
+
+[[patches]]
+[patches.pattern]
+target = "game.lua"
+pattern = '''ecto_minus = 1,'''
+position = "after"
+payload = '''
+'''
+match_indent = true

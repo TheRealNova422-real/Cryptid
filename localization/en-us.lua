@@ -2977,6 +2977,14 @@ return {
 				},
 			},
 		},
+		Particle = {
+			q_cry_proton = {
+				name = "Proton",
+				text = {
+					"Whatever."
+				},
+			},
+		},
 		Planet = {
 			c_cry_asteroidbelt = {
 				name = "Asteroid Belt",
@@ -4484,6 +4492,13 @@ return {
 				text = {
 					"Choose {C:attention}#1#{} of up to",
 					"{C:attention}#2#{C:cry_code} Code{} card#<s>2#",
+				},
+			},
+			p_cry_particle_normal_1 = {
+				name = "Atomic Pack",
+				text = {
+					"Choose {C:attention}#1#{} of up to",
+					"{C:attention}#2#{C:cry_particle} Particle{} card#<s>2#",
 				},
 			},
 			p_cry_empowered = {

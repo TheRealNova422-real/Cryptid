@@ -667,6 +667,14 @@ SMODS.UndiscoveredSprite({
 	py = 95,
 })
 SMODS.UndiscoveredSprite({
+	key = "Particle",
+	atlas = "atlasnotjokers",
+	path = "atlasnotjokers.png",
+	pos = { x = 9, y = 5 },
+	px = 71,
+	py = 95,
+})
+SMODS.UndiscoveredSprite({
 	key = "Unique",
 	atlas = "atlasnotjokers",
 	path = "atlasnotjokers.png",
