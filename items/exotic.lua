@@ -356,6 +356,7 @@ local exponentia = {
 					or key == "xmult_mod"
 					or key == "Xmult_mod"
 				) and amount ~= 1
+				and mult
 			then
 				for _, v in pairs(find_joker("cry-Exponentia")) do
 					local old = v.ability.extra.Emult
