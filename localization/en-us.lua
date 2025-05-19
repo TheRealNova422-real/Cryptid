@@ -2990,7 +2990,15 @@ return {
 				text = {
 					"Increase the power of",
 					"{C:attention} poker hand upgrades{}",
-					"by {C:mult}X#1# Mult",
+					"by {X:mult,C:white}X#1#{} Mult",
+				},
+			},
+			c_cry_neutron = {
+				name = "Neutron",
+				text = {
+					"Increase the power of",
+					"{C:attention} poker hand upgrades{}",
+					"by {X:chips,C:white}X#1#{} Chips",
 				},
 			},
 		},
@@ -4811,6 +4819,7 @@ return {
 			cry_experimental = "Experimental Mode",
 
 			k_cry_program_pack = "Program Pack",
+			k_cry_atomic_pack = "Atomic Pack",
 			k_cry_meme_pack = "Meme Pack",
 			k_cry_baneful_pack = "Baneful Buffoon Pack",
 			cry_baneful_warning = "Skipping will Banish rightmost Joker",

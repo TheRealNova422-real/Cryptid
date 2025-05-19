@@ -614,8 +614,8 @@ SMODS.Atlas({
 	py = 95,
 })
 SMODS.Atlas({
-	key = "atlasparticles",
-	path = "atlasparticles.png",
+	key = "atlasparticle",
+	path = "atlasparticle.png",
 	px = 71,
 	py = 95,
 })
