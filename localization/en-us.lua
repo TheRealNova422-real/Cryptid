@@ -2988,7 +2988,9 @@ return {
 			c_cry_proton = {
 				name = "Proton",
 				text = {
-					"Whatever."
+					"Increase the power of",
+					"{C:attention} poker hand upgrades{}",
+					"by {C:mult}X#1# Mult",
 				},
 			},
 		},

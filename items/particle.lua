@@ -88,17 +88,27 @@ local proton = {
 	set = "Particle",
 	name = "cry-Proton",
 	key = "proton",
-	atlas = "atlasnotjokers",
-	order = 426,
-	pos = { x = 3, y = 3 },
+	pos = { x = 0, y = 2 },
+	config = { extra = 1.25 },
+	loc_vars = function(self, info_queue, center)
+		return { vars = { self.config.extra } }
+	end,
 	cost = 4,
+	atlas = "placeholders",
+	order = 901,
 	can_use = function(self, card)
 		return true
 	end,
 	can_bulk_use = true,
 	use = function(self, card, area, copier)
+		for k, v in pairs(G.GAME.hands) do
+			v.l_mult = lenient_bignum(to_big(v.l_mult)*to_big(self.config.extra))
+		end
 	end,
 	bulk_use = function(self, card, area, copier, number)
+		for k, v in pairs(G.GAME.hands) do
+			v.l_mult = lenient_bignum(to_big(v.l_mult)*to_big(self.config.extra)^to_big(number))
+		end
 	end,
 }
 
