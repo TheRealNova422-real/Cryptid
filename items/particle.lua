@@ -6,7 +6,7 @@ local particle = {
 	collection_rows = { 4, 4 },
 	shop_rate = 0.0,
 	loc_txt = {},
-	default = "q_cry_proton",
+	default = "c_cry_proton",
 	can_stack = true,
 	can_divide = true,
 }
@@ -36,7 +36,7 @@ local atomic1 = {
 	},
 	dependencies = {
 		items = {
-			"set_cry_code",
+			"set_cry_particle",
 		},
 	},
 	object_type = "Booster",
@@ -90,7 +90,7 @@ local proton = {
 	key = "proton",
 	atlas = "atlasnotjokers",
 	order = 426,
-	pos = { x = 5, y = 3 },
+	pos = { x = 3, y = 3 },
 	cost = 4,
 	can_use = function(self, card)
 		return true

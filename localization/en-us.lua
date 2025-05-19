@@ -806,6 +806,13 @@ return {
 					"{C:cry_ascendant}Thematic Set",
 				},
 			},
+			set_cry_particle = {
+				name = "Particle Cards",
+				text = {
+					"{C:cry_particle}Particle Cards{} and",
+					"related content",
+				},
+			},
 			set_cry_planet = {
 				name = "Planet Cards",
 				text = {
@@ -2978,7 +2985,7 @@ return {
 			},
 		},
 		Particle = {
-			q_cry_proton = {
+			c_cry_proton = {
 				name = "Proton",
 				text = {
 					"Whatever."
@@ -4773,6 +4780,7 @@ return {
 			cry_feat_blinds = "Blinds",
 			cry_feat_challenges = "Challenges",
 			["cry_feat_code cards"] = "Code Cards",
+			["cry_feat_particle cards"] = "Particle Cards",
 			["cry_feat_misc. decks"] = "Misc. Decks",
 			["cry_feat_https module"] = "HTTPS Module",
 			["cry_feat_timer mechanics"] = "Timer Mechanics",
@@ -4824,6 +4832,7 @@ return {
 			cry_joke_placeholder = "(multiple of 8)",
 
 			k_code = "Code",
+			k_particle = "Particle",
 			k_content_set = "Thematic Set",
 			b_content_sets = "Thematic Sets",
 			--Why aren't these in vanilla?
@@ -4835,6 +4844,7 @@ return {
 
 			k_unique = "Unique",
 			b_code_cards = "Code Cards",
+			b_particle_cards = "Particle Cards",
 			b_unique_cards = "Unique Cards",
 			b_pull = "PULL",
 			cry_hooked_ex = "Hooked!",
@@ -4882,6 +4892,7 @@ return {
 			cry_plus_cryptid = "+1 Cryptid",
 			cry_plus_card = "+1 Card",
 			cry_plus_code = "+1 Code",
+			cry_plus_particle = "+1 Particle",
 			cry_no_triggers = "No triggers left!",
 			cry_unredeemed = "Unredeemed...",
 			cry_active = "Active",
@@ -4933,6 +4944,7 @@ return {
 			pinned = "Pinned",
 			cry_absolute = "Absolute",
 			code = "Code",
+			particle = "Particle",
 			unique = "Unique",
 			cry_rigged = "Rigged",
 			cry_hooked = "Hooked",
