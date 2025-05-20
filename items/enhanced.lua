@@ -84,7 +84,6 @@ Cryptid.edeck_atlas_update = function(self)
 	return sprite
 end
 
-
 -- Suit Deck
 -- All Playing Cards Are (suit)
 local st_deck = {
@@ -332,7 +331,6 @@ local sk_deck = {
 		end
 	end,
 }
-
 
 return {
 	name = "Enhanced Decks",
