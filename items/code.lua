@@ -969,7 +969,7 @@ local payload = {
 	config = { interest_mult = 3 },
 	loc_vars = function(self, info_queue, card)
 		if not card then
-			return{ vars = { self.config.interest_mult } }
+			return { vars = { self.config.interest_mult } }
 		end
 		return { vars = { card.ability.interest_mult } }
 	end,
