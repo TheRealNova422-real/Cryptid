@@ -4,13 +4,17 @@ System and Guide by Nova
 NOTE: Cards are prioritized being with the content set, rather than the type; eg you will see Green Seal with code cards, rather than the seals
 
 1-100 - Hand Level Planets
+
 Order: Bulwark, Void, Mars Moons, None Placeholder, TUIIFE
 
 101-149 - Other Planets
+
 Order: Planet.lua, Neutron Star
 
 150 - Sol
+
 151-200 - Suit Planets
+
 Order: Ruutu, Risti, Hertta, Pata, Kaikki, TEFD/None/Sol Placeholder
 
 201-300 - Enhancements
