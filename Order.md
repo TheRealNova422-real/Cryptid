@@ -114,7 +114,9 @@ Decks
 
 2607 antimatter
 
-3000-3199 - M Jokers
+3000-3099 - Hand Related Jokers (including kidnapping)
+
+3100-3199 - M Jokers
 
 3200-3399 - Spooky Jokers
 
@@ -124,7 +126,19 @@ Decks
 
 3800-3999 - D20 Jokers
 
+4000-4099 - Enhancement Jokers (eg lucky joker)
+
+4100-4199 - Seal Jokers (eg certificate/seal the deal/whichever is cryptid's one)
+
+4200-4299 - Edition Jokers (eg meteor shower/exoplanet/stardust/etc)
+
+4300-4399 - Tag Related Jonkler
+
+4400-9999 - Placeholder for new content (and the things i'm forgetting, NOT exotics bc those are later)
+
 Sleeves use the same order for decks
+
+19501-20000 - Tags 
 
 Vouchers:
 
@@ -201,3 +215,10 @@ vanilla t3s here (in order)
 30021 Particle Card T3
 
 32768 code t3
+
+
+200000-200100 - Hidden Spectrals
+200100 - Gateway
+
+250001-math.huge - Exotic Jokers
+
