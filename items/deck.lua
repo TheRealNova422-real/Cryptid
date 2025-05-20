@@ -1270,7 +1270,7 @@ return {
 		legendary,
 		wormhole,
 		-- spooky (is in spooky.lua)
-		
+
 		-- other decks
 		conveyor,
 		redeemed,
@@ -1280,7 +1280,7 @@ return {
 		bountiful,
 		misprint,
 		-- encoded (is in code.lua)
-		
+
 		-- stronger decks
 		very_fair,
 		infinite,
