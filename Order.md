@@ -64,4 +64,131 @@ Order: Meme1, Meme2, Meme3, Meme4 placeholder, Program1, Program2, ProgramJ, Pro
 900-2000 reserved for future content
 
 
+Decks
 
+2501 beige
+
+2502, 3 and 4 are reserved for uncommon, rare and epic decks respectively
+
+2505 legendary
+
+2506 wormhole
+
+2507 spooky
+
+2508 conveyor
+
+2509 redeemed
+
+2510 glowing
+
+2511 critical
+
+2512 nostalgic
+
+2513 bountiful
+
+2514 misprint
+
+2515 encoded
+
+2597 very fair
+
+2598 infinite
+
+2599 equilibrium
+
+2600 ccd
+
+2601 suit deck
+
+2602 enhancement deck
+
+2603 edition deck
+
+2604 seal deck
+
+2605 sticker deck
+
+2606 blank deck
+
+2607 antimatter
+
+
+Sleeves use the same order for decks
+
+Vouchers:
+
+20001 triple
+
+20002 quad
+
+20003 m1
+
+20004 m2
+
+20005 double1
+
+20006 double2
+
+20007 bighand 1
+
+20008 bighand 2
+
+20009 Particle t1
+
+20010 Particle t2
+
+20011 The Glitched T1
+
+20012 The Glitched t2 (whatever the name was)
+
+20031 code t1 
+
+20032 code t2
+
+vanilla t3s here (in order)
+
+30001 - Multistock
+
+30002 - Mass Production
+
+30003 - Curate
+
+30004 shop reroll t3
+
+30005 crystal ball t3
+
+30006 telescope t3
+
+30007 - Dexterity
+
+30008 - The Three Rs
+
+30009 - Tarot Acclimator
+
+30010 - Planet Acclimator
+
+30011 - Money Beanstalk
+
+30012 - Universal Fabric
+
+30013 - magic trick t3
+
+30014 - Asteroglyph
+
+30015 - boss reroll t3
+
+30016 - Canvas
+
+30017 quint tag
+
+30018 m3
+
+30019 double3
+
+30020 bighand t3
+
+30021 Particle Card T3
+
+32768 code t3
