@@ -1386,15 +1386,11 @@ local nice = {
 		extra = {
 			chips = 420,
 		},
-		immutable = {
-			sixcount = 0,
-			nincount = 0,
-		},
 	},
 	pos = { x = 2, y = 3 },
 	pools = { ["Meme"] = true },
 	rarity = 3,
-	cost = 6.9,
+	cost = 6,
 	order = 84,
 	atlas = "atlasone",
 	blueprint_compat = true,
@@ -1403,21 +1399,17 @@ local nice = {
 		return { vars = { number_format(center.ability.extra.chips) } }
 	end,
 	calculate = function(self, card, context)
-		if context.cardarea == G.jokers and context.before then
-			card.ability.immutable.sixcount = 0
-			card.ability.immutable.ninecount = 0
-			for i, v in pairs(context.full_hand) do
-				if v:get_id() == 6 then
-					card.ability.immutable.sixcount = lenient_bignum(card.ability.immutable.sixcount + 1)
-				elseif v:get_id() == 9 then
-					card.ability.immutable.ninecount = lenient_bignum(card.ability.immutable.ninecount + 1)
+		if context.cardarea == G.jokers and context.joker_main then
+			local aaa, bbb = nil, nil
+			for i = 1, #context.full_hand do
+				if context.full_hand[i]:get_id() == 6 then
+					aaa = true
+				end
+				if context.full_hand[i]:get_id() == 9 then
+					bbb = true
 				end
 			end
-		elseif context.cardarea == G.jokers and context.joker_main then
-			if
-				to_big(card.ability.immutable.sixcount) > to_big(0)
-				and to_big(card.ability.immutable.ninecount) > to_big(0)
-			then
+			if aaa and bbb then
 				return {
 					message = localize({
 						type = "variable",

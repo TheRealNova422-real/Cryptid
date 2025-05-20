@@ -967,8 +967,11 @@ local payload = {
 	key = "payload",
 	pos = { x = 8, y = 0 },
 	config = { interest_mult = 3 },
-	loc_vars = function(self, info_queue, center)
-		return { vars = { self.config.interest_mult } }
+	loc_vars = function(self, info_queue, card)
+		if not card then
+			return { vars = { self.config.interest_mult } }
+		end
+		return { vars = { card.ability.interest_mult } }
 	end,
 	cost = 4,
 	atlas = "atlasnotjokers",

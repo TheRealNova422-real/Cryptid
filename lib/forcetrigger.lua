@@ -1,12 +1,4 @@
 -- everything demicolon needs (not really as simple anymore)
-SMODS.Sound({
-	key = "forcetrigger",
-	path = "forcetrigger.ogg",
-})
-SMODS.Sound({
-	key = "demitrigger",
-	path = "demitrigger.ogg",
-})
 function Cryptid.demicolonGetTriggerable(card)
 	local n = { false, false }
 	if not card then
