@@ -37,6 +37,6 @@ Order: Just Azure :(
 
 401-500 - Editions
 
-Order:
+Order: Jolly, Golden, Blurred, Noisy, Glitched, Oversat, Double Sided, Mosaic, Fragile, Astral
 
 501
