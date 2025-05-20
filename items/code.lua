@@ -4528,7 +4528,7 @@ local encoded = {
 	object_type = "Back",
 	name = "cry-Encoded",
 	key = "encoded",
-	order = 2515,
+	order = 40015,
 	pos = { x = 2, y = 5 },
 	atlas = "atlasdeck",
 	apply = function(self)
