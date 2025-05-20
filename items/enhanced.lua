@@ -84,6 +84,107 @@ Cryptid.edeck_atlas_update = function(self)
 	return sprite
 end
 
+
+-- Suit Deck
+-- All Playing Cards Are (suit)
+local st_deck = {
+	object_type = "Back",
+	dependencies = {
+		items = {
+			"set_cry_deck",
+		},
+	},
+	name = "cry-Suit Deck",
+	key = "st_deck",
+	config = {},
+	order = 40101,
+	pos = { x = 5, y = 2 },
+	edeck_type = "suit",
+	loc_vars = function(self, info_queue, center)
+		local _, _, _, ddd = Cryptid.enhanced_deck_info(self)
+		return { vars = { localize(ddd, "suits_plural") } }
+	end,
+	apply = function(self)
+		local aaa, bbb, ccc, ddd = Cryptid.enhanced_deck_info(self)
+		if ddd == "Spades" then
+			G.GAME.bosses_used["bl_goad"] = 1e308
+		elseif ddd == "Hearts" then
+			G.GAME.bosses_used["bl_head"] = 1e308
+		elseif ddd == "Clubs" then
+			G.GAME.bosses_used["bl_club"] = 1e308
+		elseif ddd == "Diamonds" then
+			G.GAME.bosses_used["bl_window"] = 1e308
+		end
+		G.GAME.modifiers.cry_force_suit = ddd
+		G.E_MANAGER:add_event(Event({
+			func = function()
+				for c = #G.playing_cards, 1, -1 do
+					G.playing_cards[c]:change_suit(ddd)
+				end
+				return true
+			end,
+		}))
+	end,
+	unlocked = false,
+	check_for_unlock = function(self, args)
+		if args.cry_used_consumable == "c_cry_replica" then
+			unlock_card(self)
+		end
+		if args.type == "cry_lock_all" then
+			lock_card(self)
+		end
+		if args.type == "cry_unlock_all" then
+			unlock_card(self)
+		end
+	end,
+}
+-- Enhancement Deck
+-- All Playing Cards Are Enhanced with (enhancement)
+local et_deck = {
+	object_type = "Back",
+	dependencies = {
+		items = {
+			"set_cry_deck",
+		},
+	},
+	name = "cry-Enhancement Deck",
+	key = "et_deck",
+	order = 40102,
+	pos = { x = 5, y = 2 },
+	edeck_type = "enhancement",
+	config = {},
+	loc_vars = function(self, info_queue, center)
+		local _, bbb = Cryptid.enhanced_deck_info(self)
+		return { vars = { localize({ type = "name_text", set = "Enhanced", key = bbb }) } }
+	end,
+	apply = function(self)
+		local aaa, bbb = Cryptid.enhanced_deck_info(self)
+		G.GAME.modifiers.cry_force_enhancement = bbb
+		G.E_MANAGER:add_event(Event({
+			func = function()
+				for c = #G.playing_cards, 1, -1 do
+					G.playing_cards[c]:set_ability(G.P_CENTERS[bbb])
+				end
+				return true
+			end,
+		}))
+	end,
+	draw = cry_edeck_draw,
+	unlocked = false,
+	check_for_unlock = function(self, args)
+		if args.cry_used_consumable == "c_cry_vacuum" then
+			unlock_card(self)
+		end
+		if args.type == "cry_lock_all" then
+			lock_card(self)
+		end
+		if args.type == "cry_unlock_all" then
+			unlock_card(self)
+		end
+	end,
+}
+-- Edition Deck
+-- All Cards Are (Edition)
 local e_deck = {
 	object_type = "Back",
 	dependencies = {
@@ -93,7 +194,7 @@ local e_deck = {
 	},
 	name = "cry-Edition Deck",
 	key = "e_deck",
-	order = 17,
+	order = 40103,
 	pos = { x = 5, y = 2 },
 	loc_vars = function(self, info_queue, center)
 		local aaa = Cryptid.enhanced_deck_info(self)
@@ -134,39 +235,40 @@ local e_deck = {
 		end
 	end,
 }
-local et_deck = {
+-- Seal Deck
+-- All Playing Cards Are (seal)
+local sl_deck = {
 	object_type = "Back",
 	dependencies = {
 		items = {
 			"set_cry_deck",
 		},
 	},
-	name = "cry-Enhancement Deck",
-	key = "et_deck",
-	order = 18,
+	name = "cry-Seal Deck",
+	key = "sl_deck",
+	order = 40104,
 	pos = { x = 5, y = 2 },
-	edeck_type = "enhancement",
 	config = {},
+	edeck_type = "seal",
 	loc_vars = function(self, info_queue, center)
-		local _, bbb = Cryptid.enhanced_deck_info(self)
-		return { vars = { localize({ type = "name_text", set = "Enhanced", key = bbb }) } }
+		local _, _, _, _, eee = Cryptid.enhanced_deck_info(self)
+		return { vars = { localize({ type = "name_text", set = "Other", key = eee:lower() .. "_seal" }) } }
 	end,
 	apply = function(self)
-		local aaa, bbb = Cryptid.enhanced_deck_info(self)
-		G.GAME.modifiers.cry_force_enhancement = bbb
+		local aaa, bbb, ccc, ddd, eee = Cryptid.enhanced_deck_info(self)
+		G.GAME.modifiers.cry_force_seal = eee
 		G.E_MANAGER:add_event(Event({
 			func = function()
 				for c = #G.playing_cards, 1, -1 do
-					G.playing_cards[c]:set_ability(G.P_CENTERS[bbb])
+					G.playing_cards[c]:set_seal(eee, true)
 				end
 				return true
 			end,
 		}))
 	end,
-	draw = cry_edeck_draw,
 	unlocked = false,
 	check_for_unlock = function(self, args)
-		if args.cry_used_consumable == "c_cry_vacuum" then
+		if args.cry_used_consumable == "c_cry_typhoon" then
 			unlock_card(self)
 		end
 		if args.type == "cry_lock_all" then
@@ -177,6 +279,8 @@ local et_deck = {
 		end
 	end,
 }
+-- Sticker Deck
+-- All Cards are (sticker)
 local sk_deck = {
 	object_type = "Back",
 	dependencies = {
@@ -186,7 +290,7 @@ local sk_deck = {
 	},
 	name = "cry-Sticker Deck",
 	key = "sk_deck",
-	order = 19,
+	order = 40105,
 	pos = { x = 5, y = 2 },
 	edeck_type = "sticker",
 	config = {},
@@ -228,99 +332,7 @@ local sk_deck = {
 		end
 	end,
 }
-local st_deck = {
-	object_type = "Back",
-	dependencies = {
-		items = {
-			"set_cry_deck",
-		},
-	},
-	name = "cry-Suit Deck",
-	key = "st_deck",
-	config = {},
-	order = 20,
-	pos = { x = 5, y = 2 },
-	edeck_type = "suit",
-	loc_vars = function(self, info_queue, center)
-		local _, _, _, ddd = Cryptid.enhanced_deck_info(self)
-		return { vars = { localize(ddd, "suits_plural") } }
-	end,
-	apply = function(self)
-		local aaa, bbb, ccc, ddd = Cryptid.enhanced_deck_info(self)
-		if ddd == "Spades" then
-			G.GAME.bosses_used["bl_goad"] = 1e308
-		elseif ddd == "Hearts" then
-			G.GAME.bosses_used["bl_head"] = 1e308
-		elseif ddd == "Clubs" then
-			G.GAME.bosses_used["bl_club"] = 1e308
-		elseif ddd == "Diamonds" then
-			G.GAME.bosses_used["bl_window"] = 1e308
-		end
-		G.GAME.modifiers.cry_force_suit = ddd
-		G.E_MANAGER:add_event(Event({
-			func = function()
-				for c = #G.playing_cards, 1, -1 do
-					G.playing_cards[c]:change_suit(ddd)
-				end
-				return true
-			end,
-		}))
-	end,
-	unlocked = false,
-	check_for_unlock = function(self, args)
-		if args.cry_used_consumable == "c_cry_replica" then
-			unlock_card(self)
-		end
-		if args.type == "cry_lock_all" then
-			lock_card(self)
-		end
-		if args.type == "cry_unlock_all" then
-			unlock_card(self)
-		end
-	end,
-}
-local sl_deck = {
-	object_type = "Back",
-	dependencies = {
-		items = {
-			"set_cry_deck",
-		},
-	},
-	name = "cry-Seal Deck",
-	key = "sl_deck",
-	order = 21,
-	pos = { x = 5, y = 2 },
-	config = {},
-	edeck_type = "seal",
-	loc_vars = function(self, info_queue, center)
-		local _, _, _, _, eee = Cryptid.enhanced_deck_info(self)
-		return { vars = { localize({ type = "name_text", set = "Other", key = eee:lower() .. "_seal" }) } }
-	end,
-	apply = function(self)
-		local aaa, bbb, ccc, ddd, eee = Cryptid.enhanced_deck_info(self)
-		G.GAME.modifiers.cry_force_seal = eee
-		G.E_MANAGER:add_event(Event({
-			func = function()
-				for c = #G.playing_cards, 1, -1 do
-					G.playing_cards[c]:set_seal(eee, true)
-				end
-				return true
-			end,
-		}))
-	end,
-	unlocked = false,
-	check_for_unlock = function(self, args)
-		if args.cry_used_consumable == "c_cry_typhoon" then
-			unlock_card(self)
-		end
-		if args.type == "cry_lock_all" then
-			lock_card(self)
-		end
-		if args.type == "cry_unlock_all" then
-			unlock_card(self)
-		end
-	end,
-}
+
 
 return {
 	name = "Enhanced Decks",
@@ -506,5 +518,5 @@ return {
 			})
 		end
 	end,
-	items = { e_deck, et_deck, sk_deck, st_deck, sl_deck, atlasedition },
+	items = { st_deck, et_deck, e_deck, sl_deck, sk_deck, atlasedition },
 }
