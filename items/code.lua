@@ -2312,7 +2312,8 @@ local patch = {
 		end
 	end,
 }
--- ://Update, TBD, missing art
+-- ://Update
+-- Apply Oversaturated to 1 selected item in shop (Jokers Excluded)
 local cryupdate = {
 	cry_credits = {
 		idea = {
@@ -2342,9 +2343,6 @@ local cryupdate = {
 		return false
 	end,
 	-- use = function(self, card, area, copier)
-
-	-- end,
-	-- bulk_use = function(self, card, area, copier, number)
 
 	-- end,
 } -- UNIMPLEMENTED
@@ -3795,9 +3793,6 @@ local quantify = {
 	-- use = function(self, card, area, copier)
 
 	-- end,
-	-- bulk_use = function(self, card, area, copier, number)
-
-	-- end,
 } -- MISSING ART!!! -- UNIMPLEMENTED
 -- ://Divide,
 -- Halves item costs in shop
@@ -4577,6 +4572,257 @@ local encoded = {
 		end
 	end,
 }
+
+-- Cut
+-- Destroys a Code card and gains 0.5 Xmult when leaving shop
+local cut = {
+	dependencies = {
+		items = {
+			"set_cry_code",
+		},
+	},
+	object_type = "Joker",
+	name = "cry-cut",
+	key = "cut",
+	config = {
+		extra = {
+			Xmult = 1,
+			Xmult_mod = 0.5,
+		},
+	},
+	pos = { x = 2, y = 2 },
+	rarity = 2,
+	cost = 7,
+	order = 2401,
+	blueprint_compat = true,
+	perishable_compat = false,
+	demicoloncompat = true,
+	atlas = "atlasthree",
+	calculate = function(self, card, context)
+		if context.ending_shop then
+			local destructable_codecard = {}
+			for i = 1, #G.consumeables.cards do
+				if
+					G.consumeables.cards[i].ability.set == "Code"
+					and not G.consumeables.cards[i].getting_sliced
+					and not G.consumeables.cards[i].ability.eternal
+				then
+					destructable_codecard[#destructable_codecard + 1] = G.consumeables.cards[i]
+				end
+			end
+			local codecard_to_destroy = #destructable_codecard > 0
+					and pseudorandom_element(destructable_codecard, pseudoseed("cut"))
+				or nil
+
+			if codecard_to_destroy then
+				codecard_to_destroy.getting_sliced = true
+				card.ability.extra.Xmult =
+					lenient_bignum(to_big(card.ability.extra.Xmult) + card.ability.extra.Xmult_mod)
+				G.E_MANAGER:add_event(Event({
+					func = function()
+						(context.blueprint_card or card):juice_up(0.8, 0.8)
+						codecard_to_destroy:start_dissolve({ G.C.RED }, nil, 1.6)
+						return true
+					end,
+				}))
+				if not (context.blueprint_card or self).getting_sliced then
+					card_eval_status_text((context.blueprint_card or card), "extra", nil, nil, nil, {
+						message = localize({
+							type = "variable",
+							key = "a_xmult",
+							vars = { number_format(to_big(card.ability.extra.Xmult)) },
+						}),
+					})
+				end
+				return nil, true
+			end
+		end
+		if context.joker_main and (to_big(card.ability.extra.Xmult) > to_big(1)) then
+			return {
+				message = localize({
+					type = "variable",
+					key = "a_xmult",
+					vars = {
+						number_format(card.ability.extra.Xmult),
+					},
+				}),
+				Xmult_mod = card.ability.extra.Xmult,
+				colour = G.C.MULT,
+			}
+		end
+		if context.forcetrigger then
+			card.ability.extra.Xmult = lenient_bignum(to_big(card.ability.extra.Xmult) + card.ability.extra.Xmult_mod)
+			return {
+				message = localize({
+					type = "variable",
+					key = "a_xmult",
+					vars = {
+						number_format(card.ability.extra.Xmult),
+					},
+				}),
+				Xmult_mod = card.ability.extra.Xmult,
+				colour = G.C.MULT,
+			}
+		end
+	end,
+	loc_vars = function(self, info_queue, center)
+		return {
+			vars = {
+				number_format(center.ability.extra.Xmult_mod),
+				number_format(center.ability.extra.Xmult),
+			},
+		}
+	end,
+	cry_credits = {
+		idea = {
+			"Auto Watto",
+		},
+		art = {
+			"Kailen",
+		},
+		code = {
+			"Auto Watto",
+		},
+	},
+}
+
+-- Blender
+-- Creates a random Consumeable when Code card used
+local blender = {
+	dependencies = {
+		items = {
+			"set_cry_code",
+		},
+	},
+	object_type = "Joker",
+	name = "cry-blender",
+	key = "blender",
+	pos = { x = 3, y = 2 },
+	rarity = 1,
+	cost = 5,
+	blueprint_compat = true,
+	demicoloncompat = true,
+	atlas = "atlasthree",
+	order = 2421,
+	calculate = function(self, card, context)
+		if
+			context.using_consumeable
+			and context.consumeable.ability.set == "Code"
+			and not context.consumeable.beginning_end
+		then
+			if #G.consumeables.cards + G.GAME.consumeable_buffer < G.consumeables.config.card_limit then
+				local card = create_card("Consumeables", G.consumeables, nil, nil, nil, nil, nil, "cry_blender")
+				card:add_to_deck()
+				G.consumeables:emplace(card)
+			end
+		end
+		if context.forcetrigger then
+			local card = create_card("Consumeables", G.consumeables, nil, nil, nil, nil, nil, "cry_blender")
+			card:add_to_deck()
+			G.consumeables:emplace(card)
+		end
+	end,
+	cry_credits = {
+		idea = {
+			"HexaCryonic",
+		},
+		art = {
+			"Kailen",
+		},
+		code = {
+			"Kailen",
+		},
+	},
+}
+-- Python
+-- Gains 0.15 Xmult when Code card used
+local python = {
+	dependencies = {
+		items = {
+			"set_cry_code",
+		},
+	},
+	object_type = "Joker",
+	name = "cry-python",
+	key = "python",
+	config = {
+		extra = {
+			Xmult = 1,
+			Xmult_mod = 0.15,
+		},
+	},
+	pos = { x = 4, y = 2 },
+	rarity = 2,
+	cost = 7,
+	blueprint_compat = true,
+	perishable_compat = false,
+	demicoloncompat = true,
+	atlas = "atlasthree",
+	order = 2422,
+	loc_vars = function(self, info_queue, center)
+		return {
+			vars = {
+				number_format(center.ability.extra.Xmult_mod),
+				number_format(center.ability.extra.Xmult),
+			},
+		}
+	end,
+	calculate = function(self, card, context)
+		if
+			context.using_consumeable
+			and context.consumeable.ability.set == "Code"
+			and not context.consumeable.beginning_end
+		then
+			card.ability.extra.Xmult = lenient_bignum(to_big(card.ability.extra.Xmult) + card.ability.extra.Xmult_mod)
+			G.E_MANAGER:add_event(Event({
+				func = function()
+					card_eval_status_text(card, "extra", nil, nil, nil, {
+						message = localize({
+							type = "variable",
+							key = "a_xmult",
+							vars = { number_format(card.ability.extra.Xmult) },
+						}),
+					})
+					return true
+				end,
+			}))
+			return
+		end
+		if context.joker_main and (to_big(card.ability.extra.Xmult) > to_big(1)) then
+			return {
+				message = localize({
+					type = "variable",
+					key = "a_xmult",
+					vars = { number_format(card.ability.extra.Xmult) },
+				}),
+				Xmult_mod = lenient_bignum(card.ability.extra.Xmult),
+			}
+		end
+		if context.forcetrigger then
+			card.ability.extra.Xmult = lenient_bignum(to_big(card.ability.extra.Xmult) + card.ability.extra.Xmult_mod)
+			return {
+				message = localize({
+					type = "variable",
+					key = "a_xmult",
+					vars = { number_format(card.ability.extra.Xmult) },
+				}),
+				Xmult_mod = lenient_bignum(card.ability.extra.Xmult),
+			}
+		end
+	end,
+	cry_credits = {
+		idea = {
+			"HexaCryonic",
+		},
+		art = {
+			"Kailen",
+		},
+		code = {
+			"Kailen",
+		},
+	},
+}
+
 -- Code Joker
 -- Creates a Negative Code card when starting blind
 local CodeJoker = {
@@ -4597,7 +4843,7 @@ local CodeJoker = {
 	extra_gamesets = { "exp_modest" },
 	rarity = "cry_epic",
 	cost = 11,
-	order = 301,
+	order = 2451,
 	blueprint_compat = true,
 	demicoloncompat = true,
 	atlas = "atlasepic",
@@ -4677,7 +4923,7 @@ local copypaste = {
 	name = "cry-copypaste",
 	key = "copypaste",
 	pos = { x = 3, y = 4 },
-	order = 302,
+	order = 2452,
 	config = {
 		extra = {
 			odds = 2,
@@ -4789,254 +5035,7 @@ local copypaste = {
 		},
 	},
 }
--- Cut
--- Destroys a Code card and gains 0.5 Xmult when leaving shop
-local cut = {
-	dependencies = {
-		items = {
-			"set_cry_code",
-		},
-	},
-	object_type = "Joker",
-	name = "cry-cut",
-	key = "cut",
-	config = {
-		extra = {
-			Xmult = 1,
-			Xmult_mod = 0.5,
-		},
-	},
-	pos = { x = 2, y = 2 },
-	rarity = 2,
-	cost = 7,
-	order = 303,
-	blueprint_compat = true,
-	perishable_compat = false,
-	demicoloncompat = true,
-	atlas = "atlasthree",
-	calculate = function(self, card, context)
-		if context.ending_shop then
-			local destructable_codecard = {}
-			for i = 1, #G.consumeables.cards do
-				if
-					G.consumeables.cards[i].ability.set == "Code"
-					and not G.consumeables.cards[i].getting_sliced
-					and not G.consumeables.cards[i].ability.eternal
-				then
-					destructable_codecard[#destructable_codecard + 1] = G.consumeables.cards[i]
-				end
-			end
-			local codecard_to_destroy = #destructable_codecard > 0
-					and pseudorandom_element(destructable_codecard, pseudoseed("cut"))
-				or nil
 
-			if codecard_to_destroy then
-				codecard_to_destroy.getting_sliced = true
-				card.ability.extra.Xmult =
-					lenient_bignum(to_big(card.ability.extra.Xmult) + card.ability.extra.Xmult_mod)
-				G.E_MANAGER:add_event(Event({
-					func = function()
-						(context.blueprint_card or card):juice_up(0.8, 0.8)
-						codecard_to_destroy:start_dissolve({ G.C.RED }, nil, 1.6)
-						return true
-					end,
-				}))
-				if not (context.blueprint_card or self).getting_sliced then
-					card_eval_status_text((context.blueprint_card or card), "extra", nil, nil, nil, {
-						message = localize({
-							type = "variable",
-							key = "a_xmult",
-							vars = { number_format(to_big(card.ability.extra.Xmult)) },
-						}),
-					})
-				end
-				return nil, true
-			end
-		end
-		if context.joker_main and (to_big(card.ability.extra.Xmult) > to_big(1)) then
-			return {
-				message = localize({
-					type = "variable",
-					key = "a_xmult",
-					vars = {
-						number_format(card.ability.extra.Xmult),
-					},
-				}),
-				Xmult_mod = card.ability.extra.Xmult,
-				colour = G.C.MULT,
-			}
-		end
-		if context.forcetrigger then
-			card.ability.extra.Xmult = lenient_bignum(to_big(card.ability.extra.Xmult) + card.ability.extra.Xmult_mod)
-			return {
-				message = localize({
-					type = "variable",
-					key = "a_xmult",
-					vars = {
-						number_format(card.ability.extra.Xmult),
-					},
-				}),
-				Xmult_mod = card.ability.extra.Xmult,
-				colour = G.C.MULT,
-			}
-		end
-	end,
-	loc_vars = function(self, info_queue, center)
-		return {
-			vars = {
-				number_format(center.ability.extra.Xmult_mod),
-				number_format(center.ability.extra.Xmult),
-			},
-		}
-	end,
-	cry_credits = {
-		idea = {
-			"Auto Watto",
-		},
-		art = {
-			"Kailen",
-		},
-		code = {
-			"Auto Watto",
-		},
-	},
-}
--- Blender
--- Creates a random Consumeable when Code card used
-local blender = {
-	dependencies = {
-		items = {
-			"set_cry_code",
-		},
-	},
-	object_type = "Joker",
-	name = "cry-blender",
-	key = "blender",
-	pos = { x = 3, y = 2 },
-	rarity = 1,
-	cost = 5,
-	blueprint_compat = true,
-	demicoloncompat = true,
-	atlas = "atlasthree",
-	order = 304,
-	calculate = function(self, card, context)
-		if
-			context.using_consumeable
-			and context.consumeable.ability.set == "Code"
-			and not context.consumeable.beginning_end
-		then
-			if #G.consumeables.cards + G.GAME.consumeable_buffer < G.consumeables.config.card_limit then
-				local card = create_card("Consumeables", G.consumeables, nil, nil, nil, nil, nil, "cry_blender")
-				card:add_to_deck()
-				G.consumeables:emplace(card)
-			end
-		end
-		if context.forcetrigger then
-			local card = create_card("Consumeables", G.consumeables, nil, nil, nil, nil, nil, "cry_blender")
-			card:add_to_deck()
-			G.consumeables:emplace(card)
-		end
-	end,
-	cry_credits = {
-		idea = {
-			"HexaCryonic",
-		},
-		art = {
-			"Kailen",
-		},
-		code = {
-			"Kailen",
-		},
-	},
-}
--- Python
--- Gains 0.15 Xmult when Code card used
-local python = {
-	dependencies = {
-		items = {
-			"set_cry_code",
-		},
-	},
-	object_type = "Joker",
-	name = "cry-python",
-	key = "python",
-	config = {
-		extra = {
-			Xmult = 1,
-			Xmult_mod = 0.15,
-		},
-	},
-	pos = { x = 4, y = 2 },
-	rarity = 2,
-	cost = 7,
-	blueprint_compat = true,
-	perishable_compat = false,
-	demicoloncompat = true,
-	atlas = "atlasthree",
-	order = 305,
-	loc_vars = function(self, info_queue, center)
-		return {
-			vars = {
-				number_format(center.ability.extra.Xmult_mod),
-				number_format(center.ability.extra.Xmult),
-			},
-		}
-	end,
-	calculate = function(self, card, context)
-		if
-			context.using_consumeable
-			and context.consumeable.ability.set == "Code"
-			and not context.consumeable.beginning_end
-		then
-			card.ability.extra.Xmult = lenient_bignum(to_big(card.ability.extra.Xmult) + card.ability.extra.Xmult_mod)
-			G.E_MANAGER:add_event(Event({
-				func = function()
-					card_eval_status_text(card, "extra", nil, nil, nil, {
-						message = localize({
-							type = "variable",
-							key = "a_xmult",
-							vars = { number_format(card.ability.extra.Xmult) },
-						}),
-					})
-					return true
-				end,
-			}))
-			return
-		end
-		if context.joker_main and (to_big(card.ability.extra.Xmult) > to_big(1)) then
-			return {
-				message = localize({
-					type = "variable",
-					key = "a_xmult",
-					vars = { number_format(card.ability.extra.Xmult) },
-				}),
-				Xmult_mod = lenient_bignum(card.ability.extra.Xmult),
-			}
-		end
-		if context.forcetrigger then
-			card.ability.extra.Xmult = lenient_bignum(to_big(card.ability.extra.Xmult) + card.ability.extra.Xmult_mod)
-			return {
-				message = localize({
-					type = "variable",
-					key = "a_xmult",
-					vars = { number_format(card.ability.extra.Xmult) },
-				}),
-				Xmult_mod = lenient_bignum(card.ability.extra.Xmult),
-			}
-		end
-	end,
-	cry_credits = {
-		idea = {
-			"HexaCryonic",
-		},
-		art = {
-			"Kailen",
-		},
-		code = {
-			"Kailen",
-		},
-	},
-}
 local code_cards = {
 	code,
 	--packs
