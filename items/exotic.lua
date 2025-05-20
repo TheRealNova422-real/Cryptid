@@ -355,7 +355,8 @@ local exponentia = {
 					or key == "x_mult_mod"
 					or key == "xmult_mod"
 					or key == "Xmult_mod"
-				) and amount ~= 1
+				)
+				and amount ~= 1
 				and mult
 			then
 				for _, v in pairs(find_joker("cry-Exponentia")) do
