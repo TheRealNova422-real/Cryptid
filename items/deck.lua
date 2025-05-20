@@ -1,334 +1,25 @@
-local very_fair = {
+-- Beige (Common) Deck
+-- Common Card Values are multiplied by 4
+local beige = {
 	object_type = "Back",
 	dependencies = {
 		items = {
 			"set_cry_deck",
+			"set_cry_misprintize",
 		},
 	},
-	name = "Very Fair Deck",
-	key = "very_fair",
-	config = { hands = -2, discards = -2 },
-	pos = { x = 4, y = 0 },
-	order = 1,
+	name = "cry-Beige",
+	key = "beige",
+	pos = { x = 1, y = 6 },
+	order = 2501,
 	atlas = "atlasdeck",
 	apply = function(self)
-		G.GAME.modifiers.cry_no_vouchers = true
-	end,
-	init = function(self)
-		very_fair_quip = {}
-		local avts = SMODS.add_voucher_to_shop
-		function SMODS.add_voucher_to_shop(...)
-			if G.GAME.modifiers.cry_no_vouchers then
-				return
-			end
-			return avts(...)
-		end
-	end,
-	unlocked = false,
-	check_for_unlock = function(self, args)
-		if args.type == "win_deck" then
-			if get_deck_win_stake("b_cry_blank") > 0 then
-				unlock_card(self)
-			end
-		end
-		if args.type == "cry_lock_all" then
-			lock_card(self)
-		end
-		if args.type == "cry_unlock_all" then
-			unlock_card(self)
-		end
-	end,
-}
-local equilibrium = {
-	object_type = "Back",
-	dependencies = {
-		items = {
-			"set_cry_deck",
-		},
-	},
-	name = "cry-Equilibrium",
-	key = "equilibrium",
-	order = 3,
-	config = { vouchers = { "v_overstock_norm", "v_overstock_plus" } },
-	pos = { x = 0, y = 1 },
-	atlas = "atlasdeck",
-	apply = function(self)
-		G.GAME.modifiers.cry_equilibrium = true
-	end,
-	unlocked = false,
-	check_for_unlock = function(self, args)
-		if Cryptid.safe_get(G, "jokers") then
-			local count = 0
-			for i = 1, #G.jokers.cards do
-				count = count + 1
-			end
-			if count >= 10 then
-				unlock_card(self)
-			end
-		end
-		if args.type == "cry_lock_all" then
-			lock_card(self)
-		end
-		if args.type == "cry_unlock_all" then
-			unlock_card(self)
-		end
-	end,
-}
-local misprint = {
-	object_type = "Back",
-	dependencies = {
-		items = {
-			"set_cry_deck",
-		},
-	},
-	name = "cry-Misprint",
-	key = "misprint",
-	order = 4,
-	config = { cry_misprint_min = 0.1, cry_misprint_max = 10 },
-	pos = { x = 4, y = 2 },
-	atlas = "atlasdeck",
-	apply = function(self)
-		G.GAME.modifiers.cry_misprint_min = (G.GAME.modifiers.cry_misprint_min or 1) * self.config.cry_misprint_min
-		G.GAME.modifiers.cry_misprint_max = (G.GAME.modifiers.cry_misprint_max or 1) * self.config.cry_misprint_max
-	end,
-	unlocked = false,
-	check_for_unlock = function(self, args)
-		if Cryptid.safe_get(G, "jokers") then
-			for i = 1, #G.jokers.cards do
-				if G.jokers.cards[i].edition and G.jokers.cards[i].edition.cry_glitched then
-					unlock_card(self)
-					break
-				end
-			end
-		end
-		if args.type == "cry_lock_all" then
-			lock_card(self)
-		end
-		if args.type == "cry_unlock_all" then
-			unlock_card(self)
-		end
-	end,
-}
-local infinite = {
-	object_type = "Back",
-	dependencies = {
-		items = {
-			"set_cry_deck",
-		},
-	},
-	name = "cry-Infinite",
-	key = "infinite",
-	order = 2,
-	config = { cry_highlight_limit = 1e20, hand_size = 1 },
-	pos = { x = 3, y = 0 },
-	atlas = "atlasdeck",
-	apply = function(self)
-		G.GAME.modifiers.cry_highlight_limit = self.config.cry_highlight_limit
-	end,
-	unlocked = false,
-	check_for_unlock = function(self, args)
-		if args.type == "hand_contents" then
-			if #args.cards >= 6 then
-				unlock_card(self)
-			end
-		end
-		if args.type == "cry_lock_all" then
-			lock_card(self)
-		end
-		if args.type == "cry_unlock_all" then
-			unlock_card(self)
-		end
-	end,
-}
-local conveyor = {
-	object_type = "Back",
-	dependencies = {
-		items = {
-			"set_cry_deck",
-		},
-	},
-	name = "cry-Conveyor",
-	key = "conveyor",
-	order = 7,
-	pos = { x = 1, y = 1 },
-	atlas = "atlasdeck",
-	apply = function(self)
-		G.GAME.modifiers.cry_conveyor = true
-	end,
-	unlocked = false,
-	check_for_unlock = function(self, args)
-		if args.cry_used_consumable == "c_cry_analog" then
-			unlock_card(self)
-		end
-		if args.type == "cry_lock_all" then
-			lock_card(self)
-		end
-		if args.type == "cry_unlock_all" then
-			unlock_card(self)
-		end
-	end,
-}
-local CCD = {
-	object_type = "Back",
-	dependencies = {
-		items = {
-			"set_cry_deck",
-		},
-	},
-	name = "cry-CCD",
-	key = "CCD",
-	order = 5,
-	config = { cry_ccd = true },
-	pos = { x = 0, y = 0 },
-	atlas = "atlasdeck",
-	apply = function(self)
-		G.GAME.modifiers.cry_ccd = true
-	end,
-	unlocked = false,
-	check_for_unlock = function(self, args)
-		if args.cry_used_consumable == "c_cry_hammerspace" then
-			unlock_card(self)
-		end
-		if args.type == "cry_lock_all" then
-			lock_card(self)
-		end
-		if args.type == "cry_unlock_all" then
-			unlock_card(self)
-		end
-	end,
-}
-local wormhole = {
-	object_type = "Back",
-	dependencies = {
-		items = {
-			"set_cry_deck",
-			"set_cry_exotic",
-		},
-	},
-	name = "cry-Wormhole",
-	key = "wormhole",
-	order = 6,
-	config = { cry_negative_rate = 20, joker_slot = -2 },
-	pos = { x = 3, y = 4 },
-	atlas = "atlasdeck",
-	apply = function(self)
-		G.GAME.modifiers.cry_negative_rate = self.config.cry_negative_rate
-		G.E_MANAGER:add_event(Event({
-			func = function()
-				if G.jokers then
-					local card = create_card("Joker", G.jokers, nil, "cry_exotic", nil, nil, nil, "cry_wormhole")
-					card:add_to_deck()
-					card:start_materialize()
-					G.jokers:emplace(card)
-					return true
-				end
-			end,
-		}))
-	end,
-	init = function(self)
-		SMODS.Edition:take_ownership("negative", {
-			get_weight = function(self)
-				return self.weight * (G.GAME.modifiers.cry_negative_rate or 1)
-			end,
-		}, true)
-	end,
-	unlocked = false,
-	check_for_unlock = function(self, args)
-		if Cryptid.safe_get(G, "jokers") then
-			for i = 1, #G.jokers.cards do
-				if G.jokers.cards[i].config.center.rarity == "cry_exotic" then
-					unlock_card(self)
-				end
-			end
-		end
-		if args.type == "cry_lock_all" then
-			lock_card(self)
-		end
-		if args.type == "cry_unlock_all" then
-			unlock_card(self)
-		end
-	end,
-}
-local redeemed = {
-	object_type = "Back",
-	dependencies = {
-		items = {
-			"set_cry_deck",
-		},
-	},
-	name = "cry-Redeemed",
-	key = "redeemed",
-	order = 8,
-	pos = { x = 4, y = 4 },
-	atlas = "atlasdeck",
-	apply = function(self)
-		G.GAME.modifiers.cry_redeemed = true
-	end,
-	init = function(self)
-		local cr = Card.redeem
-		function Card:redeem()
-			cr(self)
-
-			if G.GAME.modifiers.cry_redeemed then
-				if
-					#G.play.cards == 0
-					and (not G.redeemed_vouchers_during_hand or #G.redeemed_vouchers_during_hand.cards == 0)
-				then
-					G.cry_redeemed_buffer = {}
-				end
-				for k, v in pairs(G.P_CENTER_POOLS["Voucher"]) do
-					if v.requires and not G.GAME.used_vouchers[v] then
-						for _, vv in pairs(v.requires) do
-							if vv == self.config.center.key then
-								--redeem extra voucher code based on Betmma's Vouchers
-								local area
-								if G.STATE == G.STATES.HAND_PLAYED then
-									if not G.redeemed_vouchers_during_hand then
-										G.redeemed_vouchers_during_hand = CardArea(
-											G.play.T.x,
-											G.play.T.y,
-											G.play.T.w,
-											G.play.T.h,
-											{ type = "play", card_limit = 5 }
-										)
-									end
-									area = G.redeemed_vouchers_during_hand
-								else
-									area = G.play
-								end
-								if not G.cry_redeemed_buffer then
-									G.cry_redeemed_buffer = {}
-								end
-								if not G.cry_redeemed_buffer[v.key] and v.unlocked then
-									local card = create_card("Voucher", area, nil, nil, nil, nil, v.key)
-									G.cry_redeemed_buffer[v.key] = true
-									card:start_materialize()
-									area:emplace(card)
-									card.cost = 0
-									card.shop_voucher = false
-									local current_round_voucher = G.GAME.current_round.voucher
-									card:redeem()
-									G.GAME.current_round.voucher = current_round_voucher
-									G.E_MANAGER:add_event(Event({
-										trigger = "after",
-										delay = 0,
-										func = function()
-											card:start_dissolve()
-											return true
-										end,
-									}))
-								end
-							end
-						end
-					end
-				end
-			end
-		end
+		G.GAME.modifiers.cry_common_value_quad = true
 	end,
 	unlocked = false,
 	check_for_unlock = function(self, args)
 		if args.type == "discover_amount" then
-			if G.DISCOVER_TALLIES.vouchers.tally / G.DISCOVER_TALLIES.vouchers.of >= 1 then
+			if args.amount >= 200 then
 				unlock_card(self)
 			end
 		end
@@ -340,6 +31,9 @@ local redeemed = {
 		end
 	end,
 }
+-- 40002/3/4 reserved for uncommon/rare/epic decks
+-- Legendary Deck
+-- Start with a random Legendary Joker, 1/5 to create another when boss blind defeated
 local legendary = {
 	object_type = "Back",
 	dependencies = {
@@ -422,6 +116,232 @@ local legendary = {
 		end
 	end,
 }
+-- Wormhole (Exotic) Deck
+-- Start with an Exotic Joker, -2 joker slots, negative edition has 20x more weight in negative rolls
+local wormhole = {
+	object_type = "Back",
+	dependencies = {
+		items = {
+			"set_cry_deck",
+			"set_cry_exotic",
+		},
+	},
+	name = "cry-Wormhole",
+	key = "wormhole",
+	order = 40006,
+	config = { cry_negative_rate = 20, joker_slot = -2 },
+	pos = { x = 3, y = 4 },
+	atlas = "atlasdeck",
+	apply = function(self)
+		G.GAME.modifiers.cry_negative_rate = self.config.cry_negative_rate
+		G.E_MANAGER:add_event(Event({
+			func = function()
+				if G.jokers then
+					local card = create_card("Joker", G.jokers, nil, "cry_exotic", nil, nil, nil, "cry_wormhole")
+					card:add_to_deck()
+					card:start_materialize()
+					G.jokers:emplace(card)
+					return true
+				end
+			end,
+		}))
+	end,
+	init = function(self)
+		SMODS.Edition:take_ownership("negative", {
+			get_weight = function(self)
+				return self.weight * (G.GAME.modifiers.cry_negative_rate or 1)
+			end,
+		}, true)
+	end,
+	unlocked = false,
+	check_for_unlock = function(self, args)
+		if Cryptid.safe_get(G, "jokers") then
+			for i = 1, #G.jokers.cards do
+				if G.jokers.cards[i].config.center.rarity == "cry_exotic" then
+					unlock_card(self)
+				end
+			end
+		end
+		if args.type == "cry_lock_all" then
+			lock_card(self)
+		end
+		if args.type == "cry_unlock_all" then
+			unlock_card(self)
+		end
+	end,
+}
+-- spooky deck is in spooky.lua
+-- Conveyor Deck
+-- Jokers are immovable, at start of round, destroy leftmost joker and duplicate rightmost
+local conveyor = {
+	object_type = "Back",
+	dependencies = {
+		items = {
+			"set_cry_deck",
+		},
+	},
+	name = "cry-Conveyor",
+	key = "conveyor",
+	order = 40008,
+	pos = { x = 1, y = 1 },
+	atlas = "atlasdeck",
+	apply = function(self)
+		G.GAME.modifiers.cry_conveyor = true
+	end,
+	unlocked = false,
+	check_for_unlock = function(self, args)
+		if args.cry_used_consumable == "c_cry_analog" then
+			unlock_card(self)
+		end
+		if args.type == "cry_lock_all" then
+			lock_card(self)
+		end
+		if args.type == "cry_unlock_all" then
+			unlock_card(self)
+		end
+	end,
+}
+-- Redeemed Deck
+-- Upon redeeming a voucher, all future tiers are redeemed
+local redeemed = {
+	object_type = "Back",
+	dependencies = {
+		items = {
+			"set_cry_deck",
+		},
+	},
+	name = "cry-Redeemed",
+	key = "redeemed",
+	order = 40009,
+	pos = { x = 4, y = 4 },
+	atlas = "atlasdeck",
+	apply = function(self)
+		G.GAME.modifiers.cry_redeemed = true
+	end,
+	init = function(self)
+		local cr = Card.redeem
+		function Card:redeem()
+			cr(self)
+
+			if G.GAME.modifiers.cry_redeemed then
+				if
+					#G.play.cards == 0
+					and (not G.redeemed_vouchers_during_hand or #G.redeemed_vouchers_during_hand.cards == 0)
+				then
+					G.cry_redeemed_buffer = {}
+				end
+				for k, v in pairs(G.P_CENTER_POOLS["Voucher"]) do
+					if v.requires and not G.GAME.used_vouchers[v] then
+						for _, vv in pairs(v.requires) do
+							if vv == self.config.center.key then
+								--redeem extra voucher code based on Betmma's Vouchers
+								local area
+								if G.STATE == G.STATES.HAND_PLAYED then
+									if not G.redeemed_vouchers_during_hand then
+										G.redeemed_vouchers_during_hand = CardArea(
+											G.play.T.x,
+											G.play.T.y,
+											G.play.T.w,
+											G.play.T.h,
+											{ type = "play", card_limit = 5 }
+										)
+									end
+									area = G.redeemed_vouchers_during_hand
+								else
+									area = G.play
+								end
+								if not G.cry_redeemed_buffer then
+									G.cry_redeemed_buffer = {}
+								end
+								if not G.cry_redeemed_buffer[v.key] and v.unlocked then
+									local card = create_card("Voucher", area, nil, nil, nil, nil, v.key)
+									G.cry_redeemed_buffer[v.key] = true
+									card:start_materialize()
+									area:emplace(card)
+									card.cost = 0
+									card.shop_voucher = false
+									local current_round_voucher = G.GAME.current_round.voucher
+									card:redeem()
+									G.GAME.current_round.voucher = current_round_voucher
+									G.E_MANAGER:add_event(Event({
+										trigger = "after",
+										delay = 0,
+										func = function()
+											card:start_dissolve()
+											return true
+										end,
+									}))
+								end
+							end
+						end
+					end
+				end
+			end
+		end
+	end,
+	unlocked = false,
+	check_for_unlock = function(self, args)
+		if args.type == "discover_amount" then
+			if G.DISCOVER_TALLIES.vouchers.tally / G.DISCOVER_TALLIES.vouchers.of >= 1 then
+				unlock_card(self)
+			end
+		end
+		if args.type == "cry_lock_all" then
+			lock_card(self)
+		end
+		if args.type == "cry_unlock_all" then
+			unlock_card(self)
+		end
+	end,
+}
+-- Glowing Deck
+-- Increase the values of compatible jokers by X1.25 after defeating boss blind
+local glowing = {
+	object_type = "Back",
+	dependencies = {
+		items = {
+			"set_cry_deck",
+			"set_cry_misprintize",
+		},
+	},
+	name = "cry-Glowing",
+	key = "glowing",
+	-- -- is this config even used for anything
+	-- config = { cry_glowing = true },
+	pos = { x = 4, y = 2 },
+	order = 40010,
+	loc_vars = function(self, info_queue, center)
+		return { vars = { " " } }
+	end,
+	atlas = "glowing",
+	calculate = function(self, back, context)
+		if context.context == "eval" and Cryptid.safe_get(G.GAME, "last_blind", "boss") then
+			for i = 1, #G.jokers.cards do
+				if not Card.no(G.jokers.cards[i], "immutable", true) then
+					Cryptid.with_deck_effects(G.jokers.cards[i], function(card)
+						Cryptid.misprintize(card, { min = 1.25, max = 1.25 }, nil, true)
+					end)
+				end
+			end
+		end
+	end,
+	unlocked = false,
+	check_for_unlock = function(self, args)
+		if args.type == "win_deck" then
+			if get_deck_win_stake("b_cry_beige") > 0 then
+				unlock_card(self)
+			end
+		end
+		if args.type == "cry_lock_all" then
+			lock_card(self)
+		end
+		if args.type == "cry_unlock_all" then
+			unlock_card(self)
+		end
+	end,
+}
+-- Critical Deck
+-- 1/4 for ^2 mult, 1/8 for ^0.5 mult
 local critical = {
 	object_type = "Back",
 	dependencies = {
@@ -431,7 +351,7 @@ local critical = {
 	},
 	name = "cry-Critical",
 	key = "critical",
-	order = 10,
+	order = 40011,
 	config = { cry_crit_rate = 0.25, cry_crit_miss_rate = 0.125 },
 	pos = { x = 4, y = 5 },
 	atlas = "atlasdeck",
@@ -503,49 +423,8 @@ local critical = {
 		end
 	end,
 }
-local glowing = {
-	object_type = "Back",
-	dependencies = {
-		items = {
-			"set_cry_deck",
-		},
-	},
-	name = "cry-Glowing",
-	key = "glowing",
-	-- is this config even used for anything
-	config = { cry_glowing = true },
-	pos = { x = 4, y = 2 },
-	order = 9,
-	loc_vars = function(self, info_queue, center)
-		return { vars = { " " } }
-	end,
-	atlas = "glowing",
-	calculate = function(self, back, context)
-		if context.context == "eval" and Cryptid.safe_get(G.GAME, "last_blind", "boss") then
-			for i = 1, #G.jokers.cards do
-				if not Card.no(G.jokers.cards[i], "immutable", true) then
-					Cryptid.with_deck_effects(G.jokers.cards[i], function(card)
-						Cryptid.misprintize(card, { min = 1.25, max = 1.25 }, nil, true)
-					end)
-				end
-			end
-		end
-	end,
-	unlocked = false,
-	check_for_unlock = function(self, args)
-		if args.type == "win_deck" then
-			if get_deck_win_stake("b_cry_beige") > 0 then
-				unlock_card(self)
-			end
-		end
-		if args.type == "cry_lock_all" then
-			lock_card(self)
-		end
-		if args.type == "cry_unlock_all" then
-			unlock_card(self)
-		end
-	end,
-}
+-- Nostalgic Deck
+-- Joker/Consumeable slots are combined (6 by default), blinds are replaced with nostalgic versions if possible
 local beta = {
 	object_type = "Back",
 	dependencies = {
@@ -557,7 +436,7 @@ local beta = {
 	key = "beta",
 	config = { cry_beta = true },
 	pos = { x = 5, y = 5 },
-	order = 13,
+	order = 40012,
 	atlas = "atlasdeck",
 	apply = function(self)
 		G.GAME.modifiers.cry_beta = true
@@ -577,6 +456,8 @@ local beta = {
 		end
 	end,
 }
+-- Bountiful Deck
+-- On play or discard, draw 5 cards
 local bountiful = {
 	object_type = "Back",
 	dependencies = {
@@ -588,7 +469,7 @@ local bountiful = {
 	key = "bountiful",
 	config = { cry_forced_draw_amount = 5 },
 	pos = { x = 2, y = 6 },
-	order = 14,
+	order = 40013,
 	atlas = "atlasdeck",
 	apply = function(self)
 		G.GAME.modifiers.cry_forced_draw_amount = self.config.cry_forced_draw_amount
@@ -611,25 +492,77 @@ local bountiful = {
 		end
 	end,
 }
-local beige = {
+-- Misprint Deck
+-- X0.1 to X10 joker values
+local misprint = {
+	object_type = "Back",
+	dependencies = {
+		items = {
+			"set_cry_deck",
+			"set_cry_misprintize",
+		},
+	},
+	name = "cry-Misprint",
+	key = "misprint",
+	order = 40014,
+	config = { cry_misprint_min = 0.1, cry_misprint_max = 10 },
+	pos = { x = 4, y = 2 },
+	atlas = "atlasdeck",
+	apply = function(self)
+		G.GAME.modifiers.cry_misprint_min = (G.GAME.modifiers.cry_misprint_min or 1) * self.config.cry_misprint_min
+		G.GAME.modifiers.cry_misprint_max = (G.GAME.modifiers.cry_misprint_max or 1) * self.config.cry_misprint_max
+	end,
+	unlocked = false,
+	check_for_unlock = function(self, args)
+		if Cryptid.safe_get(G, "jokers") then
+			for i = 1, #G.jokers.cards do
+				if G.jokers.cards[i].edition and G.jokers.cards[i].edition.cry_glitched then
+					unlock_card(self)
+					break
+				end
+			end
+		end
+		if args.type == "cry_lock_all" then
+			lock_card(self)
+		end
+		if args.type == "cry_unlock_all" then
+			unlock_card(self)
+		end
+	end,
+}
+-- Encoded is in code.lua
+-- Very Fair Deck
+-- -2 hands/discards, no vouchers in shop
+local very_fair = {
 	object_type = "Back",
 	dependencies = {
 		items = {
 			"set_cry_deck",
 		},
 	},
-	name = "cry-Beige",
-	key = "beige",
-	pos = { x = 1, y = 6 },
-	order = 15,
+	name = "Very Fair Deck",
+	key = "very_fair",
+	config = { hands = -2, discards = -2 },
+	pos = { x = 4, y = 0 },
+	order = 40097,
 	atlas = "atlasdeck",
 	apply = function(self)
-		G.GAME.modifiers.cry_common_value_quad = true
+		G.GAME.modifiers.cry_no_vouchers = true
+	end,
+	init = function(self)
+		very_fair_quip = {}
+		local avts = SMODS.add_voucher_to_shop
+		function SMODS.add_voucher_to_shop(...)
+			if G.GAME.modifiers.cry_no_vouchers then
+				return
+			end
+			return avts(...)
+		end
 	end,
 	unlocked = false,
 	check_for_unlock = function(self, args)
-		if args.type == "discover_amount" then
-			if args.amount >= 200 then
+		if args.type == "win_deck" then
+			if get_deck_win_stake("b_cry_blank") > 0 then
 				unlock_card(self)
 			end
 		end
@@ -641,6 +574,111 @@ local beige = {
 		end
 	end,
 }
+-- Infinite Deck
+-- "Infinite" selection limit (1e20), +1 hand size
+local infinite = {
+	object_type = "Back",
+	dependencies = {
+		items = {
+			"set_cry_deck",
+		},
+	},
+	name = "cry-Infinite",
+	key = "infinite",
+	order = 40098,
+	config = { cry_highlight_limit = 1e20, hand_size = 1 },
+	pos = { x = 3, y = 0 },
+	atlas = "atlasdeck",
+	apply = function(self)
+		G.GAME.modifiers.cry_highlight_limit = self.config.cry_highlight_limit
+	end,
+	unlocked = false,
+	check_for_unlock = function(self, args)
+		if args.type == "hand_contents" then
+			if #args.cards >= 6 then
+				unlock_card(self)
+			end
+		end
+		if args.type == "cry_lock_all" then
+			lock_card(self)
+		end
+		if args.type == "cry_unlock_all" then
+			unlock_card(self)
+		end
+	end,
+}
+-- Equilibrium Deck
+-- Equilibrium effect, start with overstock plus
+-- Equilibrium effect = **ALL** cards can appear in shop and all have equal weight
+local equilibrium = {
+	object_type = "Back",
+	dependencies = {
+		items = {
+			"set_cry_deck",
+		},
+	},
+	name = "cry-Equilibrium",
+	key = "equilibrium",
+	order = 40099,
+	config = { vouchers = { "v_overstock_norm", "v_overstock_plus" } },
+	pos = { x = 0, y = 1 },
+	atlas = "atlasdeck",
+	apply = function(self)
+		G.GAME.modifiers.cry_equilibrium = true
+	end,
+	unlocked = false,
+	check_for_unlock = function(self, args)
+		if Cryptid.safe_get(G, "jokers") then
+			local count = 0
+			for i = 1, #G.jokers.cards do
+				count = count + 1
+			end
+			if count >= 10 then
+				unlock_card(self)
+			end
+		end
+		if args.type == "cry_lock_all" then
+			lock_card(self)
+		end
+		if args.type == "cry_unlock_all" then
+			unlock_card(self)
+		end
+	end,
+}
+-- CCD Deck
+-- All Cards Are CCD
+local CCD = {
+	object_type = "Back",
+	dependencies = {
+		items = {
+			"set_cry_deck",
+		},
+	},
+	name = "cry-CCD",
+	key = "CCD",
+	order = 40100,
+	config = { cry_ccd = true },
+	pos = { x = 0, y = 0 },
+	atlas = "atlasdeck",
+	apply = function(self)
+		G.GAME.modifiers.cry_ccd = true
+	end,
+	unlocked = false,
+	check_for_unlock = function(self, args)
+		if args.cry_used_consumable == "c_cry_hammerspace" then
+			unlock_card(self)
+		end
+		if args.type == "cry_lock_all" then
+			lock_card(self)
+		end
+		if args.type == "cry_unlock_all" then
+			unlock_card(self)
+		end
+	end,
+}
+-- 40101-40105, aka edition decks are in enhanced.lua
+-- Blank Deck
+-- Does Nothing?
 local blank = {
 	object_type = "Back",
 	dependencies = {
@@ -650,10 +688,12 @@ local blank = {
 	},
 	name = "cry-Blank",
 	key = "blank",
-	order = 75,
+	order = 40106,
 	pos = { x = 1, y = 0 },
 	atlas = "atlasdeck",
 }
+-- Antimatter Deck
+-- Does Everything
 local antimatter = {
 	object_type = "Back",
 	dependencies = {
@@ -665,7 +705,7 @@ local antimatter = {
 		return { key = Cryptid.gameset_loc(self, { mainline = "balanced", modest = "balanced" }) }
 	end,
 	name = "cry-Antimatter",
-	order = 76,
+	order = 40107,
 	key = "antimatter",
 	config = {
 		cry_antimatter = true,
@@ -1222,26 +1262,36 @@ local antimatter = {
 return {
 	name = "Misc. Decks",
 	items = {
-		very_fair,
-		equilibrium,
-		misprint,
-		infinite,
-		conveyor,
-		CCD,
-		wormhole,
-		redeemed,
+		-- Rarity Decks
+		beige,
+		-- uncommon
+		-- rare
+		-- epic
 		legendary,
-		critical,
+		wormhole,
+		-- spooky (is in spooky.lua)
+		
+		-- other decks
+		conveyor,
+		redeemed,
 		glowing,
+		critical,
 		beta,
 		bountiful,
-		beige,
+		misprint,
+		-- encoded (is in code.lua)
+		
+		-- stronger decks
+		very_fair,
+		infinite,
+		equilibrium,
+		CCD,
+		st_deck,
+		et_deck,
+		e_deck,
+		sl_deck,
+		sk_deck,
 		blank,
 		antimatter,
-		e_deck,
-		et_deck,
-		sk_deck,
-		st_deck,
-		sl_deck,
 	},
 }
