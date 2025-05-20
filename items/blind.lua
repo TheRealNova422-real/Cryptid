@@ -972,7 +972,8 @@ local vermillion_virus = {
 					)
 				else
 					_card = create_card("Joker", G.jokers, nil, nil, nil, nil, nil, "cry_vermillion_virus_gen")
-					G.jokers.cards[idx]:remove_from_deck()
+					G.jokers.cards[idx]:start_dissolve()
+					--G.jokers.cards[idx]:remove_from_deck()
 					_card:add_to_deck()
 					_card:start_materialize()
 					G.jokers.cards[idx] = _card
