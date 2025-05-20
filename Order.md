@@ -114,6 +114,15 @@ Decks
 
 2607 antimatter
 
+3000-3199 - M Jokers
+
+3200-3399 - Spooky Jokers
+
+3400-3599 - Code Jokers
+
+3600-3799 - Particle Card Jokers
+
+3800-3999 - D20 Jokers
 
 Sleeves use the same order for decks
 
