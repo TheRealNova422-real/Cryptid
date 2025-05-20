@@ -43,13 +43,58 @@ local atomic1 = {
 	key = "particle_normal_1",
 	kind = "Particle",
 	atlas = "pack",
-	pos = { x = 0, y = 0 },
+	pos = { x = 1, y = 2 },
 	config = { extra = 2, choose = 1 },
 	cost = 4,
 	order = 805,
-	weight = 100,
+	weight = 0.3,
 	create_card = function(self, card)
 		return create_card("Particle", G.pack_cards, nil, nil, true, true, nil, "cry_atomic_1")
+	end,
+	ease_background_colour = function(self)
+		ease_colour(G.C.DYN_UI.MAIN, G.C.SET.Particle)
+		ease_background_colour({ new_colour = G.C.SET.Particle, special_colour = G.C.BLACK, contrast = 2 })
+	end,
+	loc_vars = function(self, info_queue, card)
+		return {
+			vars = {
+				card and card.ability.choose or self.config.choose,
+				card and card.ability.extra or self.config.extra,
+			},
+		}
+	end,
+	group_key = "k_cry_atomic_pack",
+	cry_digital_hallucinations = particle_digital_hallucinations_compat,
+}
+
+local atomic2 = {
+	cry_credits = {
+		idea = {
+			"",
+		},
+		art = {
+			"",
+		},
+		code = {
+			"Math",
+		},
+	},
+	dependencies = {
+		items = {
+			"set_cry_particle",
+		},
+	},
+	object_type = "Booster",
+	key = "particle_normal_2",
+	kind = "Particle",
+	atlas = "pack",
+	pos = { x = 1, y = 2 },
+	config = { extra = 2, choose = 1 },
+	cost = 4,
+	order = 805,
+	weight = 0.3,
+	create_card = function(self, card)
+		return create_card("Particle", G.pack_cards, nil, nil, true, true, nil, "cry_atomic_2")
 	end,
 	ease_background_colour = function(self)
 		ease_colour(G.C.DYN_UI.MAIN, G.C.SET.Particle)
@@ -197,7 +242,6 @@ local neutron = {
 	end,
 	can_bulk_use = true,
 	use = function(self, card, area, copier)
-
 		local used_consumable = copier or card
 		delay(0.4)
 		update_hand_text(
@@ -230,7 +274,6 @@ local neutron = {
 
 	end,
 	bulk_use = function(self, card, area, copier, number)
-
 		local used_consumable = copier or card
 		delay(0.4)
 		update_hand_text(
@@ -263,11 +306,138 @@ local neutron = {
 	end,
 }
 
+local higgsboson = {
+	cry_credits = {
+		idea = {
+			"HexaCryonic",
+		},
+		art = {
+			"ori",
+		},
+		code = {
+			"crazybot",
+		},
+	},
+	dependencies = {
+		items = {
+			"set_cry_particle",
+		},
+	},
+	object_type = "Consumable",
+	set = "Particle",
+	name = "cry-HiggsBoson",
+	key = "higgsboson",
+	pos = { x = 0, y = 2 },
+	config = {},
+	cost = 4,
+	atlas = "atlasparticle",
+	order = 903,
+	can_use = function(self, card)
+		return true
+	end,
+	can_bulk_use = true,
+	use = function(self, card, area, copier)
+		local used_consumable = copier or card
+		G.E_MANAGER:add_event(Event({
+			trigger = "after",
+			delay = 0.4,
+			func = function() --"borrowed" from Wheel Of Fortune
+				attention_text({
+					text = localize("k_nope_ex"),
+					scale = 1.3,
+					hold = 1.4,
+					major = used_consumable,
+					backdrop_colour = G.C.SECONDARY_SET.Particle,
+					align = (
+						G.STATE == G.STATES.TAROT_PACK
+						or G.STATE == G.STATES.SPECTRAL_PACK
+						or G.STATE == G.STATES.SMODS_BOOSTER_OPENED
+					)
+							and "tm"
+						or "cm",
+					offset = {
+						x = 0,
+						y = (
+							G.STATE == G.STATES.TAROT_PACK
+							or G.STATE == G.STATES.SPECTRAL_PACK
+							or G.STATE == G.STATES.SMODS_BOOSTER_OPENED
+						)
+								and -0.2
+							or 0,
+					},
+					silent = true,
+				})
+				G.E_MANAGER:add_event(Event({
+					trigger = "after",
+					delay = 0.06 * G.SETTINGS.GAMESPEED,
+					blockable = false,
+					blocking = false,
+					func = function()
+						play_sound("tarot2", 0.76, 0.4)
+						return true
+					end,
+				}))
+				play_sound("tarot2", 1, 0.4)
+				used_consumable:juice_up(0.3, 0.5)
+				return true
+			end,
+		}))
+	end,
+	bulk_use = function(self, card, area, copier, number)
+		G.E_MANAGER:add_event(Event({
+			trigger = "after",
+			delay = 0.4,
+			func = function() --"borrowed" from Wheel Of Fortune
+				attention_text({
+					text = localize("k_nope_ex"),
+					scale = 1.3,
+					hold = 1.4,
+					major = used_consumable,
+					backdrop_colour = G.C.SECONDARY_SET.Particle,
+					align = (
+						G.STATE == G.STATES.TAROT_PACK
+						or G.STATE == G.STATES.SPECTRAL_PACK
+						or G.STATE == G.STATES.SMODS_BOOSTER_OPENED
+					)
+							and "tm"
+						or "cm",
+					offset = {
+						x = 0,
+						y = (
+							G.STATE == G.STATES.TAROT_PACK
+							or G.STATE == G.STATES.SPECTRAL_PACK
+							or G.STATE == G.STATES.SMODS_BOOSTER_OPENED
+						)
+								and -0.2
+							or 0,
+					},
+					silent = true,
+				})
+				G.E_MANAGER:add_event(Event({
+					trigger = "after",
+					delay = 0.06 * G.SETTINGS.GAMESPEED,
+					blockable = false,
+					blocking = false,
+					func = function()
+						play_sound("tarot2", 0.76, 0.4)
+						return true
+					end,
+				}))
+				play_sound("tarot2", 1, 0.4)
+				used_consumable:juice_up(0.3, 0.5)
+				return true
+			end,
+		}))
+	end,
+}
+
 local particle_cards = {
 	particle,
 	atomic1,
+	atomic2,
 	proton,
 	neutron,
+	higgsboson,
 }
 
 return {

@@ -3001,6 +3001,12 @@ return {
 					"by {X:chips,C:white}X#1#{} Chips",
 				},
 			},
+			c_cry_higgsboson = {
+				name = "Higgs Boson",
+				text = {
+					"Says {C:attention}\"Nope!\"",
+				},
+			},
 		},
 		Planet = {
 			c_cry_asteroidbelt = {
@@ -4513,6 +4519,27 @@ return {
 			},
 			p_cry_particle_normal_1 = {
 				name = "Atomic Pack",
+				text = {
+					"Choose {C:attention}#1#{} of up to",
+					"{C:attention}#2#{C:cry_particle} Particle{} card#<s>2#",
+				},
+			},
+			p_cry_particle_normal_2 = {
+				name = "Atomic Pack",
+				text = {
+					"Choose {C:attention}#1#{} of up to",
+					"{C:attention}#2#{C:cry_particle} Particle{} card#<s>2#",
+				},
+			},
+			p_cry_particle_jumbo_1 = {
+				name = "Jumbo Atomic Pack",
+				text = {
+					"Choose {C:attention}#1#{} of up to",
+					"{C:attention}#2#{C:cry_particle} Particle{} card#<s>2#",
+				},
+			},
+			p_cry_particle_mega_1 = {
+				name = "Mega Atomic Pack",
 				text = {
 					"Choose {C:attention}#1#{} of up to",
 					"{C:attention}#2#{C:cry_particle} Particle{} card#<s>2#",
