@@ -140,6 +140,46 @@ Sleeves use the same order for decks
 
 19501-20000 - Tags 
 
+19501-19599 - Edition Tags (follows edition order, double M goes here too after jolly)
+
+19600-19899 - Normal Tags
+
+19601 - epic
+
+19602-5 reserved for possible other rarity tags
+
+19606 - scope
+
+19607 - memory
+
+19608 - better top up
+
+19609 - bundle
+
+19610 - gourmand
+
+19611 - loss
+
+19612 - banana
+
+19613 - schematic
+
+empowered tag is just before hidden spectrals
+
+19900-19999 - other tags
+
+19901 - triple
+
+19902 - quad
+
+19903 - quint
+
+19904 - t3 voucher
+
+19905 - meow
+
+19906 - gamba
+
 Vouchers:
 
 20001 triple
@@ -216,8 +256,12 @@ vanilla t3s here (in order)
 
 32768 code t3
 
+199998 - Empowered Tag
+
+199999 - Empowered Pack
 
 200000-200100 - Hidden Spectrals
+
 200100 - Gateway
 
 250001-math.huge - Exotic Jokers
