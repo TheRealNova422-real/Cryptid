@@ -64,55 +64,7 @@ Order: Meme1, Meme2, Meme3, Meme4 placeholder, Program1, Program2, ProgramJ, Pro
 900-2000 reserved for future content
 
 
-Decks
 
-2501 beige
-
-2502, 3 and 4 are reserved for uncommon, rare and epic decks respectively
-
-2505 legendary
-
-2506 wormhole
-
-2507 spooky
-
-2508 conveyor
-
-2509 redeemed
-
-2510 glowing
-
-2511 critical
-
-2512 nostalgic
-
-2513 bountiful
-
-2514 misprint
-
-2515 encoded
-
-2597 very fair
-
-2598 infinite
-
-2599 equilibrium
-
-2600 ccd
-
-2601 suit deck
-
-2602 enhancement deck
-
-2603 edition deck
-
-2604 seal deck
-
-2605 sticker deck
-
-2606 blank deck
-
-2607 antimatter
 
 3000-3099 - Hand Related Jokers (including kidnapping)
 
@@ -255,6 +207,60 @@ vanilla t3s here (in order)
 30021 Particle Card T3
 
 32768 code t3
+
+Decks
+
+40001 beige
+
+40002, 3 and 4 are reserved for uncommon, rare and epic decks respectively
+
+40005 legendary
+
+40006 wormhole
+
+40007 spooky
+
+40008 conveyor
+
+40009 redeemed
+
+40010 glowing
+
+40011 critical
+
+40012 nostalgic
+
+40013 bountiful
+
+40014 misprint
+
+40015 encoded
+
+40097 very fair
+
+40098 infinite
+
+40099 equilibrium
+
+40100 ccd
+
+40101 suit deck
+
+40102 enhancement deck
+
+40103 edition deck
+
+40104 seal deck
+
+40105 sticker deck
+
+40106 blank deck
+
+40107 antimatter
+
+
+
+
 
 199998 - Empowered Tag
 
