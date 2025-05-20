@@ -135,8 +135,8 @@ local proton = {
 	key = "proton",
 	pos = { x = 0, y = 0 },
 	config = { extra = 1.25 },
-	loc_vars = function(self, info_queue, center)
-		return { vars = { self.config.extra } }
+	loc_vars = function(self, info_queue, card)
+		return { vars = { card.config.extra } }
 	end,
 	cost = 4,
 	atlas = "atlasparticle",
@@ -231,8 +231,8 @@ local neutron = {
 	key = "neutron",
 	pos = { x = 1, y = 0 },
 	config = { extra = 1.1 },
-	loc_vars = function(self, info_queue, center)
-		return { vars = { self.config.extra } }
+	loc_vars = function(self, info_queue, card)
+		return { vars = { card.config.extra } }
 	end,
 	cost = 4,
 	atlas = "atlasparticle",
