@@ -4171,7 +4171,8 @@ local ctrl_v = {
 		return {}
 	end,
 	can_use = function(self, card)
-		return #G.hand.highlighted + #G.consumeables.highlighted + #G.pack_cards.highlighted == 2
+		return #G.hand.highlighted + #G.consumeables.highlighted + (G.pack_cards and #G.pack_cards.highlighted or 0)
+			== 2
 	end,
 	use = function(self, card, area, copier)
 		if area then
@@ -4205,7 +4206,7 @@ local ctrl_v = {
 				end,
 			}))
 		end
-		if G.pack_cards.highlighted[1] then
+		if G.pack_cards and G.pack_cards.highlighted[1] then
 			G.E_MANAGER:add_event(Event({
 				func = function()
 					local card = copy_card(G.pack_cards.highlighted[1])
@@ -4253,7 +4254,7 @@ local ctrl_v = {
 					end,
 				}))
 			end
-			if G.pack_cards.highlighted[1] then
+			if G.pack_cards and G.pack_cards.highlighted[1] then
 				G.E_MANAGER:add_event(Event({
 					func = function()
 						local card = copy_card(G.pack_cards.highlighted[1])
