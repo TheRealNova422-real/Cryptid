@@ -3007,7 +3007,7 @@ return {
 					"{C:attention}Poker hand upgrades{} get",
 					"{X:mult,C:white}X2{} Mult and {X:chips,C:white}X2{} Chips",
 					"for the next {C:attention}#1#{} rounds",
-					"{C:inactive}(Currently {X:mult,C:white}X#2#{C:inactive} for {C:attention}#3#{C:inactive} rounds)",
+					"{C:inactive}(Currently {X:mult,C:white}X#2#{C:inactive} for {C:attention}#3#{C:inactive} round#<s>3#)",
 				},
 			},
 			c_cry_higgsboson = {

@@ -451,7 +451,7 @@ local photon = {
 	use = function(self, card, area, copier)
 		local used_consumable = copier or card
 
-		G.GAME.photon_rounds = lenient_bignum(card.ability.extra)
+		G.GAME.photon_rounds = math.max(G.GAME.photon_rounds, lenient_bignum(card.ability.extra))
 		G.GAME.photon_power = G.GAME.photon_power or 1
 
 		delay(0.4)
@@ -490,7 +490,7 @@ local photon = {
 	bulk_use = function(self, card, area, copier, number)
 		local used_consumable = copier or card
 
-		G.GAME.photon_rounds = lenient_bignum(card.ability.extra)
+		G.GAME.photon_rounds = math.max(G.GAME.photon_rounds, lenient_bignum(card.ability.extra))
 		G.GAME.photon_power = G.GAME.photon_power or 1
 
 		delay(0.4)
