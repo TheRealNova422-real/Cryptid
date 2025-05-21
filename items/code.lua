@@ -2384,11 +2384,13 @@ local hook = {
 	atlas = "atlasnotjokers",
 	order = 414,
 	can_use = function(self, card)
-		if not G.GAME.modifiers.cry_beta or card.area == G.pack_cards then
-			return #G.jokers.highlighted == 2
-		else
-			return #G.jokers.highlighted == 3
+		local count = 0
+		for _, v in ipairs(G.jokers.highlighted) do
+			if not v.ability.consumeable then
+				count = count + 1
+			end
 		end
+		return G.GAME.modifiers.cry_beta and count == 3 or count == 2
 	end,
 	loc_vars = function(self, info_queue, card)
 		info_queue[#info_queue + 1] = { key = "cry_hooked", set = "Other", vars = { "hooked Joker" } }
@@ -2397,9 +2399,9 @@ local hook = {
 		local card1 = nil
 		local card2 = nil
 		for i = 1, #G.jokers.highlighted do
-			if not card1 and G.jokers.highlighted[i] ~= card then
+			if not card1 and G.jokers.highlighted[i] ~= card and not G.jokers.highlighted[i].ability.consumeable then
 				card1 = G.jokers.highlighted[i]
-			elseif G.jokers.highlighted[i] ~= card then
+			elseif G.jokers.highlighted[i] ~= card and not G.jokers.highlighted[i].ability.consumeable then
 				card2 = G.jokers.highlighted[i]
 			end
 		end
@@ -4164,7 +4166,7 @@ local ctrl_v = {
 		return {}
 	end,
 	can_use = function(self, card)
-		return #G.hand.highlighted + #G.consumeables.highlighted == 2
+		return #G.hand.highlighted + #G.consumeables.highlighted + #G.pack_cards.highlighted == 2
 	end,
 	use = function(self, card, area, copier)
 		if area then
@@ -4198,6 +4200,22 @@ local ctrl_v = {
 				end,
 			}))
 		end
+		if G.pack_cards.highlighted[1] then
+			G.E_MANAGER:add_event(Event({
+				func = function()
+					local card = copy_card(G.pack_cards.highlighted[1])
+					if card.ability.name and card.ability.name == "cry-Chambered" then
+						card.ability.extra.num_copies = 1
+					end
+					card:add_to_deck()
+					if Incantation then
+						card:setQty(1)
+					end
+					G.consumeables:emplace(card)
+					return true
+				end,
+			}))
+		end
 	end,
 	bulk_use = function(self, card, area, copier, number)
 		for i = 1, number do
@@ -4218,6 +4236,22 @@ local ctrl_v = {
 				G.E_MANAGER:add_event(Event({
 					func = function()
 						local card = copy_card(G.consumeables.highlighted[1])
+						if card.ability.name and card.ability.name == "cry-Chambered" then
+							card.ability.extra.num_copies = 1
+						end
+						card:add_to_deck()
+						if Incantation then
+							card:setQty(1)
+						end
+						G.consumeables:emplace(card)
+						return true
+					end,
+				}))
+			end
+			if G.pack_cards.highlighted[1] then
+				G.E_MANAGER:add_event(Event({
+					func = function()
+						local card = copy_card(G.pack_cards.highlighted[1])
 						if card.ability.name and card.ability.name == "cry-Chambered" then
 							card.ability.extra.num_copies = 1
 						end

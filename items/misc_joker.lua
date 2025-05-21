@@ -7105,7 +7105,7 @@ local coin = {
 	atlas = "atlasthree",
 	calculate = function(self, card, context)
 		if (context.selling_card and context.card.ability.set == "Joker") or context.forcetrigger then
-			local mod = math.floor(pseudorandom(pseudoseed("coin")) * card.ability.immutable.money_mod)
+			local mod = math.floor(pseudorandom(pseudoseed("coin")) * card.ability.immutable.money_mod) + 1
 			local option = lenient_bignum(to_big(card.ability.extra.money) * mod)
 			ease_dollars(option)
 			card_eval_status_text(
