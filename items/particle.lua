@@ -43,10 +43,10 @@ local atomic1 = {
 	key = "particle_normal_1",
 	kind = "Particle",
 	atlas = "pack",
-	pos = { x = 1, y = 2 },
+	pos = { x = 0, y = 3 },
 	config = { extra = 2, choose = 1 },
 	cost = 4,
-	order = 805,
+	order = 801,
 	weight = 0.3,
 	create_card = function(self, card)
 		return create_card("Particle", G.pack_cards, nil, nil, true, true, nil, "cry_atomic_1")
@@ -88,10 +88,100 @@ local atomic2 = {
 	key = "particle_normal_2",
 	kind = "Particle",
 	atlas = "pack",
-	pos = { x = 1, y = 2 },
+	pos = { x = 1, y = 3 },
 	config = { extra = 2, choose = 1 },
 	cost = 4,
-	order = 805,
+	order = 802,
+	weight = 0.3,
+	create_card = function(self, card)
+		return create_card("Particle", G.pack_cards, nil, nil, true, true, nil, "cry_atomic_2")
+	end,
+	ease_background_colour = function(self)
+		ease_colour(G.C.DYN_UI.MAIN, G.C.SET.Particle)
+		ease_background_colour({ new_colour = G.C.SET.Particle, special_colour = G.C.BLACK, contrast = 2 })
+	end,
+	loc_vars = function(self, info_queue, card)
+		return {
+			vars = {
+				card and card.ability.choose or self.config.choose,
+				card and card.ability.extra or self.config.extra,
+			},
+		}
+	end,
+	group_key = "k_cry_atomic_pack",
+	cry_digital_hallucinations = particle_digital_hallucinations_compat,
+}
+
+local atomicJ = {
+	cry_credits = {
+		idea = {
+			"",
+		},
+		art = {
+			"",
+		},
+		code = {
+			"Math",
+		},
+	},
+	dependencies = {
+		items = {
+			"set_cry_particle",
+		},
+	},
+	object_type = "Booster",
+	key = "particle_jumbo_1",
+	kind = "Particle",
+	atlas = "pack",
+	pos = { x = 2, y = 3 },
+	config = { extra = 4, choose = 1 },
+	cost = 4,
+	order = 803,
+	weight = 0.3,
+	create_card = function(self, card)
+		return create_card("Particle", G.pack_cards, nil, nil, true, true, nil, "cry_atomic_2")
+	end,
+	ease_background_colour = function(self)
+		ease_colour(G.C.DYN_UI.MAIN, G.C.SET.Particle)
+		ease_background_colour({ new_colour = G.C.SET.Particle, special_colour = G.C.BLACK, contrast = 2 })
+	end,
+	loc_vars = function(self, info_queue, card)
+		return {
+			vars = {
+				card and card.ability.choose or self.config.choose,
+				card and card.ability.extra or self.config.extra,
+			},
+		}
+	end,
+	group_key = "k_cry_atomic_pack",
+	cry_digital_hallucinations = particle_digital_hallucinations_compat,
+}
+
+local atomicM = {
+	cry_credits = {
+		idea = {
+			"",
+		},
+		art = {
+			"",
+		},
+		code = {
+			"Math",
+		},
+	},
+	dependencies = {
+		items = {
+			"set_cry_particle",
+		},
+	},
+	object_type = "Booster",
+	key = "particle_mega_1",
+	kind = "Particle",
+	atlas = "pack",
+	pos = { x = 3, y = 3 },
+	config = { extra = 4, choose = 2 },
+	cost = 4,
+	order = 804,
 	weight = 0.3,
 	create_card = function(self, card)
 		return create_card("Particle", G.pack_cards, nil, nil, true, true, nil, "cry_atomic_2")
@@ -435,6 +525,8 @@ local particle_cards = {
 	particle,
 	atomic1,
 	atomic2,
+	atomicJ,
+	atomicM,
 	proton,
 	neutron,
 	higgsboson,
