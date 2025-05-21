@@ -3,7 +3,7 @@ local particle = {
 	key = "Particle",
 	primary_colour = HEX("bdb56f"),
 	secondary_colour = HEX("bdba9f"),
-	collection_rows = { 4, 4 },
+	collection_rows = { 4, 3 },
 	shop_rate = 0.0,
 	loc_txt = {},
 	default = "c_cry_proton",
@@ -245,7 +245,7 @@ local proton = {
 		delay(0.4)
 		update_hand_text(
 			{ sound = "button", volume = 0.7, pitch = 0.8, delay = 0.3 },
-			{ handname = localize("k_all_hands"), chips = "...", mult = "...", level = "" }
+			{ handname = localize("cry_upg_power"), chips = "+...", mult = "+...", level = "" }
 		)
 		delay(1.0)
 		G.E_MANAGER:add_event(Event({
@@ -261,7 +261,7 @@ local proton = {
 
 		update_hand_text({ delay = 0 }, { mult = "X"..number_format(card.ability.extra), StatusText = true })
 		delay(1.3)
-		update_hand_text({ sound = "button", volume = 0.7, pitch = 0.9, delay = 0 }, {})
+		update_hand_text({ sound = "button", volume = 0.7, pitch = 0.9, delay = 0 }, {mult = "+...",})
 		delay(1.3)
 
 		update_hand_text(
@@ -279,7 +279,7 @@ local proton = {
 		delay(0.4)
 		update_hand_text(
 			{ sound = "button", volume = 0.7, pitch = 0.8, delay = 0.3 },
-			{ handname = localize("k_all_hands"), chips = "...", mult = "...", level = "" }
+			{ handname = localize("cry_upg_power"), chips = "+...", mult = "+...", level = "" }
 		)
 		delay(1.0)
 		G.E_MANAGER:add_event(Event({
@@ -295,7 +295,7 @@ local proton = {
 		
 		update_hand_text({ delay = 0 }, { mult = "X"..number_format(to_big(card.ability.extra)^to_big(number)), StatusText = true })
 		delay(1.3)
-		update_hand_text({ sound = "button", volume = 0.7, pitch = 0.9, delay = 0 }, {})
+		update_hand_text({ sound = "button", volume = 0.7, pitch = 0.9, delay = 0 }, {mult = "+...",})
 		delay(1.3)
 
 		update_hand_text(
@@ -348,7 +348,7 @@ local neutron = {
 		delay(0.4)
 		update_hand_text(
 			{ sound = "button", volume = 0.7, pitch = 0.8, delay = 0.3 },
-			{ handname = localize("k_all_hands"), chips = "...", mult = "...", level = "" }
+			{ handname = localize("cry_upg_power"), chips = "+...", mult = "+...", level = "" }
 		)
 		delay(1.0)
 		G.E_MANAGER:add_event(Event({
@@ -364,7 +364,7 @@ local neutron = {
 
 		update_hand_text({ delay = 0 }, { chips = "X"..number_format(card.ability.extra), StatusText = true })
 		delay(1.3)
-		update_hand_text({ sound = "button", volume = 0.7, pitch = 0.9, delay = 0 }, {})
+		update_hand_text({ sound = "button", volume = 0.7, pitch = 0.9, delay = 0 }, {chips = "+...",})
 		delay(1.3)
 
 		update_hand_text(
@@ -383,7 +383,7 @@ local neutron = {
 		delay(0.4)
 		update_hand_text(
 			{ sound = "button", volume = 0.7, pitch = 0.8, delay = 0.3 },
-			{ handname = localize("k_all_hands"), chips = "...", mult = "...", level = "" }
+			{ handname = localize("cry_upg_power"), chips = "+...", mult = "+...", level = "" }
 		)
 		delay(1.0)
 		G.E_MANAGER:add_event(Event({
@@ -399,9 +399,212 @@ local neutron = {
 
 		update_hand_text({ delay = 0 }, { chips = "X"..number_format(to_big(card.ability.extra)^to_big(number)), StatusText = true })
 		delay(1.3)
-		update_hand_text({ sound = "button", volume = 0.7, pitch = 0.9, delay = 0 }, {})
+		update_hand_text({ sound = "button", volume = 0.7, pitch = 0.9, delay = 0 }, {chips = "+...",})
 		delay(1.3)
 
+		update_hand_text(
+			{ sound = "button", volume = 0.7, pitch = 1.1, delay = 0 },
+			{ mult = 0, chips = 0, handname = "", level = "" }
+		)
+	end,
+}
+
+local positron = {
+	cry_credits = {
+		idea = {
+			"HexaCryonic",
+		},
+		art = {
+			"ori",
+		},
+		code = {
+			"crazybot",
+		},
+	},
+	dependencies = {
+		items = {
+			"set_cry_particle",
+		},
+	},
+	object_type = "Consumable",
+	set = "Particle",
+	name = "cry-Positron",
+	key = "positron",
+	pos = { x = 3, y = 0 },
+	config = { 
+		most_power = 0.8, 
+		other_power = 1.4, 
+	},
+	loc_vars = function(self, info_queue, card)
+		return { 
+			vars = { 
+				card.ability.most_power,
+				card.ability.other_power,
+			} 
+		}
+	end,
+	cost = 4,
+	atlas = "atlasparticle",
+	order = 904,
+	can_use = function(self, card)
+		return true
+	end,
+	can_bulk_use = true,
+	use = function(self, card, area, copier)
+		local used_consumable = copier or card
+
+		local _hand, _tally = nil, -1
+		for k, v in ipairs(G.handlist) do
+			if G.GAME.hands[v].visible and G.GAME.hands[v].played > _tally then
+				_hand = v
+				_tally = G.GAME.hands[v].played
+			end
+		end
+
+		delay(0.4)
+		update_hand_text(
+			{ sound = "button", volume = 0.7, pitch = 0.8, delay = 0.3 }, {
+				handname = localize(_hand, "poker_hands").." "..localize("cry_upg_power"),
+				chips = "+"..number_format(Cryptid.get_l_chips(_hand)),
+				mult = "+"..number_format(Cryptid.get_l_mult(_hand)),
+				level = "",
+			}
+		)
+		delay(1.0)
+		G.E_MANAGER:add_event(Event({
+			trigger = "after",
+			delay = 0.2,
+			func = function()
+				play_sound("multhit2")
+				play_sound("xchips")
+				used_consumable:juice_up(0.8, 0.5)
+				G.TAROT_INTERRUPT_PULSE = true
+				return true
+			end,
+		}))
+		update_hand_text({ delay = 0 }, { mult = "X"..number_format(card.ability.most_power), chips = "X"..number_format(card.ability.most_power), StatusText = true })
+		G.GAME.hands[_hand].l_mult = lenient_bignum(to_big(G.GAME.hands[_hand].l_mult)*card.ability.most_power)
+		G.GAME.hands[_hand].l_chips = lenient_bignum(to_big(G.GAME.hands[_hand].l_chips)*card.ability.most_power)
+		delay(1.3)
+		update_hand_text(
+			{ sound = "button", volume = 0.7, pitch = 0.8, delay = 0.3 }, {
+				handname = localize(_hand, "poker_hands").." "..localize("cry_upg_power"),
+				chips = "+"..number_format(Cryptid.get_l_chips(_hand)),
+				mult = "+"..number_format(Cryptid.get_l_mult(_hand)),
+				level = "",
+			}
+		)
+		delay(1.3)
+		update_hand_text(
+			{ sound = "button", volume = 0.7, pitch = 0.8, delay = 0.3 }, {
+				handname = localize("cry_other_hands").." "..localize("cry_upg_power"),
+				chips = "+...",
+				mult = "+...",
+				level = "",
+			}
+		)
+		delay(1.0)
+		G.E_MANAGER:add_event(Event({
+			trigger = "after",
+			delay = 0.2,
+			func = function()
+				play_sound("multhit2")
+				play_sound("xchips")
+				used_consumable:juice_up(0.8, 0.5)
+				G.TAROT_INTERRUPT_PULSE = true
+				return true
+			end,
+		}))
+		update_hand_text({ delay = 0 }, { mult = "X"..number_format(card.ability.other_power), chips = "X"..number_format(card.ability.other_power), StatusText = true })
+		for k, v in pairs(G.GAME.hands) do
+			if k ~= _hand then
+				v.l_mult = lenient_bignum(to_big(v.l_mult)*card.ability.other_power)
+				v.l_chips = lenient_bignum(to_big(v.l_chips)*card.ability.other_power)
+			end
+		end
+		delay(1.3)
+		update_hand_text({ sound = "button", volume = 0.7, pitch = 0.9, delay = 0 }, {chips = "+...", mult = "+...",})
+		delay(1.3)
+		update_hand_text(
+			{ sound = "button", volume = 0.7, pitch = 1.1, delay = 0 },
+			{ mult = 0, chips = 0, handname = "", level = "" }
+		)
+	end,
+	bulk_use = function(self, card, area, copier, number)
+		local used_consumable = copier or card
+
+		local _hand, _tally = nil, -1
+		for k, v in ipairs(G.handlist) do
+			if G.GAME.hands[v].visible and G.GAME.hands[v].played > _tally then
+				_hand = v
+				_tally = G.GAME.hands[v].played
+			end
+		end
+
+		delay(0.4)
+		update_hand_text(
+			{ sound = "button", volume = 0.7, pitch = 0.8, delay = 0.3 }, {
+				handname = localize(_hand, "poker_hands").." "..localize("cry_upg_power"),
+				chips = "+"..number_format(Cryptid.get_l_chips(_hand)),
+				mult = "+"..number_format(Cryptid.get_l_mult(_hand)),
+				level = "",
+			}
+		)
+		delay(1.0)
+		G.E_MANAGER:add_event(Event({
+			trigger = "after",
+			delay = 0.2,
+			func = function()
+				play_sound("multhit2")
+				play_sound("xchips")
+				used_consumable:juice_up(0.8, 0.5)
+				G.TAROT_INTERRUPT_PULSE = true
+				return true
+			end,
+		}))
+		update_hand_text({ delay = 0 }, { mult = "X"..number_format(to_big(card.ability.most_power)^number), chips = "X"..number_format(to_big(card.ability.most_power)^number), StatusText = true })
+		G.GAME.hands[_hand].l_mult = lenient_bignum(to_big(G.GAME.hands[_hand].l_mult)*to_big(card.ability.most_power)^number)
+		G.GAME.hands[_hand].l_chips = lenient_bignum(to_big(G.GAME.hands[_hand].l_chips)*to_big(card.ability.most_power)^number)
+		delay(1.3)
+		update_hand_text(
+			{ sound = "button", volume = 0.7, pitch = 0.8, delay = 0.3 }, {
+				handname = localize(_hand, "poker_hands").." "..localize("cry_upg_power"),
+				chips = "+"..number_format(Cryptid.get_l_chips(_hand)),
+				mult = "+"..number_format(Cryptid.get_l_mult(_hand)),
+				level = "",
+			}
+		)
+		delay(1.3)
+		update_hand_text(
+			{ sound = "button", volume = 0.7, pitch = 0.8, delay = 0.3 }, {
+				handname = localize("cry_other_hands").." "..localize("cry_upg_power"),
+				chips = "+...",
+				mult = "+...",
+				level = "",
+			}
+		)
+		delay(1.0)
+		G.E_MANAGER:add_event(Event({
+			trigger = "after",
+			delay = 0.2,
+			func = function()
+				play_sound("multhit2")
+				play_sound("xchips")
+				used_consumable:juice_up(0.8, 0.5)
+				G.TAROT_INTERRUPT_PULSE = true
+				return true
+			end,
+		}))
+		update_hand_text({ delay = 0 }, { mult = "X"..number_format(to_big(card.ability.other_power)^number), chips = "X"..number_format(to_big(card.ability.other_power)^number), StatusText = true })
+		for k, v in pairs(G.GAME.hands) do
+			if k ~= _hand then
+				v.l_mult = lenient_bignum(to_big(v.l_mult)*to_big(card.ability.other_power)^number)
+				v.l_chips = lenient_bignum(to_big(v.l_chips)*to_big(card.ability.other_power)^number)
+			end
+		end
+		delay(1.3)
+		update_hand_text({ sound = "button", volume = 0.7, pitch = 0.9, delay = 0 }, {chips = "+...", mult = "+...",})
+		delay(1.3)
 		update_hand_text(
 			{ sound = "button", volume = 0.7, pitch = 1.1, delay = 0 },
 			{ mult = 0, chips = 0, handname = "", level = "" }
@@ -444,7 +647,7 @@ local photon = {
 	end,
 	cost = 4,
 	atlas = "atlasparticle",
-	order = 902,
+	order = 907,
 	can_use = function(self, card)
 		return true
 	end,
@@ -528,6 +731,8 @@ local photon = {
 	end,
 }
 
+
+
 local higgsboson = {
 	cry_credits = {
 		idea = {
@@ -553,7 +758,7 @@ local higgsboson = {
 	config = {},
 	cost = 4,
 	atlas = "atlasparticle",
-	order = 903,
+	order = 909,
 	can_use = function(self, card)
 		return true
 	end,
@@ -661,6 +866,7 @@ local particle_cards = {
 	atomicM,
 	proton,
 	neutron,
+	positron,
 	photon,
 	higgsboson,
 }

@@ -3001,6 +3001,15 @@ return {
 					"by {X:chips,C:white}X#1#{} Chips",
 				},
 			},
+			c_cry_positron = {
+				name = "Positron",
+				text = {
+					"{C:attention}Most played hand{}'s upgrade power",
+					"gets {X:mult,C:white}X#1#{} Mult and {X:chips,C:white}X#1#{} Chips,",
+					"all other poker hands' upgrade power",
+					"get {X:mult,C:white}X#2#{} Mult and {X:chips,C:white}X#2#{} Chips",
+				},
+			},
 			c_cry_photon = {
 				name = "Photon",
 				text = {
@@ -4920,7 +4929,8 @@ return {
 
 			cry_asc_hands = "Asc. Hands",
 			cry_p_star = "Star",
-			cry_all_hands_power = "Upgrade Power",
+			cry_other_hands = "Other Hands",
+			cry_upg_power = "Upg. Power",
 			cry_photon_buff = "Photon Buff",
 
 			cry_again_q = "Again?",
