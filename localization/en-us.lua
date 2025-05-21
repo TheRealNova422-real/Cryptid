@@ -3005,9 +3005,9 @@ return {
 				name = "Photon",
 				text = {
 					"{C:attention}Poker hand upgrades{} get",
-					"{X:mult,C:white}X2{} Mult and {X:chips,C:white}X2{} Chips",
-					"for the next {C:attention}#1#{} rounds",
-					"{C:inactive}(Currently {X:mult,C:white}X#2#{C:inactive} for {C:attention}#3#{C:inactive} round#<s>3#)",
+					"{X:mult,C:white}X#1#{} Mult and {X:chips,C:white}X#1#{} Chips",
+					"for the next {C:attention}#2#{} rounds",
+					"{C:inactive}(Currently {X:mult,C:white}X#3#{C:inactive} for {C:attention}#4#{C:inactive} round#<s>4#)",
 				},
 			},
 			c_cry_higgsboson = {

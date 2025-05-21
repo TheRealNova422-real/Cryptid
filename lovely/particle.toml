@@ -23,7 +23,7 @@ payload = '''
 if G.GAME.photon_rounds and to_big(G.GAME.photon_rounds) > to_big(0) then
     G.GAME.photon_rounds = lenient_bignum(to_big(G.GAME.photon_rounds) - to_big(1))
     if to_big(G.GAME.photon_rounds) <= to_big(0) then
-        G.GAME.photon_round = 0
+        G.GAME.photon_rounds = 0
         G.GAME.photon_power = 1
     end
 end

@@ -431,11 +431,12 @@ local photon = {
 	name = "cry-Photon",
 	key = "photon",
 	pos = { x = 2, y = 1 },
-	config = { extra = 3 },
+	config = { power = 2, rounds = 3 },
 	loc_vars = function(self, info_queue, card)
 		return { 
 			vars = {
-				 card.ability.extra,
+				 number_format(card.ability.power),
+				 number_format(card.ability.rounds),
 				 number_format(G.GAME.photon_power),
 				 number_format(G.GAME.photon_rounds),
 				} 
@@ -451,7 +452,7 @@ local photon = {
 	use = function(self, card, area, copier)
 		local used_consumable = copier or card
 
-		G.GAME.photon_rounds = math.max(G.GAME.photon_rounds, lenient_bignum(card.ability.extra))
+		G.GAME.photon_rounds = math.max(G.GAME.photon_rounds, lenient_bignum(card.ability.rounds))
 		G.GAME.photon_power = G.GAME.photon_power or 1
 
 		delay(0.4)
@@ -472,8 +473,8 @@ local photon = {
 			end,
 		}))
 
-		update_hand_text({ delay = 0 }, { chips = "X2", mult = "X2", StatusText = true })
-		G.GAME.photon_power = lenient_bignum(G.GAME.photon_power*2)
+		update_hand_text({ delay = 0 }, { chips = " X"..number_format(card.ability.power), mult = "X"..number_format(card.ability.power).." ", StatusText = true })
+		G.GAME.photon_power = lenient_bignum(G.GAME.photon_power*to_big(card.ability.power))
 		delay(1.3)
 		update_hand_text(
 			{ sound = "button", volume = 0.7, pitch = 0.8, delay = 0.3 },
@@ -490,7 +491,7 @@ local photon = {
 	bulk_use = function(self, card, area, copier, number)
 		local used_consumable = copier or card
 
-		G.GAME.photon_rounds = math.max(G.GAME.photon_rounds, lenient_bignum(card.ability.extra))
+		G.GAME.photon_rounds = math.max(G.GAME.photon_rounds, lenient_bignum(card.ability.rounds))
 		G.GAME.photon_power = G.GAME.photon_power or 1
 
 		delay(0.4)
@@ -511,8 +512,8 @@ local photon = {
 			end,
 		}))
 
-		update_hand_text({ delay = 0 }, { chips = "X"..number_format(to_big(2)^number), mult = "X"..number_format(to_big(2)^number), StatusText = true })
-		G.GAME.photon_power = lenient_bignum(G.GAME.photon_power*to_big(2)^number)
+		update_hand_text({ delay = 0 }, { chips = " X"..number_format(to_big(card.ability.power)^number), mult = "X"..number_format(to_big(card.ability.power)^number).." ", StatusText = true })
+		G.GAME.photon_power = lenient_bignum(G.GAME.photon_power*to_big(card.ability.power)^number)
 		delay(1.3)
 		update_hand_text(
 			{ sound = "button", volume = 0.7, pitch = 0.8, delay = 0.3 },
