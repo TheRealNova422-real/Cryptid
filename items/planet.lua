@@ -187,7 +187,7 @@ local universe = {
 	loc_vars = function(self, info_queue, center)
 		return {
 			vars = {
-				localize("cry_UltPair"),
+				localize("cry_WholeDeck"),
 				G.GAME.hands["cry_WholeDeck"].level,
 				number_format(Cryptid.get_l_mult("cry_WholeDeck")),
 				number_format(Cryptid.get_l_chips("cry_WholeDeck")),
