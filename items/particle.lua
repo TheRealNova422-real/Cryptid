@@ -182,7 +182,7 @@ local atomicM = {
 	config = { extra = 4, choose = 2 },
 	cost = 4,
 	order = 813,
-	weight = 0.3,
+	weight = 0.07,
 	create_card = function(self, card)
 		return create_card("Particle", G.pack_cards, nil, nil, true, true, nil, "cry_atomic_2")
 	end,
@@ -237,6 +237,11 @@ local proton = {
 	can_bulk_use = true,
 	use = function(self, card, area, copier)
 		local used_consumable = copier or card
+
+		for k, v in pairs(G.GAME.hands) do
+			v.l_mult = lenient_bignum(to_big(v.l_mult)*to_big(card.ability.extra))
+		end
+
 		delay(0.4)
 		update_hand_text(
 			{ sound = "button", volume = 0.7, pitch = 0.8, delay = 0.3 },
@@ -259,9 +264,6 @@ local proton = {
 		update_hand_text({ sound = "button", volume = 0.7, pitch = 0.9, delay = 0 }, {})
 		delay(1.3)
 
-		for k, v in pairs(G.GAME.hands) do
-			v.l_mult = lenient_bignum(to_big(v.l_mult)*to_big(card.ability.extra))
-		end
 		update_hand_text(
 			{ sound = "button", volume = 0.7, pitch = 1.1, delay = 0 },
 			{ mult = 0, chips = 0, handname = "", level = "" }
@@ -269,6 +271,11 @@ local proton = {
 	end,
 	bulk_use = function(self, card, area, copier, number)
 		local used_consumable = copier or card
+
+		for k, v in pairs(G.GAME.hands) do
+			v.l_mult = lenient_bignum(to_big(v.l_mult)*to_big(card.ability.extra)^to_big(number))
+		end
+
 		delay(0.4)
 		update_hand_text(
 			{ sound = "button", volume = 0.7, pitch = 0.8, delay = 0.3 },
@@ -279,7 +286,7 @@ local proton = {
 			trigger = "after",
 			delay = 0.2,
 			func = function()
-				play_sound("xmult")
+				play_sound("multhit2")
 				used_consumable:juice_up(0.8, 0.5)
 				G.TAROT_INTERRUPT_PULSE = true
 				return true
@@ -290,10 +297,6 @@ local proton = {
 		delay(1.3)
 		update_hand_text({ sound = "button", volume = 0.7, pitch = 0.9, delay = 0 }, {})
 		delay(1.3)
-
-		for k, v in pairs(G.GAME.hands) do
-			v.l_mult = lenient_bignum(to_big(v.l_mult)*to_big(card.ability.extra)^to_big(number))
-		end
 
 		update_hand_text(
 			{ sound = "button", volume = 0.7, pitch = 1.1, delay = 0 },
@@ -337,6 +340,11 @@ local neutron = {
 	can_bulk_use = true,
 	use = function(self, card, area, copier)
 		local used_consumable = copier or card
+
+		for k, v in pairs(G.GAME.hands) do
+			v.l_chips = lenient_bignum(to_big(v.l_chips)*to_big(card.ability.extra))
+		end
+
 		delay(0.4)
 		update_hand_text(
 			{ sound = "button", volume = 0.7, pitch = 0.8, delay = 0.3 },
@@ -359,10 +367,6 @@ local neutron = {
 		update_hand_text({ sound = "button", volume = 0.7, pitch = 0.9, delay = 0 }, {})
 		delay(1.3)
 
-		for k, v in pairs(G.GAME.hands) do
-			v.l_chips = lenient_bignum(to_big(v.l_chips)*to_big(card.ability.extra))
-		end
-
 		update_hand_text(
 			{ sound = "button", volume = 0.7, pitch = 1.1, delay = 0 },
 			{ mult = 0, chips = 0, handname = "", level = "" }
@@ -371,6 +375,11 @@ local neutron = {
 	end,
 	bulk_use = function(self, card, area, copier, number)
 		local used_consumable = copier or card
+
+		for k, v in pairs(G.GAME.hands) do
+			v.l_chips = lenient_bignum(to_big(v.l_chips)*to_big(card.ability.extra)^to_big(number))
+		end
+
 		delay(0.4)
 		update_hand_text(
 			{ sound = "button", volume = 0.7, pitch = 0.8, delay = 0.3 },
@@ -392,11 +401,125 @@ local neutron = {
 		delay(1.3)
 		update_hand_text({ sound = "button", volume = 0.7, pitch = 0.9, delay = 0 }, {})
 		delay(1.3)
-		
-		for k, v in pairs(G.GAME.hands) do
-			v.l_chips = lenient_bignum(to_big(v.l_chips)*to_big(card.ability.extra)^to_big(number))
-		end
 
+		update_hand_text(
+			{ sound = "button", volume = 0.7, pitch = 1.1, delay = 0 },
+			{ mult = 0, chips = 0, handname = "", level = "" }
+		)
+	end,
+}
+
+local photon = {
+	cry_credits = {
+		idea = {
+			"HexaCryonic",
+		},
+		art = {
+			"ori",
+		},
+		code = {
+			"crazybot",
+		},
+	},
+	dependencies = {
+		items = {
+			"set_cry_particle",
+		},
+	},
+	object_type = "Consumable",
+	set = "Particle",
+	name = "cry-Photon",
+	key = "photon",
+	pos = { x = 2, y = 1 },
+	config = { extra = 3 },
+	loc_vars = function(self, info_queue, card)
+		return { 
+			vars = {
+				 card.ability.extra,
+				 number_format(G.GAME.photon_power),
+				 number_format(G.GAME.photon_rounds),
+				} 
+		}
+	end,
+	cost = 4,
+	atlas = "atlasparticle",
+	order = 902,
+	can_use = function(self, card)
+		return true
+	end,
+	can_bulk_use = true,
+	use = function(self, card, area, copier)
+		local used_consumable = copier or card
+
+		G.GAME.photon_rounds = lenient_bignum(card.ability.extra)
+		G.GAME.photon_power = G.GAME.photon_power or 1
+
+		delay(0.4)
+		update_hand_text(
+			{ sound = "button", volume = 0.7, pitch = 0.8, delay = 0.3 },
+			{ handname = localize("cry_photon_buff"), chips = "X"..number_format(G.GAME.photon_power), mult = "X"..number_format(G.GAME.photon_power), level = "" }
+		)
+		delay(1.0)
+		G.E_MANAGER:add_event(Event({
+			trigger = "after",
+			delay = 0.2,
+			func = function()
+				play_sound("multhit2")
+				play_sound("xchips")
+				used_consumable:juice_up(0.8, 0.5)
+				G.TAROT_INTERRUPT_PULSE = true
+				return true
+			end,
+		}))
+
+		update_hand_text({ delay = 0 }, { chips = "X2", mult = "X2", StatusText = true })
+		G.GAME.photon_power = lenient_bignum(G.GAME.photon_power*2)
+		delay(1.3)
+		update_hand_text(
+			{ sound = "button", volume = 0.7, pitch = 0.8, delay = 0.3 },
+			{ chips = "X"..number_format(G.GAME.photon_power), mult = "X"..number_format(G.GAME.photon_power), level = "" }
+		)
+		delay(1.3)
+
+		update_hand_text(
+			{ sound = "button", volume = 0.7, pitch = 1.1, delay = 0 },
+			{ mult = 0, chips = 0, handname = "", level = "" }
+		)
+
+	end,
+	bulk_use = function(self, card, area, copier, number)
+		local used_consumable = copier or card
+
+		G.GAME.photon_rounds = lenient_bignum(card.ability.extra)
+		G.GAME.photon_power = G.GAME.photon_power or 1
+
+		delay(0.4)
+		update_hand_text(
+			{ sound = "button", volume = 0.7, pitch = 0.8, delay = 0.3 },
+			{ handname = localize("cry_photon_buff"), chips = "X"..number_format(G.GAME.photon_power), mult = "X"..number_format(G.GAME.photon_power), level = "" }
+		)
+		delay(1.0)
+		G.E_MANAGER:add_event(Event({
+			trigger = "after",
+			delay = 0.2,
+			func = function()
+				play_sound("multhit2")
+				play_sound("xchips")
+				used_consumable:juice_up(0.8, 0.5)
+				G.TAROT_INTERRUPT_PULSE = true
+				return true
+			end,
+		}))
+
+		update_hand_text({ delay = 0 }, { chips = "X"..number_format(to_big(2)^number), mult = "X"..number_format(to_big(2)^number), StatusText = true })
+		G.GAME.photon_power = lenient_bignum(G.GAME.photon_power*to_big(2)^number)
+		delay(1.3)
+		update_hand_text(
+			{ sound = "button", volume = 0.7, pitch = 0.8, delay = 0.3 },
+			{ chips = "X"..number_format(G.GAME.photon_power), mult = "X"..number_format(G.GAME.photon_power), level = "" }
+		)
+		delay(1.3)
+		
 		update_hand_text(
 			{ sound = "button", volume = 0.7, pitch = 1.1, delay = 0 },
 			{ mult = 0, chips = 0, handname = "", level = "" }
@@ -537,6 +660,7 @@ local particle_cards = {
 	atomicM,
 	proton,
 	neutron,
+	photon,
 	higgsboson,
 }
 

@@ -34,8 +34,8 @@ local abelt = {
 			vars = {
 				localize("cry_hand_bulwark"),
 				G.GAME.hands["cry_Bulwark"].level,
-				G.GAME.hands["cry_Bulwark"].l_mult,
-				G.GAME.hands["cry_Bulwark"].l_chips,
+				number_format(Cryptid.get_l_mult("cry_Bulwark")),
+				number_format(Cryptid.get_l_chips("cry_Bulwark")),
 				colours = {
 					(
 						to_big(G.GAME.hands["cry_Bulwark"].level) == to_big(1) and G.C.UI.TEXT_DARK
@@ -83,8 +83,8 @@ local void = {
 			vars = {
 				localize("cry_Clusterfuck"),
 				G.GAME.hands["cry_Clusterfuck"].level,
-				G.GAME.hands["cry_Clusterfuck"].l_mult,
-				G.GAME.hands["cry_Clusterfuck"].l_chips,
+				number_format(Cryptid.get_l_mult("cry_Clusterfuck")),
+				number_format(Cryptid.get_l_chips("cry_Clusterfuck")),
 				colours = {
 					(
 						to_big(G.GAME.hands["cry_Clusterfuck"].level) == to_big(1) and G.C.UI.TEXT_DARK
@@ -137,8 +137,8 @@ local marsmoons = {
 			vars = {
 				localize("cry_UltPair"),
 				G.GAME.hands["cry_UltPair"].level,
-				G.GAME.hands["cry_UltPair"].l_mult,
-				G.GAME.hands["cry_UltPair"].l_chips,
+				number_format(Cryptid.get_l_mult("cry_UltPair")),
+				number_format(Cryptid.get_l_chips("cry_UltPair")),
 				colours = {
 					(
 						to_big(G.GAME.hands["cry_UltPair"].level) == to_big(1) and G.C.UI.TEXT_DARK
@@ -189,8 +189,8 @@ local universe = {
 			vars = {
 				localize("cry_UltPair"),
 				G.GAME.hands["cry_WholeDeck"].level,
-				G.GAME.hands["cry_WholeDeck"].l_mult,
-				G.GAME.hands["cry_WholeDeck"].l_chips,
+				number_format(Cryptid.get_l_mult("cry_WholeDeck")),
+				number_format(Cryptid.get_l_chips("cry_WholeDeck")),
 				colours = {
 					(
 						to_big(G.GAME.hands["cry_WholeDeck"].level) == to_big(1) and G.C.UI.TEXT_DARK

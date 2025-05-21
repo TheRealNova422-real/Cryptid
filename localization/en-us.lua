@@ -3001,6 +3001,15 @@ return {
 					"by {X:chips,C:white}X#1#{} Chips",
 				},
 			},
+			c_cry_photon = {
+				name = "Photon",
+				text = {
+					"{C:attention}Poker hand upgrades{} get",
+					"{X:mult,C:white}X2{} Mult and {X:chips,C:white}X2{} Chips",
+					"for the next {C:attention}#1#{} rounds",
+					"{C:inactive}(Currently {X:mult,C:white}X#2#{C:inactive} for {C:attention}#3#{C:inactive} rounds)",
+				},
+			},
 			c_cry_higgsboson = {
 				name = "Higgs Boson",
 				text = {
@@ -4911,6 +4920,8 @@ return {
 
 			cry_asc_hands = "Asc. Hands",
 			cry_p_star = "Star",
+			cry_all_hands_power = "Upgrade Power",
+			cry_photon_buff = "Photon Buff",
 
 			cry_again_q = "Again?",
 			cry_curse = "Curse",
