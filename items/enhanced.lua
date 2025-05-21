@@ -444,7 +444,7 @@ return {
 			end
 		end
 		function Cryptid.enhancement_config_UI(center, actual_page)
-			local count_per_page = 5
+			local count_per_page = 6
 			if not center.edeck_type then
 				return
 			end
@@ -481,6 +481,9 @@ return {
 			end
 			local page = (actual_page and actual_page * count_per_page or count_per_page) - (count_per_page - 1)
 			local max_pages = math.floor(#editions / count_per_page)
+			if max_pages * count_per_page < #editions then --idk why this is needed but it is
+				max_pages = max_pages + 1
+			end
 			local modification_options = {}
 			for i = 1, max_pages do
 				table.insert(
@@ -488,7 +491,7 @@ return {
 					localize("k_page") .. " " .. tostring(i) .. "/" .. tostring(max_pages)
 				)
 			end
-			for i = page, math.min(page + count_per_page, #editions) do
+			for i = page, math.min(page + count_per_page - 1, #editions) do
 				local _center = Cryptid.deep_copy(center)
 				_center.config["cry_force_" .. center.edeck_type] = editions[i].center
 				Cryptid.edeck_atlas_update(_center)

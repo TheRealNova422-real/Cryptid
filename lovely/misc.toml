@@ -622,3 +622,20 @@ payload = """
 if not eligible_card then return true end
 """
 match_indent = true
+
+#Make negative playing cards not take up space even when debuffed
+[[patches]]
+[patches.pattern]
+target = "cardarea.lua"
+pattern = """if not card.debuff and card.edition and card.edition.card_limit and (self == G.hand) then"""
+position = "at"
+payload = """if card.edition and card.edition.card_limit and (self == G.hand) then"""
+match_indent = true
+
+[[patches]]
+[patches.pattern]
+target = "functions/state_events.lua"
+pattern = """limit = limit - 1 + (not card.debuff and card.edition and card.edition.card_limit or 0)"""
+position = "at"
+payload = """limit = limit - 1 + (card.edition and card.edition.card_limit or 0)"""
+match_indent = true
