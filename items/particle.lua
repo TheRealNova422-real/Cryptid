@@ -731,8 +731,6 @@ local photon = {
 	end,
 }
 
-
-
 local higgsboson = {
 	cry_credits = {
 		idea = {
@@ -796,16 +794,84 @@ local higgsboson = {
 				})
 				G.E_MANAGER:add_event(Event({
 					trigger = "after",
-					delay = 0.06 * G.SETTINGS.GAMESPEED,
-					blockable = false,
-					blocking = false,
+					delay = 0,
 					func = function()
-						play_sound("tarot2", 0.76, 0.4)
+						play_sound("multhit1", 1)
 						return true
 					end,
 				}))
-				play_sound("tarot2", 1, 0.4)
-				used_consumable:juice_up(0.3, 0.5)
+				G.E_MANAGER:add_event(Event({
+					trigger = "after",
+					delay = 0.5,
+					func = function()
+						play_sound("multhit1", 1)
+						return true
+					end,
+				}))
+				G.E_MANAGER:add_event(Event({
+					trigger = "after",
+					delay = 0.5,
+					func = function()
+						play_sound("multhit1", 2)
+						return true
+					end,
+				}))
+				G.E_MANAGER:add_event(Event({
+					trigger = "after",
+					delay = 1,
+					func = function()
+						play_sound("multhit1", 1.5)
+						return true
+					end,
+				}))
+				G.E_MANAGER:add_event(Event({
+					trigger = "after",
+					delay = 1.5,
+					func = function()
+						play_sound("multhit1", 1.414)
+						return true
+					end,
+				}))
+				G.E_MANAGER:add_event(Event({
+					trigger = "after",
+					delay = 1,
+					func = function()
+						play_sound("multhit1", 1.333)
+						return true
+					end,
+				}))
+				G.E_MANAGER:add_event(Event({
+					trigger = "after",
+					delay = 1,
+					func = function()
+						play_sound("multhit1", 1.2)
+						return true
+					end,
+				}))
+				G.E_MANAGER:add_event(Event({
+					trigger = "after",
+					delay = 1,
+					func = function()
+						play_sound("multhit1", 1)
+						return true
+					end,
+				}))
+				G.E_MANAGER:add_event(Event({
+					trigger = "after",
+					delay = 0.5,
+					func = function()
+						play_sound("multhit1", 1.2)
+						return true
+					end,
+				}))
+				G.E_MANAGER:add_event(Event({
+					trigger = "after",
+					delay = 0.5,
+					func = function()
+						play_sound("multhit1", 1.333)
+						return true
+					end,
+				}))
 				return true
 			end,
 		}))
@@ -842,19 +908,197 @@ local higgsboson = {
 				})
 				G.E_MANAGER:add_event(Event({
 					trigger = "after",
-					delay = 0.06 * G.SETTINGS.GAMESPEED,
-					blockable = false,
-					blocking = false,
+					delay = 0,
 					func = function()
-						play_sound("tarot2", 0.76, 0.4)
+						play_sound("multhit1", 1)
 						return true
 					end,
 				}))
-				play_sound("tarot2", 1, 0.4)
-				used_consumable:juice_up(0.3, 0.5)
+				G.E_MANAGER:add_event(Event({
+					trigger = "after",
+					delay = 0.5,
+					func = function()
+						play_sound("multhit1", 1)
+						return true
+					end,
+				}))
+				G.E_MANAGER:add_event(Event({
+					trigger = "after",
+					delay = 0.5,
+					func = function()
+						play_sound("multhit1", 2)
+						return true
+					end,
+				}))
+				G.E_MANAGER:add_event(Event({
+					trigger = "after",
+					delay = 1,
+					func = function()
+						play_sound("multhit1", 1.5)
+						return true
+					end,
+				}))
+				G.E_MANAGER:add_event(Event({
+					trigger = "after",
+					delay = 1.5,
+					func = function()
+						play_sound("multhit1", 1.414)
+						return true
+					end,
+				}))
+				G.E_MANAGER:add_event(Event({
+					trigger = "after",
+					delay = 1,
+					func = function()
+						play_sound("multhit1", 1.333)
+						return true
+					end,
+				}))
+				G.E_MANAGER:add_event(Event({
+					trigger = "after",
+					delay = 1,
+					func = function()
+						play_sound("multhit1", 1.2)
+						return true
+					end,
+				}))
+				G.E_MANAGER:add_event(Event({
+					trigger = "after",
+					delay = 1,
+					func = function()
+						play_sound("multhit1", 1)
+						return true
+					end,
+				}))
+				G.E_MANAGER:add_event(Event({
+					trigger = "after",
+					delay = 0.5,
+					func = function()
+						play_sound("multhit1", 1.2)
+						return true
+					end,
+				}))
+				G.E_MANAGER:add_event(Event({
+					trigger = "after",
+					delay = 0.5,
+					func = function()
+						play_sound("multhit1", 1.333)
+						return true
+					end,
+				}))
 				return true
 			end,
 		}))
+	end,
+}
+
+local tachyon = {
+	cry_credits = {
+		idea = {
+			"HexaCryonic",
+		},
+		art = {
+			"ruby",
+		},
+		code = {
+			"crazybot",
+		},
+	},
+	dependencies = {
+		items = {
+			"set_cry_particle",
+		},
+	},
+	object_type = "Consumable",
+	set = "Spectral",
+	name = "cry-Tachyon",
+	key = "tachyon",
+	pos = { x = 1, y = 3 },
+	config = { extra = 1.5 },
+	loc_vars = function(self, info_queue, card)
+		return { vars = { card.ability.extra } }
+	end,
+	cost = 4,
+	atlas = "atlasparticle",
+	order = 200001,
+	hidden = true,
+	soul_set = "Particle",
+	can_use = function(self, card)
+		return true
+	end,
+	can_bulk_use = true,
+	use = function(self, card, area, copier)
+		local used_consumable = copier or card
+
+		for k, v in pairs(G.GAME.hands) do
+			v.l_mult = lenient_bignum(to_big(v.l_mult)^to_big(card.ability.extra))
+			v.l_chips = lenient_bignum(to_big(v.l_chips)^to_big(card.ability.extra))
+		end
+
+		delay(0.4)
+		update_hand_text(
+			{ sound = "button", volume = 0.7, pitch = 0.8, delay = 0.3 },
+			{ handname = localize("cry_upg_power"), chips = "+...", mult = "+...", level = "" }
+		)
+		delay(1.0)
+		G.E_MANAGER:add_event(Event({
+			trigger = "after",
+			delay = 0.2,
+			func = function()
+				play_sound("talisman_emult")
+				play_sound("talisman_echip")
+				used_consumable:juice_up(0.8, 0.5)
+				G.TAROT_INTERRUPT_PULSE = true
+				return true
+			end,
+		}))
+
+		update_hand_text({ delay = 0 }, { chips = "^"..number_format(card.ability.extra), mult = "^"..number_format(card.ability.extra), StatusText = true })
+		delay(1.3)
+		update_hand_text({ sound = "button", volume = 0.7, pitch = 0.9, delay = 0 }, {chips = "+...", mult = "+...",})
+		delay(1.3)
+
+		update_hand_text(
+			{ sound = "button", volume = 0.7, pitch = 1.1, delay = 0 },
+			{ mult = 0, chips = 0, handname = "", level = "" }
+		)
+
+	end,
+	bulk_use = function(self, card, area, copier, number)
+		local used_consumable = copier or card
+
+		for k, v in pairs(G.GAME.hands) do
+			v.l_mult = lenient_bignum(to_big(v.l_mult)^(to_big(card.ability.extra)^number))
+			v.l_chips = lenient_bignum(to_big(v.l_chips)^(to_big(card.ability.extra)^number))
+		end
+
+		delay(0.4)
+		update_hand_text(
+			{ sound = "button", volume = 0.7, pitch = 0.8, delay = 0.3 },
+			{ handname = localize("cry_upg_power"), chips = "+...", mult = "+...", level = "" }
+		)
+		delay(1.0)
+		G.E_MANAGER:add_event(Event({
+			trigger = "after",
+			delay = 0.2,
+			func = function()
+				play_sound("emult")
+				play_sound("echip")
+				used_consumable:juice_up(0.8, 0.5)
+				G.TAROT_INTERRUPT_PULSE = true
+				return true
+			end,
+		}))
+
+		update_hand_text({ delay = 0 }, { chips = "^"..number_format(to_big(card.ability.extra)^number), "^"..number_format(to_big(card.ability.extra)^number), StatusText = true })
+		delay(1.3)
+		update_hand_text({ sound = "button", volume = 0.7, pitch = 0.9, delay = 0 }, {chips = "+...", mult = "+...",})
+		delay(1.3)
+
+		update_hand_text(
+			{ sound = "button", volume = 0.7, pitch = 1.1, delay = 0 },
+			{ mult = 0, chips = 0, handname = "", level = "" }
+		)
 	end,
 }
 
@@ -869,6 +1113,7 @@ local particle_cards = {
 	positron,
 	photon,
 	higgsboson,
+	tachyon,
 }
 
 return {

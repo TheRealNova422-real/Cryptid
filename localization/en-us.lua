@@ -3442,6 +3442,14 @@ return {
 					"by {C:attention}3{} for each removed level",
 				},
 			},
+			c_cry_tachyon = {
+				name = "Tachyon",
+				text = {
+					"Increase the power of",
+					"{C:attention} poker hand upgrades{}",
+					"by {X:dark_edition,C:white}^#1#{} Mult and {X:dark_edition,C:white}^#1#{} Chips",
+				},
+			},
 		},
 		Stake = {
 			stake_cry_pink = {
