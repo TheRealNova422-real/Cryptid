@@ -46,7 +46,7 @@ local atomic1 = {
 	pos = { x = 0, y = 3 },
 	config = { extra = 2, choose = 1 },
 	cost = 4,
-	order = 801,
+	order = 810,
 	weight = 0.3,
 	create_card = function(self, card)
 		return create_card("Particle", G.pack_cards, nil, nil, true, true, nil, "cry_atomic_1")
@@ -91,7 +91,7 @@ local atomic2 = {
 	pos = { x = 1, y = 3 },
 	config = { extra = 2, choose = 1 },
 	cost = 4,
-	order = 802,
+	order = 811,
 	weight = 0.3,
 	create_card = function(self, card)
 		return create_card("Particle", G.pack_cards, nil, nil, true, true, nil, "cry_atomic_2")
@@ -136,7 +136,7 @@ local atomicJ = {
 	pos = { x = 2, y = 3 },
 	config = { extra = 4, choose = 1 },
 	cost = 4,
-	order = 803,
+	order = 812,
 	weight = 0.3,
 	create_card = function(self, card)
 		return create_card("Particle", G.pack_cards, nil, nil, true, true, nil, "cry_atomic_2")
@@ -181,7 +181,7 @@ local atomicM = {
 	pos = { x = 3, y = 3 },
 	config = { extra = 4, choose = 2 },
 	cost = 4,
-	order = 804,
+	order = 813,
 	weight = 0.3,
 	create_card = function(self, card)
 		return create_card("Particle", G.pack_cards, nil, nil, true, true, nil, "cry_atomic_2")
@@ -253,13 +253,15 @@ local proton = {
 				return true
 			end,
 		}))
+
 		update_hand_text({ delay = 0 }, { mult = "X"..number_format(card.ability.extra), StatusText = true })
+		delay(1.3)
+		update_hand_text({ sound = "button", volume = 0.7, pitch = 0.9, delay = 0 }, {})
+		delay(1.3)
 
 		for k, v in pairs(G.GAME.hands) do
 			v.l_mult = lenient_bignum(to_big(v.l_mult)*to_big(card.ability.extra))
 		end
-		delay(1.3)
-
 		update_hand_text(
 			{ sound = "button", volume = 0.7, pitch = 1.1, delay = 0 },
 			{ mult = 0, chips = 0, handname = "", level = "" }
@@ -285,11 +287,13 @@ local proton = {
 		}))
 		
 		update_hand_text({ delay = 0 }, { mult = "X"..number_format(to_big(card.ability.extra)^to_big(number)), StatusText = true })
+		delay(1.3)
+		update_hand_text({ sound = "button", volume = 0.7, pitch = 0.9, delay = 0 }, {})
+		delay(1.3)
 
 		for k, v in pairs(G.GAME.hands) do
 			v.l_mult = lenient_bignum(to_big(v.l_mult)*to_big(card.ability.extra)^to_big(number))
 		end
-		delay(1.3)
 
 		update_hand_text(
 			{ sound = "button", volume = 0.7, pitch = 1.1, delay = 0 },
@@ -351,11 +355,13 @@ local neutron = {
 		}))
 
 		update_hand_text({ delay = 0 }, { chips = "X"..number_format(card.ability.extra), StatusText = true })
+		delay(1.3)
+		update_hand_text({ sound = "button", volume = 0.7, pitch = 0.9, delay = 0 }, {})
+		delay(1.3)
 
 		for k, v in pairs(G.GAME.hands) do
 			v.l_chips = lenient_bignum(to_big(v.l_chips)*to_big(card.ability.extra))
 		end
-		delay(1.3)
 
 		update_hand_text(
 			{ sound = "button", volume = 0.7, pitch = 1.1, delay = 0 },
@@ -383,11 +389,13 @@ local neutron = {
 		}))
 
 		update_hand_text({ delay = 0 }, { chips = "X"..number_format(to_big(card.ability.extra)^to_big(number)), StatusText = true })
+		delay(1.3)
+		update_hand_text({ sound = "button", volume = 0.7, pitch = 0.9, delay = 0 }, {})
+		delay(1.3)
 		
 		for k, v in pairs(G.GAME.hands) do
 			v.l_chips = lenient_bignum(to_big(v.l_chips)*to_big(card.ability.extra)^to_big(number))
 		end
-		delay(1.3)
 
 		update_hand_text(
 			{ sound = "button", volume = 0.7, pitch = 1.1, delay = 0 },
