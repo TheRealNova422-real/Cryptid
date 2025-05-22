@@ -1,3 +1,6 @@
+-- Achievement.lua
+-- The file containing every Achievement that Cryptid adds
+
 local achievement_atlas = {
 	object_type = "Atlas",
 	key = "achievements",
