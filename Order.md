@@ -242,7 +242,7 @@ vanilla t3s here (in order)
 
 30015 - boss reroll t3
 
-30016 - Canvas
+30016 - Blank Canvas
 
 30017 quint tag
 
@@ -264,5 +264,42 @@ vanilla t3s here (in order)
 
 200100 - Gateway
 
-250001-math.huge - Exotic Jokers
+250001-math.huge - Exotic Jokers (imagine they all start with 250k
+
+1 - Iterum
+
+2 - Duplicare
+
+3 - Exponentia
+
+4 - Scalae
+
+5 - Crustulum
+
+6 - Effarcire
+
+7 - Speculo
+
+8 - Universum
+
+9 - Tenebris
+
+10 - Facile
+
+11 - Redeo
+
+12 - Circulus Pistoris
+
+13 - Ace Aequilibruim
+
+14 - Stella Mortis
+
+15 - Primus
+
+16 - Energia
+
+17 - Formiduliosus
+
+18 - Tredecim
+
 
