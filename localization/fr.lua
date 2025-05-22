@@ -2135,7 +2135,7 @@ return {
 					"{C:attention}première défausse{} de chaque manche",
 				},
 			},
-			j_cry_Megg = {
+			j_cry_megg = {
 				name = "Mœuf",
 				text = {
 					"Vendre cette carte crée",

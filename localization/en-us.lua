@@ -2105,7 +2105,7 @@ return {
 					"{C:attention}first discard{} of each round",
 				},
 			},
-			j_cry_Megg = {
+			j_cry_megg = {
 				name = "Megg",
 				text = {
 					"Sell this card to create",
