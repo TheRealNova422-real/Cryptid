@@ -4166,7 +4166,8 @@ local ctrl_v = {
 		return {}
 	end,
 	can_use = function(self, card)
-		return #G.hand.highlighted + #G.consumeables.highlighted + #G.pack_cards.highlighted == 2
+		return #G.hand.highlighted + #G.consumeables.highlighted + (G.pack_cards and #G.pack_cards.highlighted or 0)
+			== 2
 	end,
 	use = function(self, card, area, copier)
 		if area then
@@ -4200,7 +4201,7 @@ local ctrl_v = {
 				end,
 			}))
 		end
-		if G.pack_cards.highlighted[1] then
+		if G.pack_cards and G.pack_cards.highlighted[1] then
 			G.E_MANAGER:add_event(Event({
 				func = function()
 					local card = copy_card(G.pack_cards.highlighted[1])
@@ -4248,7 +4249,7 @@ local ctrl_v = {
 					end,
 				}))
 			end
-			if G.pack_cards.highlighted[1] then
+			if G.pack_cards and G.pack_cards.highlighted[1] then
 				G.E_MANAGER:add_event(Event({
 					func = function()
 						local card = copy_card(G.pack_cards.highlighted[1])
@@ -4514,27 +4515,17 @@ local green_seal = {
 	order = 604,
 	calculate = function(self, card, context)
 		if context.cardarea == "unscored" and context.main_scoring then
-			for k, v in ipairs(context.scoring_hand) do
-				v.cry_green_incompat = true
-			end
-			for k, v in ipairs(context.full_hand) do
-				if not v.cry_green_incompat then
-					G.E_MANAGER:add_event(Event({
-						func = function()
-							if G.consumeables.config.card_limit > #G.consumeables.cards then
-								local c = create_card("Code", G.consumeables, nil, nil, nil, nil, nil, "cry_green_seal")
-								c:add_to_deck()
-								G.consumeables:emplace(c)
-								v:juice_up()
-							end
-							return true
-						end,
-					}))
-				end
-			end
-			for k, v in ipairs(context.scoring_hand) do
-				v.cry_green_incompat = nil
-			end
+			G.E_MANAGER:add_event(Event({
+				func = function()
+					if G.consumeables.config.card_limit > #G.consumeables.cards then
+						local c = create_card("Code", G.consumeables, nil, nil, nil, nil, nil, "cry_green_seal")
+						c:add_to_deck()
+						G.consumeables:emplace(c)
+						card:juice_up()
+					end
+					return true
+				end,
+			}))
 		end
 	end,
 }
