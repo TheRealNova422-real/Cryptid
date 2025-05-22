@@ -1,3 +1,6 @@
+-- Challenge.lua
+-- The place where Cryptid's Challenges are
+
 local sticker_sheet = {
 	object_type = "Challenge",
 	key = "sticker_sheet",
