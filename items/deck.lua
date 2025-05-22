@@ -1,3 +1,6 @@
+-- Deck.lua
+-- Where John Cryptid keeps his Decks
+
 -- Beige (Common) Deck
 -- Common Card Values are multiplied by 4
 local beige = {
