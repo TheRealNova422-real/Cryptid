@@ -1,3 +1,6 @@
+-- Blind.lua
+-- The Blinds that Cryptid adds (both normal and showdown)
+
 local oldox = {
 	object_type = "Blind",
 	dependencies = {
