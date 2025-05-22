@@ -3394,6 +3394,14 @@ return {
 					"card#<s>1# in your hand",
 				},
 			},
+			c_cry_collider = {
+				name = "Collider",
+				text = {
+					"Add a {C:cry_code}White Seal{}",
+					"to {C:attention}#1#{} selected",
+					"card#<s>1# in your hand",
+				},
+			},
 			c_cry_summoning = {
 				name = "Summoning",
 				text = {
@@ -4644,6 +4652,15 @@ return {
 					"{C:red}destroy{} this card",
 				},
 			},
+			cry_white_seal = {
+				name = "White Seal",
+				text = {
+					"Creates a {C:cry_code}Particle{} card",
+					"when scored in the center of",
+					"a hand with at least {C:attention}3 cards{}",
+					"{C:inactive}(Must have room)",
+				},
+			},
 			blurred_sdm0 = {
 				name = "a",
 				text = {
@@ -5021,6 +5038,7 @@ return {
 
 			cry_green_seal = "Green Seal",
 			cry_azure_seal = "Azure Seal",
+			cry_white_seal = "White Seal",
 
 			cry_astral = "Astral",
 			cry_blur = "Blurred",

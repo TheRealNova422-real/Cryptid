@@ -1102,6 +1102,124 @@ local tachyon = {
 	end,
 }
 
+-- Collider (Spectral)
+-- Gives a selected playing card White Seal
+-- literally just stole this from source
+local collider = {
+	cry_credits = {
+		idea = {
+			"HexaCryonic",
+		},
+		art = {
+			"HexaCryonic",
+		},
+		code = {
+			"crazybot",
+		},
+	},
+	dependencies = {
+		items = {
+			"set_cry_particle",
+			"cry_white",
+		},
+	},
+	object_type = "Consumable",
+	set = "Spectral",
+	name = "cry-Collider",
+	order = 605,
+	key = "collider",
+	config = {
+		-- This will add a tooltip.
+		mod_conv = "cry_white_seal",
+		-- Tooltip args
+		max_highlighted = 1,
+	},
+	loc_vars = function(self, info_queue, center)
+		-- Handle creating a tooltip with set args.
+		info_queue[#info_queue + 1] = { set = "Other", key = "cry_white_seal" }
+		return { vars = { center.ability.max_highlighted } }
+	end,
+	cost = 4,
+	atlas = "placeholders",
+	pos = { x = 2, y = 2 },
+	use = function(self, card, area, copier) --Good enough
+		for i = 1, #G.hand.highlighted do
+			local highlighted = G.hand.highlighted[i]
+			G.E_MANAGER:add_event(Event({
+				func = function()
+					play_sound("tarot1")
+					highlighted:juice_up(0.3, 0.5)
+					return true
+				end,
+			}))
+			G.E_MANAGER:add_event(Event({
+				trigger = "after",
+				delay = 0.1,
+				func = function()
+					if highlighted then
+						highlighted:set_seal("cry_white")
+					end
+					return true
+				end,
+			}))
+			delay(0.5)
+			G.E_MANAGER:add_event(Event({
+				trigger = "after",
+				delay = 0.2,
+				func = function()
+					G.hand:unhighlight_all()
+					return true
+				end,
+			}))
+		end
+	end,
+}
+
+-- White Seal
+-- Creates a Particle card when scored in the center of a hand with at least 3 cards
+local white_seal = {
+	cry_credits = {
+		idea = {
+			"HexaCryonic",
+		},
+		art = {
+			"HexaCryonic",
+		},
+		code = {
+			"crazybot",
+		},
+	},
+	dependencies = {
+		items = {
+			"set_cry_particle",
+		},
+	},
+	object_type = "Seal",
+	name = "cry-White-Seal",
+	key = "white",
+	badge_colour = HEX("bdb56f"), --same as particle cards
+	atlas = "cry_misc",
+	pos = { x = 1, y = 3 },
+	order = 606,
+	calculate = function(self, card, context)
+		if context.cardarea == G.play and context.main_scoring then
+			if (#context.full_hand > 1) and (#context.full_hand % 2 == 1) and context.full_hand[math.ceil(#context.full_hand/2)] == card then
+				G.E_MANAGER:add_event(Event({
+					func = function()
+						if G.consumeables.config.card_limit > #G.consumeables.cards then
+							local c = create_card("Particle", G.consumeables, nil, nil, nil, nil, nil, "cry_white_seal")
+							c:add_to_deck()
+							G.consumeables:emplace(c)
+							card:juice_up()
+						end
+						return true
+					end,
+				}))
+			end
+		end
+	end,
+}
+
 local particle_cards = {
 	particle,
 	atomic1,
@@ -1114,6 +1232,8 @@ local particle_cards = {
 	photon,
 	higgsboson,
 	tachyon,
+	collider,
+	white_seal,
 }
 
 return {
