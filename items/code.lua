@@ -4520,27 +4520,17 @@ local green_seal = {
 	order = 604,
 	calculate = function(self, card, context)
 		if context.cardarea == "unscored" and context.main_scoring then
-			for k, v in ipairs(context.scoring_hand) do
-				v.cry_green_incompat = true
-			end
-			for k, v in ipairs(context.full_hand) do
-				if not v.cry_green_incompat then
-					G.E_MANAGER:add_event(Event({
-						func = function()
-							if G.consumeables.config.card_limit > #G.consumeables.cards then
-								local c = create_card("Code", G.consumeables, nil, nil, nil, nil, nil, "cry_green_seal")
-								c:add_to_deck()
-								G.consumeables:emplace(c)
-								v:juice_up()
-							end
-							return true
-						end,
-					}))
-				end
-			end
-			for k, v in ipairs(context.scoring_hand) do
-				v.cry_green_incompat = nil
-			end
+			G.E_MANAGER:add_event(Event({
+				func = function()
+					if G.consumeables.config.card_limit > #G.consumeables.cards then
+						local c = create_card("Code", G.consumeables, nil, nil, nil, nil, nil, "cry_green_seal")
+						c:add_to_deck()
+						G.consumeables:emplace(c)
+						card:juice_up()
+					end
+					return true
+				end,
+			}))
 		end
 	end,
 }

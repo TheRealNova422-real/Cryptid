@@ -9403,7 +9403,7 @@ local lebaron_james = {
 				local max_h_mod = card.ability.immutable.max_h_mod
 
 				local available_h = math.max(0, max_h_mod - added_h)
-				local h_size = math.max(0, math.min(available_h, h_mod))
+				local h_size = to_number(math.max(0, math.min(available_h, h_mod)))
 
 				if h_size > 0 then
 					-- Apply hand size bonus
