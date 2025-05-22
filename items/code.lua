@@ -1,3 +1,6 @@
+-- Code.lua
+-- Cryptid's Code Cards (and related jokers/packs)
+
 local code = {
 	object_type = "ConsumableType",
 	key = "Code",
