@@ -9674,6 +9674,7 @@ local highfive = {
 	blueprint_compat = false,
 	eternal_compat = true,
 	perishable_compat = true,
+	immutable = true
 	rarity = 3,
 	cost = 5,
 	calculate = function(self, card, context)
