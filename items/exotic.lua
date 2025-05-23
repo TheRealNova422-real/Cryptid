@@ -1,6 +1,13 @@
+-- Exotic.lua
+-- The place where Cryptid gets its Exotics
+
 --TIP!!! for coding exotics, make sure you know which layer corresponds to which value!
 --The Normal pos correponds to the background. use this for the layer that goes all the way in the back!
 --The soul_pos = {blahblahblah, extra = {blahblahblah}} correspomds to the other two layers. the value in the extra table is for the layer that goes in the middle, and the other value is the one that goes all the way in the front
+
+-- Gateway (Hidden Spectral)
+-- Destroy all jokers, then create an Exotic Joker
+-- Can't be used if eternal jokers >= joker slots
 local gateway = {
 	dependencies = {
 		items = {
@@ -14,7 +21,7 @@ local gateway = {
 	pos = { x = 0, y = 0 },
 	cost = 4,
 	atlas = "atlasnotjokers",
-	order = 90,
+	order = 200100,
 	hidden = true, --default soul_set and soul_rate of 0.3% in spectral packs is used
 	can_use = function(self, card)
 		--Don't allow use if everything is eternal and there is no room
@@ -78,7 +85,7 @@ local iterum = {
 	},
 	pos = { x = 0, y = 1 },
 	rarity = "cry_exotic",
-	order = 500,
+	order = 250001,
 	cost = 50,
 	blueprint_compat = true,
 	demicoloncompat = true,
