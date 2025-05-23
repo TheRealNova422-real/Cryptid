@@ -796,7 +796,7 @@ local higgsboson = {
 					trigger = "after",
 					delay = 0,
 					func = function()
-						play_sound("multhit1", 1)
+						play_sound("tarot1", 1)
 						return true
 					end,
 				}))
@@ -804,7 +804,7 @@ local higgsboson = {
 					trigger = "after",
 					delay = 0.5,
 					func = function()
-						play_sound("multhit1", 1)
+						play_sound("tarot1", 1)
 						return true
 					end,
 				}))
@@ -812,7 +812,7 @@ local higgsboson = {
 					trigger = "after",
 					delay = 0.5,
 					func = function()
-						play_sound("multhit1", 2)
+						play_sound("tarot1", 2)
 						return true
 					end,
 				}))
@@ -820,7 +820,7 @@ local higgsboson = {
 					trigger = "after",
 					delay = 1,
 					func = function()
-						play_sound("multhit1", 1.5)
+						play_sound("tarot1", 1.5)
 						return true
 					end,
 				}))
@@ -828,7 +828,7 @@ local higgsboson = {
 					trigger = "after",
 					delay = 1.5,
 					func = function()
-						play_sound("multhit1", 1.414)
+						play_sound("tarot1", 1.414)
 						return true
 					end,
 				}))
@@ -836,7 +836,7 @@ local higgsboson = {
 					trigger = "after",
 					delay = 1,
 					func = function()
-						play_sound("multhit1", 1.333)
+						play_sound("tarot1", 1.333)
 						return true
 					end,
 				}))
@@ -844,7 +844,7 @@ local higgsboson = {
 					trigger = "after",
 					delay = 1,
 					func = function()
-						play_sound("multhit1", 1.2)
+						play_sound("tarot1", 1.2)
 						return true
 					end,
 				}))
@@ -852,7 +852,7 @@ local higgsboson = {
 					trigger = "after",
 					delay = 1,
 					func = function()
-						play_sound("multhit1", 1)
+						play_sound("tarot1", 1)
 						return true
 					end,
 				}))
@@ -860,7 +860,7 @@ local higgsboson = {
 					trigger = "after",
 					delay = 0.5,
 					func = function()
-						play_sound("multhit1", 1.2)
+						play_sound("tarot1", 1.2)
 						return true
 					end,
 				}))
@@ -868,7 +868,7 @@ local higgsboson = {
 					trigger = "after",
 					delay = 0.5,
 					func = function()
-						play_sound("multhit1", 1.333)
+						play_sound("tarot1", 1.333)
 						return true
 					end,
 				}))
@@ -910,7 +910,7 @@ local higgsboson = {
 					trigger = "after",
 					delay = 0,
 					func = function()
-						play_sound("multhit1", 1)
+						play_sound("tarot1", 1)
 						return true
 					end,
 				}))
@@ -918,7 +918,7 @@ local higgsboson = {
 					trigger = "after",
 					delay = 0.5,
 					func = function()
-						play_sound("multhit1", 1)
+						play_sound("tarot1", 1)
 						return true
 					end,
 				}))
@@ -926,7 +926,7 @@ local higgsboson = {
 					trigger = "after",
 					delay = 0.5,
 					func = function()
-						play_sound("multhit1", 2)
+						play_sound("tarot1", 2)
 						return true
 					end,
 				}))
@@ -934,7 +934,7 @@ local higgsboson = {
 					trigger = "after",
 					delay = 1,
 					func = function()
-						play_sound("multhit1", 1.5)
+						play_sound("tarot1", 1.5)
 						return true
 					end,
 				}))
@@ -942,7 +942,7 @@ local higgsboson = {
 					trigger = "after",
 					delay = 1.5,
 					func = function()
-						play_sound("multhit1", 1.414)
+						play_sound("tarot1", 1.414)
 						return true
 					end,
 				}))
@@ -950,7 +950,7 @@ local higgsboson = {
 					trigger = "after",
 					delay = 1,
 					func = function()
-						play_sound("multhit1", 1.333)
+						play_sound("tarot1", 1.333)
 						return true
 					end,
 				}))
@@ -958,7 +958,7 @@ local higgsboson = {
 					trigger = "after",
 					delay = 1,
 					func = function()
-						play_sound("multhit1", 1.2)
+						play_sound("tarot1", 1.2)
 						return true
 					end,
 				}))
@@ -966,7 +966,7 @@ local higgsboson = {
 					trigger = "after",
 					delay = 1,
 					func = function()
-						play_sound("multhit1", 1)
+						play_sound("tarot1", 1)
 						return true
 					end,
 				}))
@@ -974,7 +974,7 @@ local higgsboson = {
 					trigger = "after",
 					delay = 0.5,
 					func = function()
-						play_sound("multhit1", 1.2)
+						play_sound("tarot1", 1.2)
 						return true
 					end,
 				}))
@@ -982,7 +982,7 @@ local higgsboson = {
 					trigger = "after",
 					delay = 0.5,
 					func = function()
-						play_sound("multhit1", 1.333)
+						play_sound("tarot1", 1.333)
 						return true
 					end,
 				}))
