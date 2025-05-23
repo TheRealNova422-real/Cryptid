@@ -5,6 +5,7 @@ function loc_colour(_c, _default)
 		lc()
 	end
 	G.ARGS.LOC_COLOURS.cry_code = G.C.SET.Code
+	G.ARGS.LOC_COLOURS.cry_particle = G.C.SET.Particle
 	G.ARGS.LOC_COLOURS.heart = G.C.SUITS.Hearts
 	G.ARGS.LOC_COLOURS.diamond = G.C.SUITS.Diamonds
 	G.ARGS.LOC_COLOURS.spade = G.C.SUITS.Spades
@@ -790,6 +791,30 @@ function Cryptid.cry_rankname_to_id(rankname)
 		if rankname == v then
 			return i
 		end
+	end
+	return nil
+end
+
+--Get l_mult and l_chips since the values stored may not be accurate
+function Cryptid.get_l_mult(handname)
+	if G.GAME.hands[handname] then
+		local l_mult = lenient_bignum(G.GAME.hands[handname].l_mult)
+		if G.GAME.photon_rounds and to_big(G.GAME.photon_rounds) > to_big(0) and G.GAME.photon_power then
+			l_mult = lenient_bignum(l_mult*G.GAME.photon_power)
+		end
+		return l_mult
+	end
+	return nil
+end
+
+--Get l_mult and l_chips since the values stored may not be accurate
+function Cryptid.get_l_chips(handname)
+	if G.GAME.hands[handname] then
+		local l_chips = lenient_bignum(G.GAME.hands[handname].l_chips)
+		if G.GAME.photon_rounds and to_big(G.GAME.photon_rounds) > to_big(0) and G.GAME.photon_power then
+			l_chips = lenient_bignum(l_chips*G.GAME.photon_power)
+		end
+		return l_chips
 	end
 	return nil
 end

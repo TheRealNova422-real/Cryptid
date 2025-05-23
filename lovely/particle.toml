@@ -1,0 +1,31 @@
+[manifest]
+version = "1.0.0"
+dump_lua = true
+priority = -1
+
+[[patches]]
+[patches.pattern]
+target = "game.lua"
+pattern = '''ecto_minus = 1,'''
+position = "after"
+payload = '''
+photon_rounds = 0,
+photon_power = 1,
+'''
+match_indent = true
+
+[[patches]]
+[patches.pattern]
+target = "functions/state_events.lua"
+pattern = '''reset_castle_card()'''
+position = "after"
+payload = '''
+if G.GAME.photon_rounds and to_big(G.GAME.photon_rounds) > to_big(0) then
+    G.GAME.photon_rounds = lenient_bignum(to_big(G.GAME.photon_rounds) - to_big(1))
+    if to_big(G.GAME.photon_rounds) <= to_big(0) then
+        G.GAME.photon_rounds = 0
+        G.GAME.photon_power = 1
+    end
+end
+'''
+match_indent = true

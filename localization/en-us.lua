@@ -806,6 +806,13 @@ return {
 					"{C:cry_ascendant}Thematic Set",
 				},
 			},
+			set_cry_particle = {
+				name = "Particle Cards",
+				text = {
+					"{C:cry_particle}Particle Cards{} and",
+					"related content",
+				},
+			},
 			set_cry_planet = {
 				name = "Planet Cards",
 				text = {
@@ -2977,6 +2984,48 @@ return {
 				},
 			},
 		},
+		Particle = {
+			c_cry_proton = {
+				name = "Proton",
+				text = {
+					"Increase the power of",
+					"{C:attention} poker hand upgrades{}",
+					"by {X:mult,C:white}X#1#{} Mult",
+				},
+			},
+			c_cry_neutron = {
+				name = "Neutron",
+				text = {
+					"Increase the power of",
+					"{C:attention} poker hand upgrades{}",
+					"by {X:chips,C:white}X#1#{} Chips",
+				},
+			},
+			c_cry_positron = {
+				name = "Positron",
+				text = {
+					"{C:attention}Most played hand{}'s upgrade power",
+					"gets {X:mult,C:white}X#1#{} Mult and {X:chips,C:white}X#1#{} Chips,",
+					"all other poker hands' upgrade power",
+					"get {X:mult,C:white}X#2#{} Mult and {X:chips,C:white}X#2#{} Chips",
+				},
+			},
+			c_cry_photon = {
+				name = "Photon",
+				text = {
+					"{C:attention}Poker hand upgrades{} get",
+					"{X:mult,C:white}X#1#{} Mult and {X:chips,C:white}X#1#{} Chips",
+					"for the next {C:attention}#2#{} rounds",
+					"{C:inactive}(Currently {X:mult,C:white}X#3#{C:inactive} for {C:attention}#4#{C:inactive} round#<s>4#)",
+				},
+			},
+			c_cry_higgsboson = {
+				name = "Higgs Boson",
+				text = {
+					"Says {C:attention}\"Nope!\"",
+				},
+			},
+		},
 		Planet = {
 			c_cry_asteroidbelt = {
 				name = "Asteroid Belt",
@@ -3345,6 +3394,14 @@ return {
 					"card#<s>1# in your hand",
 				},
 			},
+			c_cry_collider = {
+				name = "Collider",
+				text = {
+					"Add a {C:cry_code}White Seal{}",
+					"to {C:attention}#1#{} selected",
+					"card#<s>1# in your hand",
+				},
+			},
 			c_cry_summoning = {
 				name = "Summoning",
 				text = {
@@ -3391,6 +3448,14 @@ return {
 					"{C:attention}Remove{} all hand levels,",
 					"upgrade {C:legendary,E:1}most played{} poker hand",
 					"by {C:attention}3{} for each removed level",
+				},
+			},
+			c_cry_tachyon = {
+				name = "Tachyon",
+				text = {
+					"Increase the power of",
+					"{C:attention} poker hand upgrades{}",
+					"by {X:dark_edition,C:white}^#1#{} Mult and {X:dark_edition,C:white}^#1#{} Chips",
 				},
 			},
 		},
@@ -4486,6 +4551,34 @@ return {
 					"{C:attention}#2#{C:cry_code} Code{} card#<s>2#",
 				},
 			},
+			p_cry_particle_normal_1 = {
+				name = "Atomic Pack",
+				text = {
+					"Choose {C:attention}#1#{} of up to",
+					"{C:attention}#2#{C:cry_particle} Particle{} card#<s>2#",
+				},
+			},
+			p_cry_particle_normal_2 = {
+				name = "Atomic Pack",
+				text = {
+					"Choose {C:attention}#1#{} of up to",
+					"{C:attention}#2#{C:cry_particle} Particle{} card#<s>2#",
+				},
+			},
+			p_cry_particle_jumbo_1 = {
+				name = "Jumbo Atomic Pack",
+				text = {
+					"Choose {C:attention}#1#{} of up to",
+					"{C:attention}#2#{C:cry_particle} Particle{} card#<s>2#",
+				},
+			},
+			p_cry_particle_mega_1 = {
+				name = "Mega Atomic Pack",
+				text = {
+					"Choose {C:attention}#1#{} of up to",
+					"{C:attention}#2#{C:cry_particle} Particle{} card#<s>2#",
+				},
+			},
 			p_cry_empowered = {
 				name = "Empowered Pack",
 				text = {
@@ -4557,6 +4650,15 @@ return {
 					"{C:planet}Planet#<s>1#{} for played",
 					"{C:attention}poker hand{}, then",
 					"{C:red}destroy{} this card",
+				},
+			},
+			cry_white_seal = {
+				name = "White Seal",
+				text = {
+					"Creates a {C:cry_code}Particle{} card",
+					"when scored in the center of",
+					"a hand with at least {C:attention}3 cards{}",
+					"{C:inactive}(Must have room)",
 				},
 			},
 			blurred_sdm0 = {
@@ -4758,6 +4860,7 @@ return {
 			cry_feat_blinds = "Blinds",
 			cry_feat_challenges = "Challenges",
 			["cry_feat_code cards"] = "Code Cards",
+			["cry_feat_particle cards"] = "Particle Cards",
 			["cry_feat_misc. decks"] = "Misc. Decks",
 			["cry_feat_https module"] = "HTTPS Module",
 			["cry_feat_timer mechanics"] = "Timer Mechanics",
@@ -4786,6 +4889,7 @@ return {
 			cry_experimental = "Experimental Mode",
 
 			k_cry_program_pack = "Program Pack",
+			k_cry_atomic_pack = "Atomic Pack",
 			k_cry_meme_pack = "Meme Pack",
 			k_cry_baneful_pack = "Baneful Buffoon Pack",
 			cry_baneful_warning = "Skipping will Banish rightmost Joker",
@@ -4809,6 +4913,7 @@ return {
 			cry_joke_placeholder = "(multiple of 8)",
 
 			k_code = "Code",
+			k_particle = "Particle",
 			k_content_set = "Thematic Set",
 			b_content_sets = "Thematic Sets",
 			--Why aren't these in vanilla?
@@ -4820,6 +4925,7 @@ return {
 
 			k_unique = "Unique",
 			b_code_cards = "Code Cards",
+			b_particle_cards = "Particle Cards",
 			b_unique_cards = "Unique Cards",
 			b_pull = "PULL",
 			cry_hooked_ex = "Hooked!",
@@ -4848,6 +4954,9 @@ return {
 
 			cry_asc_hands = "Asc. Hands",
 			cry_p_star = "Star",
+			cry_other_hands = "Other Hands",
+			cry_upg_power = "Upg. Power",
+			cry_photon_buff = "Photon Buff",
 
 			cry_again_q = "Again?",
 			cry_curse = "Curse",
@@ -4867,6 +4976,7 @@ return {
 			cry_plus_cryptid = "+1 Cryptid",
 			cry_plus_card = "+1 Card",
 			cry_plus_code = "+1 Code",
+			cry_plus_particle = "+1 Particle",
 			cry_no_triggers = "No triggers left!",
 			cry_unredeemed = "Unredeemed...",
 			cry_active = "Active",
@@ -4918,6 +5028,7 @@ return {
 			pinned = "Pinned",
 			cry_absolute = "Absolute",
 			code = "Code",
+			particle = "Particle",
 			unique = "Unique",
 			cry_rigged = "Rigged",
 			cry_hooked = "Hooked",
@@ -4927,6 +5038,7 @@ return {
 
 			cry_green_seal = "Green Seal",
 			cry_azure_seal = "Azure Seal",
+			cry_white_seal = "White Seal",
 
 			cry_astral = "Astral",
 			cry_blur = "Blurred",

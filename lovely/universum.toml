@@ -18,9 +18,8 @@ match_indent = true
 target = "functions/common_events.lua"
 pattern = "G.GAME.hands[hand].mult = math.max(G.GAME.hands[hand].s_mult + G.GAME.hands[hand].l_mult*(G.GAME.hands[hand].level - 1), 1)"
 position = "at"
-payload = "G.GAME.hands[hand].mult = math.max(G.GAME.hands[hand].mult + G.GAME.hands[hand].l_mult*amount, 1)"
+payload = "G.GAME.hands[hand].mult = math.max(G.GAME.hands[hand].mult + Cryptid.get_l_mult(hand)*amount, 1)"
 match_indent = true
-
 
 [[patches]]
 [patches.pattern]
@@ -28,7 +27,7 @@ target = "functions/common_events.lua"
 pattern = "G.GAME.hands[hand].chips = math.max(G.GAME.hands[hand].s_chips + G.GAME.hands[hand].l_chips*(G.GAME.hands[hand].level - 1), 0)"
 position = "at"
 payload = '''
-G.GAME.hands[hand].chips = math.max(G.GAME.hands[hand].chips + G.GAME.hands[hand].l_chips*amount, 1)
+G.GAME.hands[hand].chips = math.max(G.GAME.hands[hand].chips + Cryptid.get_l_chips(hand)*amount, 1)
 else
     universum_mod = 1
     local effects = {}
@@ -41,4 +40,16 @@ else
     G.GAME.hands[hand].chips = math.max(G.GAME.hands[hand].chips * (universum_mod)^amount, 1)
 end
 '''
+match_indent = true
+
+[[patches]]
+[patches.pattern]
+target = "functions/common_events.lua"
+pattern = """
+G.GAME.hands[cfg.hand_type].level,localize(cfg.hand_type, 'poker_hands'), G.GAME.hands[cfg.hand_type].l_mult, G.GAME.hands[cfg.hand_type].l_chips,
+"""
+position = "at"
+payload = """
+G.GAME.hands[cfg.hand_type].level,localize(cfg.hand_type, 'poker_hands'), Cryptid.get_l_mult(cfg.hand_type), Cryptid.get_l_chips(cfg.hand_type),
+"""
 match_indent = true

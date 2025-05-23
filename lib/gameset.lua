@@ -781,6 +781,7 @@ local collection_shtuff = {
 	"planets",
 	"spectrals",
 	"codes",
+	"particles",
 
 	"vouchers",
 	"enhancements",
@@ -1201,6 +1202,12 @@ SMODS.ContentSet({
 	key = "code",
 	atlas = "atlasnotjokers",
 	pos = { x = 7, y = 0 }, --://CRASH
+	cry_order = -39,
+})
+SMODS.ContentSet({
+	key = "particle",
+	atlas = "atlasnotjokers",
+	pos = { x = 7, y = 0 }, --://CRASH (for now)
 	cry_order = -39,
 })
 SMODS.ContentSet({

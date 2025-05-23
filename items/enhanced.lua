@@ -441,6 +441,7 @@ return {
 				if not G.cry_edeck_select then
 					Cryptid.enhancement_config_UI(Galdur and self.config.center or G.GAME.viewed_back.effect.center, 1)
 					G.cry_edeck_select = true
+					G.cry_edeck_center = Galdur and self.config.center or G.GAME.viewed_back.effect.center
 				else
 					if self.edeck_select then
 						G.PROFILES[G.SETTINGS.profile]["cry_edeck_" .. self.config.center.edeck_type] =
@@ -450,6 +451,7 @@ return {
 						definition = G.UIDEF.run_setup("main_menu_play"),
 					})
 					G.cry_edeck_select = nil
+					G.cry_edeck_center = nil
 				end
 			end
 		end
@@ -545,10 +547,7 @@ return {
 			})
 		end
 		G.FUNCS.edeck_page = function(args)
-			Cryptid.enhancement_config_UI(
-				Galdur and self.config.center or G.GAME.viewed_back.effect.center,
-				args.cycle_config.current_option
-			)
+			Cryptid.enhancement_config_UI(G.cry_edeck_center, args.cycle_config.current_option)
 		end
 	end,
 	items = { st_deck, et_deck, e_deck, sl_deck, sk_deck, atlasedition },
