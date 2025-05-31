@@ -11,6 +11,8 @@ position = "after"
 payload = '''
 photon_rounds = 0,
 photon_power = 1,
+quarksusedthisrun = 0,
+quark_power = 1.1,
 '''
 match_indent = true
 

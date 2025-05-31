@@ -22,13 +22,14 @@ local particle_digital_hallucinations_compat = {
 	end,
 }
 
+-- Atomic Pack, 1/2
 local atomic1 = {
 	cry_credits = {
 		idea = {
-			"",
+			"HexaCryonic",
 		},
 		art = {
-			"",
+			"HexaCryonic",
 		},
 		code = {
 			"Math",
@@ -67,13 +68,14 @@ local atomic1 = {
 	cry_digital_hallucinations = particle_digital_hallucinations_compat,
 }
 
+-- Atomic Pack Alt, 1/2
 local atomic2 = {
 	cry_credits = {
 		idea = {
-			"",
+			"HexaCryonic",
 		},
 		art = {
-			"",
+			"HexaCryonic",
 		},
 		code = {
 			"Math",
@@ -112,13 +114,14 @@ local atomic2 = {
 	cry_digital_hallucinations = particle_digital_hallucinations_compat,
 }
 
+-- Jumbo Atomic Pack, 1/4
 local atomicJ = {
 	cry_credits = {
 		idea = {
-			"",
+			"HexaCryonic",
 		},
 		art = {
-			"",
+			"HexaCryonic",
 		},
 		code = {
 			"Math",
@@ -157,13 +160,14 @@ local atomicJ = {
 	cry_digital_hallucinations = particle_digital_hallucinations_compat,
 }
 
+--Mega Atomic Pack, 2/4
 local atomicM = {
 	cry_credits = {
 		idea = {
-			"",
+			"HexaCryonic",
 		},
 		art = {
-			"",
+			"HexaCryonic",
 		},
 		code = {
 			"Math",
@@ -202,6 +206,71 @@ local atomicM = {
 	cry_digital_hallucinations = particle_digital_hallucinations_compat,
 }
 
+-- Theorem Tag
+-- Gives a free Atomic Pack
+local theorem = {
+	cry_credits = {
+		idea = {
+			"HexaCryonic",
+		},
+		art = {
+			"",
+		},
+		code = {
+			"Math",
+		},
+	},
+	dependencies = {
+		items = {
+			"p_cry_particle_normal_1",
+			"set_cry_particle",
+		},
+	},
+	object_type = "Tag",
+	atlas = "tag_cry",
+	name = "cry-Theorem Tag",
+	order = 609,
+	pos = { x = 3, y = 2 },
+	config = { type = "new_blind_choice" },
+	key = "theorem",
+	min_ante = 4,
+	loc_vars = function(self, info_queue)
+		info_queue[#info_queue + 1] = { set = "Other", key = "p_cry_particle_normal_1", specific_vars = { 1, 2 } }
+		return { vars = {} }
+	end,
+	apply = function(self, tag, context)
+		if context.type == "new_blind_choice" then
+			tag:yep("+", G.C.SECONDARY_SET.Particle, function()
+				local key = "p_cry_particle_normal_1"
+				local card = Card(
+					G.play.T.x + G.play.T.w / 2 - G.CARD_W * 1.27 / 2,
+					G.play.T.y + G.play.T.h / 2 - G.CARD_H * 1.27 / 2,
+					G.CARD_W * 1.27,
+					G.CARD_H * 1.27,
+					G.P_CARDS.empty,
+					G.P_CENTERS[key],
+					{ bypass_discovery_center = true, bypass_discovery_ui = true }
+				)
+				card.cost = 0
+				card.from_tag = true
+				G.FUNCS.use_card({ config = { ref_table = card } })
+				if G.GAME.modifiers.cry_force_edition and not G.GAME.modifiers.cry_force_random_edition then
+					card:set_edition(nil, true, true)
+				elseif G.GAME.modifiers.cry_force_random_edition then
+					local edition = Cryptid.poll_random_edition()
+					card:set_edition(edition, true, true)
+				end
+				card:start_materialize()
+				return true
+			end)
+			tag.triggered = true
+			return true
+		end
+	end,
+}
+
+-- Proton
+-- Increase upgrade power of all hands by X1.25 Mult
 local proton = {
 	cry_credits = {
 		idea = {
@@ -305,6 +374,8 @@ local proton = {
 	end,
 }
 
+-- Neutron
+-- Increase upgrade power of all hands by X1.1 Chips
 local neutron = {
 	cry_credits = {
 		idea = {
@@ -409,6 +480,8 @@ local neutron = {
 	end,
 }
 
+-- Positron
+-- Most played hand's power gets X0.8 Chips and Mult, all other hands' powers get X1.4 Chips and Mult
 local positron = {
 	cry_credits = {
 		idea = {
@@ -612,6 +685,8 @@ local positron = {
 	end,
 }
 
+-- Photon
+-- Give X2 Chips and Mult to all hands' upgrade powers for 3 rounds
 local photon = {
 	cry_credits = {
 		idea = {
@@ -731,6 +806,8 @@ local photon = {
 	end,
 }
 
+-- Higgs Boson
+-- Says "Nope!"
 local higgsboson = {
 	cry_credits = {
 		idea = {
@@ -992,6 +1069,8 @@ local higgsboson = {
 	end,
 }
 
+-- Tachyon (Spectral)
+-- Increase upgrade power of all hands by ^1.5 Chips and Mult
 local tachyon = {
 	cry_credits = {
 		idea = {
@@ -1226,6 +1305,7 @@ local particle_cards = {
 	atomic2,
 	atomicJ,
 	atomicM,
+	theorem,
 	proton,
 	neutron,
 	positron,

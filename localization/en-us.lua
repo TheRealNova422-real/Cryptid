@@ -3001,6 +3001,12 @@ return {
 					"by {X:chips,C:white}X#1#{} Chips",
 				},
 			},
+			c_cry_electron = {
+				name = "Electron",
+				text = {
+					"Says {C:attention}\"Nope!\"",
+				},
+			},
 			c_cry_positron = {
 				name = "Positron",
 				text = {
@@ -3008,6 +3014,18 @@ return {
 					"gets {X:mult,C:white}X#1#{} Mult and {X:chips,C:white}X#1#{} Chips,",
 					"all other poker hands' upgrade power",
 					"get {X:mult,C:white}X#2#{} Mult and {X:chips,C:white}X#2#{} Chips",
+				},
+			},
+			c_cry_antiproton = {
+				name = "Antiproton",
+				text = {
+					"Says {C:attention}\"Nope!\"",
+				},
+			},
+			c_cry_muon = {
+				name = "Muon",
+				text = {
+					"Says {C:attention}\"Nope!\"",
 				},
 			},
 			c_cry_photon = {
@@ -3021,6 +3039,30 @@ return {
 			},
 			c_cry_higgsboson = {
 				name = "Higgs Boson",
+				text = {
+					"Says {C:attention}\"Nope!\"",
+				},
+			},
+			c_cry_neutrino = {
+				name = "Neutrino",
+				text = {
+					"Says {C:attention}\"Nope!\"",
+				},
+			},
+			c_cry_tau = {
+				name = "Tau",
+				text = {
+					"Says {C:attention}\"Nope!\"",
+				},
+			},
+			c_cry_antitau = {
+				name = "Antitau",
+				text = {
+					"Says {C:attention}\"Nope!\"",
+				},
+			},
+			c_cry_quark = {
+				name = "Quark",
 				text = {
 					"Says {C:attention}\"Nope!\"",
 				},
