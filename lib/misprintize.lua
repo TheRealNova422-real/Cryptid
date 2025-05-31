@@ -72,8 +72,8 @@ function Cryptid.misprintize_tbl(name, ref_tbl, ref_value, clear, override, stac
 	local function num_too_big(initial, min, max, limit)
 		return (
 			to_big(initial) > to_big(limit)
-			or to_big(initial) * min > to_big(limit)
-			or to_big(initial) * max > to_big(limit)
+			or (min and to_big(initial) * min > to_big(limit))
+			or (max and to_big(initial) * max > to_big(limit))
 		)
 	end
 
