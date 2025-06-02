@@ -214,7 +214,7 @@ local theorem = {
 			"HexaCryonic",
 		},
 		art = {
-			"",
+			"ruby",
 		},
 		code = {
 			"Math",
@@ -230,7 +230,7 @@ local theorem = {
 	atlas = "tag_cry",
 	name = "cry-Theorem Tag",
 	order = 609,
-	pos = { x = 3, y = 2 },
+	pos = { x = 6, y = 3 },
 	config = { type = "new_blind_choice" },
 	key = "theorem",
 	min_ante = 4,
@@ -1190,7 +1190,7 @@ local collider = {
 			"HexaCryonic",
 		},
 		art = {
-			"HexaCryonic",
+			"ruby",
 		},
 		code = {
 			"crazybot",
@@ -1219,8 +1219,8 @@ local collider = {
 		return { vars = { center.ability.max_highlighted } }
 	end,
 	cost = 4,
-	atlas = "placeholders",
-	pos = { x = 2, y = 2 },
+	atlas = "atlasnotjokers",
+	pos = { x = 1, y = 6 },
 	use = function(self, card, area, copier) --Good enough
 		for i = 1, #G.hand.highlighted do
 			local highlighted = G.hand.highlighted[i]
