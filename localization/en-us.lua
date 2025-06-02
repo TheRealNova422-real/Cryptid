@@ -3504,7 +3504,7 @@ return {
 			c_cry_collider = {
 				name = "Collider",
 				text = {
-					"Add a {C:cry_code}White Seal{}",
+					"Add a {C:cry_particle}White Seal{}",
 					"to {C:attention}#1#{} selected",
 					"card#<s>1# in your hand",
 				},
@@ -3961,6 +3961,13 @@ return {
 					"Gives {C:attention}#1#{} cop#<ies,y>1# of the",
 					"next selected {C:attention}Tag",
 					"{s:0.8,C:inactive}Copying Tags excluded",
+				},
+			},
+			tag_cry_theorem = {
+				name = "Theorem Tag",
+				text = {
+					"Gives a free",
+					"{C:cry_particle}Atomic Pack",
 				},
 			},
 		},
@@ -4762,7 +4769,7 @@ return {
 			cry_white_seal = {
 				name = "White Seal",
 				text = {
-					"Creates a {C:cry_code}Particle{} card",
+					"Creates a {C:cry_particle}Particle{} card",
 					"when scored in the center of",
 					"a hand with at least {C:attention}3 cards{}",
 					"{C:inactive}(Must have room)",
