@@ -1,8 +1,8 @@
 local particle = {
     object_type = "ConsumableType",
 	key = "Particle",
-	primary_colour = HEX("bdb56f"),
-	secondary_colour = HEX("bdba9f"),
+	primary_colour = HEX("adadad"),
+	secondary_colour = HEX("8d8d8d"),
 	collection_rows = { 4, 3 },
 	shop_rate = 0.0,
 	loc_txt = {},
@@ -12,7 +12,7 @@ local particle = {
 }
 
 local particle_digital_hallucinations_compat = {
-	colour = HEX("bdb56f"),
+	colour = HEX("adadad"),
 	loc_key = "cry_plus_particle",
 	create = function()
 		local ccard = create_card("Particle", G.consumeables, nil, nil, nil, nil, nil, "diha")
@@ -723,8 +723,8 @@ local photon = {
 			vars = {
 				 number_format(card.ability.power),
 				 number_format(card.ability.rounds),
-				 number_format(G.GAME.photon_power),
-				 number_format(G.GAME.photon_rounds),
+				 number_format(G.GAME.photon_power or 1),
+				 number_format(G.GAME.photon_rounds or 0),
 				} 
 		}
 	end,
@@ -1077,6 +1077,139 @@ local higgsboson = {
 	end,
 }
 
+-- Quark
+-- Increase upgrade power of all hands by X1.25 Mult
+local quark = {
+	cry_credits = {
+		idea = {
+			"playerrWon",
+			"HexaCryonic",
+		},
+		art = {
+			"ori",
+		},
+		code = {
+			"crazybot",
+		},
+	},
+	dependencies = {
+		items = {
+			"set_cry_particle",
+		},
+	},
+	object_type = "Consumable",
+	set = "Particle",
+	name = "cry-Quark",
+	key = "quark",
+	pos = { x = 3, y = 3 },
+	config = { extra = 0.1 },
+	loc_vars = function(self, info_queue, card)
+		return { 
+			vars = {
+			number_format(G.GAME.quark_power or 1.1),
+			number_format(card.ability.extra),
+			number_format(G.GAME.quarksusedthisrun or 0),
+			}
+		}
+	end,
+	cost = 4,
+	atlas = "atlasparticle",
+	order = 912,
+	can_use = function(self, card)
+		return true
+	end,
+	can_bulk_use = false,
+	use = function(self, card, area, copier)
+		local used_consumable = copier or card
+
+		G.GAME.quarksusedthisrun = G.GAME.quarksusedthisrun or 0
+		G.GAME.quark_power = G.GAME.quark_power or 1.1
+
+		for k, v in pairs(G.GAME.hands) do
+			v.l_mult = lenient_bignum(to_big(v.l_mult)*to_big(G.GAME.quark_power))
+			v.l_chips = lenient_bignum(to_big(v.l_chips)*to_big(G.GAME.quark_power))
+		end
+
+		delay(0.4)
+		update_hand_text(
+			{ sound = "button", volume = 0.7, pitch = 0.8, delay = 0.3 },
+			{ handname = localize("cry_upg_power"), chips = "+...", mult = "+...", level = "" }
+		)
+		delay(1.0)
+		G.E_MANAGER:add_event(Event({
+			trigger = "after",
+			delay = 0.2,
+			func = function()
+				play_sound("multhit2")
+				play_sound("xchips")
+				used_consumable:juice_up(0.8, 0.5)
+				G.TAROT_INTERRUPT_PULSE = true
+				return true
+			end,
+		}))
+		update_hand_text({ delay = 0 }, { mult = "X"..number_format(G.GAME.quark_power), chips = "X"..number_format(G.GAME.quark_power), StatusText = true })
+		delay(1.3)
+		update_hand_text({ sound = "button", volume = 0.7, pitch = 0.9, delay = 0 }, {mult = "+...", chips = "+...",})
+		delay(1.3)
+
+		update_hand_text(
+			{ sound = "button", volume = 0.7, pitch = 1.1, delay = 0 },
+			{ mult = 0, chips = 0, handname = "", level = "" }
+		)
+
+		if (G.GAME.quarksusedthisrun < 6) then
+			G.GAME.quark_power = lenient_bignum(G.GAME.quark_power+card.ability.extra)
+		end
+
+		G.GAME.quarksusedthisrun = G.GAME.quarksusedthisrun + 1
+		
+	end,
+	bulk_use = function(self, card, area, copier, number)
+		local used_consumable = copier or card
+
+		G.GAME.quarksusedthisrun = G.GAME.quarksusedthisrun or 0
+		G.GAME.quark_power = G.GAME.quark_power or 1.1
+
+		for k, v in pairs(G.GAME.hands) do
+			v.l_mult = lenient_bignum(to_big(v.l_mult)*to_big(G.GAME.quark_power))
+			v.l_chips = lenient_bignum(to_big(v.l_chips)*to_big(G.GAME.quark_power))
+		end
+
+		delay(0.4)
+		update_hand_text(
+			{ sound = "button", volume = 0.7, pitch = 0.8, delay = 0.3 },
+			{ handname = localize("cry_upg_power"), chips = "+...", mult = "+...", level = "" }
+		)
+		delay(1.0)
+		G.E_MANAGER:add_event(Event({
+			trigger = "after",
+			delay = 0.2,
+			func = function()
+				play_sound("multhit2")
+				play_sound("xchips")
+				used_consumable:juice_up(0.8, 0.5)
+				G.TAROT_INTERRUPT_PULSE = true
+				return true
+			end,
+		}))
+		update_hand_text({ delay = 0 }, { mult = "X"..number_format(G.GAME.quark_power), chips = "X"..number_format(G.GAME.quark_power), StatusText = true })
+		delay(1.3)
+		update_hand_text({ sound = "button", volume = 0.7, pitch = 0.9, delay = 0 }, {mult = "+...", chips = "+...",})
+		delay(1.3)
+
+		update_hand_text(
+			{ sound = "button", volume = 0.7, pitch = 1.1, delay = 0 },
+			{ mult = 0, chips = 0, handname = "", level = "" }
+		)
+
+		if (G.GAME.quarksusedthisrun < 6) then
+			G.GAME.quark_power = lenient_bignum(G.GAME.quark_power+card.ability.extra)
+		end
+
+		G.GAME.quarksusedthisrun = G.GAME.quarksusedthisrun + number
+	end,
+}
+
 -- Tachyon (Spectral)
 -- Increase upgrade power of all hands by ^1.5 Chips and Mult
 local tachyon = {
@@ -1285,7 +1418,7 @@ local white_seal = {
 	object_type = "Seal",
 	name = "cry-White-Seal",
 	key = "white",
-	badge_colour = HEX("bdb56f"), --same as particle cards
+	badge_colour = HEX("adadad"), --same as particle cards
 	atlas = "cry_misc",
 	pos = { x = 1, y = 3 },
 	order = 606,
@@ -1320,6 +1453,7 @@ local particle_cards = {
 	positron,
 	photon,
 	higgsboson,
+	quark,
 	tachyon,
 	collider,
 	white_seal,

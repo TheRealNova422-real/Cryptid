@@ -3119,7 +3119,12 @@ return {
 			c_cry_quark = {
 				name = "Quark",
 				text = {
-					"Says {C:attention}\"Nope!\"",
+					"Increase the power of",
+					"{C:attention} poker hand upgrades{}",
+					"by {X:mult,C:white}X#1#{} Mult and {X:chips,C:white}X#1#{} Chips,",
+					"future quarks gain {X:mult,C:white}X#2#{} Mult and {X:chips,C:white}X#2#{} Chips",
+					"if fewer than {C:attention}6{} quarks used this run",
+					"{C:inactive}(Quarks used this run: {C:attention}#3#{C:inactive})",
 				},
 			},
 		},
