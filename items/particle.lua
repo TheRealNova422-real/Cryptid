@@ -26,6 +26,7 @@ local particle_digital_hallucinations_compat = {
 local atomic1 = {
 	cry_credits = {
 		idea = {
+			"playerrWon",
 			"HexaCryonic",
 		},
 		art = {
@@ -72,6 +73,7 @@ local atomic1 = {
 local atomic2 = {
 	cry_credits = {
 		idea = {
+			"playerrWon",
 			"HexaCryonic",
 		},
 		art = {
@@ -118,6 +120,7 @@ local atomic2 = {
 local atomicJ = {
 	cry_credits = {
 		idea = {
+			"playerrWon",
 			"HexaCryonic",
 		},
 		art = {
@@ -164,6 +167,7 @@ local atomicJ = {
 local atomicM = {
 	cry_credits = {
 		idea = {
+			"playerrWon",
 			"HexaCryonic",
 		},
 		art = {
@@ -214,7 +218,7 @@ local theorem = {
 			"HexaCryonic",
 		},
 		art = {
-			"ruby",
+			"lord-ruby",
 		},
 		code = {
 			"Math",
@@ -274,7 +278,8 @@ local theorem = {
 local proton = {
 	cry_credits = {
 		idea = {
-			"playerrWon/HexaCryonic",
+			"playerrWon",
+			"HexaCryonic",
 		},
 		art = {
 			"ori",
@@ -379,7 +384,8 @@ local proton = {
 local neutron = {
 	cry_credits = {
 		idea = {
-			"playerrWon/HexaCryonic",
+			"playerrWon",
+			"HexaCryonic",
 		},
 		art = {
 			"ori",
@@ -485,6 +491,7 @@ local neutron = {
 local positron = {
 	cry_credits = {
 		idea = {
+			"playerrWon",
 			"HexaCryonic",
 		},
 		art = {
@@ -690,6 +697,7 @@ local positron = {
 local photon = {
 	cry_credits = {
 		idea = {
+			"playerrWon",
 			"HexaCryonic",
 		},
 		art = {
@@ -1074,10 +1082,11 @@ local higgsboson = {
 local tachyon = {
 	cry_credits = {
 		idea = {
+			"playerrWon",
 			"HexaCryonic",
 		},
 		art = {
-			"ruby",
+			"lord-ruby",
 		},
 		code = {
 			"crazybot",
@@ -1190,7 +1199,7 @@ local collider = {
 			"HexaCryonic",
 		},
 		art = {
-			"ruby",
+			"lord-ruby",
 		},
 		code = {
 			"crazybot",
