@@ -2669,8 +2669,8 @@ return {
 			j_cry_yarnball = {
 				name = "Yarn Ball",
 				text = {
-					"{C:red}+#1#{} to all {C:green}listed probabilities",
-					"for the highest {C:attention}Cat Tag{} level",
+					"Add the level of the highest level {C:attention}Cat Tag{}",
+					"to all {C:green}listed probabilities",
 				},
 			},
 			j_cry_spaceglobe = {
@@ -2830,7 +2830,7 @@ return {
 				},
 			},
 			j_cry_words_cant_even = {
-				name = "Words cant even describe this Joker",
+				name = "Words Can’t Even Begin to Describe This Joker",
 				text = {
 					"{X:mult,C:white}X#1#{} Mult if played",
 					"hand contains",
@@ -2838,13 +2838,13 @@ return {
 				},
 			},
 			j_cry_many_lost_minds = {
-				name = "Many have lost their minds comprehending this Joker",
+				name = "Many Have Lost Their Minds Comprehending This Joker",
 				text = {
 					"{X:blue,C:white}X#1#{} Chips if played hand contains {C:attention}#2#",
 				},
 			},
 			j_cry_annihalation = {
-				name = "The complete and utter annihalation of everything that makes Balatro sacred",
+				name = "The Complete and Utter Annihalation of Everything That Makes Balatro Sacred",
 				text = {
 					"{X:dark_edition,C:white}^#1#{} Mult if played",
 					"hand contains",
